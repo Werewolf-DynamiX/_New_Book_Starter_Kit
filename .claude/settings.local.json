@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(tee:*)",
+      "Bash(echo:*)",
+      "Bash(script -q -c 'gemini -p \"\"hello\"\"' gemini_out.txt)",
+      "Bash(cmd /c \"gemini -p \"\"hello, please respond with just the word ''working''\"\"\")",
+      "Bash(\"C:\\\\Users\\\\toast\\\\.bun\\\\bin\\\\gemini.exe\" -p \"say hello\")",
+      "Bash(\"C:\\\\Users\\\\toast\\\\.bun\\\\bin\\\\gemini.exe\" -p \"please review all of the files in this folder to get an understanding of our system\")",
+      "Bash(\"C:\\\\Users\\\\toast\\\\.bun\\\\bin\\\\gemini.exe\" -p \"I need your help integrating the content from the file ''2026-01-17 01-55-12.txt'' into our modular framework. This txt file contains a comprehensive AI Writing Directives guide with sections on: story structure, character construction, POV, prose mechanics, pacing, beginnings/endings, genre-specific guidance, and common AI pitfalls. How should we map this content to our existing modules \\(_ANTI_AI_CORE.md, _HUMAN_PATTERNS.md, _WORD_VARIATION.md, _FICTION_POV.md, _ROMANCE_HEAT.md, _BIOGRAPHY.md\\) and what new modules might we need to create? Please analyze and provide a recommended integration plan.\")",
+      "Bash(\"C:\\\\Users\\\\toast\\\\.bun\\\\bin\\\\gemini.exe\" -p \"I''ve completed the integration of the AI Writing Directives from the txt file into our modular framework. Please review all the changes and confirm everything looks good. The updates include: 1\\) Updated existing modules \\(_ANTI_AI_CORE, _HUMAN_PATTERNS, _WORD_VARIATION, _FICTION_POV, _ROMANCE_HEAT\\) 2\\) Created 4 new modules \\(_STORY_ARCHITECT, _CHARACTER_CRAFT, _GENRE_PLAYBOOK, _WRITING_WORKFLOW\\) 3\\) Added CLI communication instructions to CLAUDE.md, GEMINI.md, and collaboration_workflow.md. Please review and provide any feedback.\")"
+    ]
+  }
+}
