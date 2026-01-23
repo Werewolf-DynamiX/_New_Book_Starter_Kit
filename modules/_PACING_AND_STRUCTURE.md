@@ -45,7 +45,75 @@ The opening must:
 - **Literary:** Can be delayed, but tension must exist immediately.
 - **Thriller/Mystery:** Often page one.
 
-## 4. Endings
+## 4. Surviving the Middle (Act 2)
+
+The middle 50% of your story is where most manuscripts die. Here's how to keep it alive.
+
+### Why Middles Fail
+- Stakes established but not escalated
+- Protagonist reactive instead of active
+- Subplots don't connect to main story
+- Same type of obstacle repeated
+- No sense of ticking clock or urgency
+- "Training montage" syndrome (competence without conflict)
+
+### The Midpoint Shift
+At roughly the 50% mark, something fundamental should change:
+- **Revelation:** Protagonist (and reader) learns something that recontextualizes everything
+- **False victory/defeat:** Protagonist seems to succeed/fail, but the real challenge is ahead
+- **Point of no return:** Protagonist commits fully; retreat becomes impossible
+- **Stakes elevation:** What's at risk increases dramatically
+
+### The Try-Fail Cycle
+Protagonist attempts solutions. They fail. But each failure:
+1. Eliminates an option (narrows the path)
+2. Reveals information (advances the plot)
+3. Raises stakes (makes success harder)
+4. Develops character (forces growth)
+
+**Bad middles:** Protagonist tries random things; failures are interchangeable.
+**Good middles:** Each attempt is logical, each failure is specific, each consequence is cumulative.
+
+### Pinch Points
+Insert moments of antagonist presence/pressure at roughly:
+- **25% (First Pinch):** Reminder of the threat; stakes clarified
+- **75% (Second Pinch):** Antagonist at full strength; protagonist at lowest point
+
+These prevent the antagonist from disappearing while protagonist "does stuff."
+
+### Subplot Weaving
+Subplots should:
+- Intersect with main plot (not run parallel indefinitely)
+- Force protagonist to make choices
+- Provide contrast/relief from main tension
+- Converge toward climax
+
+**Check:** If you remove the subplot, does the main plot still work exactly the same? If yes, the subplot isn't integrated enough.
+
+### Escalation Patterns
+Each major sequence in Act 2 should escalate at least one of:
+| Element | Escalation |
+|---------|------------|
+| **Stakes** | More to lose |
+| **Urgency** | Less time |
+| **Opposition** | Stronger enemies |
+| **Cost** | Higher price for action |
+| **Commitment** | Harder to turn back |
+
+### Avoiding "Training Montage" Syndrome
+Characters gaining competence without meaningful conflict creates dead space.
+
+**Instead of:** Character trains for twenty pages and gets better.
+**Try:** Training interrupted by external threat; skills tested before ready; internal conflict about methods; cost of training (what are they sacrificing?).
+
+### The "Therefore/But" Test
+Read your middle scenes in sequence. Between each, you should be able to say:
+- "This happened, THEREFORE this happened" (causation)
+- "This happened, BUT then this happened" (complication)
+
+If you find yourself saying "This happened, AND THEN this happened" — you have episodic structure, not escalating structure.
+
+## 5. Endings
 
 ### Chapter Endings [FLEXIBLE]
 **Strong:** Unanswered question, new threat, revelation, decision point.

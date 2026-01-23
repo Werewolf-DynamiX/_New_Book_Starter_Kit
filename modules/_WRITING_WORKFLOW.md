@@ -1,5 +1,46 @@
 # Writing Workflow & Process
 
+## Session Initialization
+
+At the start of each writing session, determine:
+
+### 1. Track Selection
+| Question | Answer | Modules Loaded |
+|----------|--------|----------------|
+| Fiction or Nonfiction? | **Fiction** | `_STORY_ENGINE`, `_CHARACTER_CRAFT`, `_PACING_AND_STRUCTURE`, `_NARRATIVE_VOICE`, `_DIALOGUE_CRAFT`, `_GENRE_PLAYBOOK`, `_WORLDBUILDING` |
+| Fiction or Nonfiction? | **Nonfiction** | `_NONFICTION_CORE`, optionally `_BIOGRAPHY` |
+| Fiction or Nonfiction? | **Narrative Nonfiction** | `_NONFICTION_CORE` + `_STORY_ENGINE` + `_PACING_AND_STRUCTURE` + `_DIALOGUE_CRAFT` |
+
+**Narrative Nonfiction** is a hybrid track for: Memoir, Creative Nonfiction, Immersive Journalism, True Crime narratives. It applies fiction craft techniques (scenes, pacing, dialogue) while maintaining nonfiction's epistemic boundaries (no invention).
+
+### 2. Fiction Configuration
+If Fiction, also determine:
+- **Primary genre** → Load relevant section from `_GENRE_PLAYBOOK`
+- **POV and tense** → Reference appropriate section in `_NARRATIVE_VOICE`
+- **Heat level** (if romance elements) → Load `_ROMANCE_HEAT` with specified level
+- **Worldbuilding complexity** → Reference `_WORLDBUILDING` as needed
+
+### 3. Nonfiction Configuration
+If Nonfiction, also determine:
+- **Biography?** → Load `_BIOGRAPHY` and select tone mode (Warm/Critical/Dark)
+- **Technical?** → Emphasis on scaffolding and jargon handling from `_NONFICTION_CORE`
+
+### 3b. Narrative Nonfiction Configuration
+If Narrative Nonfiction, also determine:
+- **Memoir?** → First-person, thematic structure, emotional arc over chronology
+- **True Crime?** → Multiple POVs allowed, procedural pacing, ethical disclosure
+- **Immersive Journalism?** → Scene-based reporting, present-tense optional
+- **All types:** Apply `_PACING_AND_STRUCTURE` scene requirements (Goal/Obstacle/Outcome) but source all details from documented reality
+
+### 4. Universal Modules (Always Active)
+These apply to all projects:
+- `_STYLE_AUTHORITY` (diction, syntax, anti-AI patterns)
+- `_HUMAN_PATTERNS` (rhythm, burstiness)
+- `_REVISION_TOOLKIT` (for self-editing)
+- `_WRITING_WORKFLOW` (this file)
+
+---
+
 ## Project Initialization
 
 **Before drafting, provide:**
