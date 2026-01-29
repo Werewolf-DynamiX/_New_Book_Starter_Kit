@@ -4,7 +4,7 @@
 
 ---
 
-## 1. ZERO TOLERANCE (Hard Bans)
+## 1. ZERO TOLERANCE (Literal AI Tells)
 
 These are literal AI remnants. Their presence instantly breaks immersion. **Never use.**
 
@@ -24,24 +24,26 @@ These are literal AI remnants. Their presence instantly breaks immersion. **Neve
 
 ---
 
-## 2. PERVASIVE PATTERN FLAGS (Soft Bans)
+## 2. HEURISTIC FLAGS (Contextual Audit)
 
-These words appear in legitimate human writing. **Flag only when clustered or excessive.**
+These words are not strictly banned but are statistical indicators of AI writing when used to *smooth over* complexity rather than *describe* it.
 
-A single "delve" in a 60,000-word manuscript is fine. Three "delves" in one chapter signals AI.
+**The Green Test:** Can you remove the word without losing meaning? If yes, it is filler. Delete it.
+**The Specificity Test:** Are you using "tapestry" because you're too lazy to describe the actual threads? If yes, rewrite with specifics.
 
-### AI-Associated Vocabulary (audit when clustered)
-| Word/Phrase | Threshold | Notes |
-|-------------|-----------|-------|
-| delve, tapestry, testament | Max 1-2 per manuscript | Heavy AI tells |
-| myriad, plethora, multifaceted | Max 2-3 per manuscript | Formal and overused |
-| crucial, significant, nuanced | Max 3-4 per manuscript | Hedging markers |
-| landscape (metaphorical), realm, paradigm | Avoid in most contexts | Corporate/academic AI-speak |
-| notably, furthermore, moreover, additionally | Max 2-3 per manuscript | Transition crutches |
-| seamlessly, leverage, harness, foster, cultivate | Avoid | Business jargon |
-| invaluable, indispensable, paramount, intricate | Rare use only | Inflated modifiers |
-| "It's worth noting," "It should be noted" | Never | Throat-clearing |
-| "A symphony of," "A dance of," "A mix of" | Avoid | Purple cliches |
+### Contextual Usage Table
+| Word/Phrase | AI Usage (Bad) | Human Usage (Good) |
+|-------------|----------------|--------------------|
+| **Delve** | "Let's delve into the history..." (Transition) | "She delved into the pocket of her coat." (Physical action) |
+| **Tapestry** | "A rich tapestry of culture..." (Metaphor) | "The faded tapestry on the wall depicted a hunt." (Literal object) |
+| **Echo** | "His words echoed in her mind..." (Cliche) | "The gunshot echoed off the canyon walls." (Physical sound) |
+| **Testament** | "A testament to his skill..." (Praise) | "Her last will and testament." (Legal document) |
+| **Landscape** | "The political landscape..." (Metaphor) | "The landscape was scarred by craters." (Geography) |
+| **Embrace** | "Embrace the challenge..." (Self-help) | "He embraced his daughter." (Physical action) |
+
+### AI-Associated Vocabulary (Flag when clustered)
+*Audit these if they appear more than 2-3 times per chapter:*
+delve, tapestry, testament, myriad, plethora, multifaceted, crucial, significant, nuanced, realm, paradigm, notably, furthermore, moreover, additionally, seamlessly, leverage, harness, foster, cultivate, invaluable, indispensable, paramount, intricate, "It's worth noting," "It should be noted," game-changer, cutting-edge, revolutionary, rich tapestry, vibrant landscape, dynamic, optimize, utilize, facilitate, deep dive.
 
 ### Crutch Words (Use Sparingly)
 | Word/Phrase | Max Per Manuscript | Alternative Strategy |

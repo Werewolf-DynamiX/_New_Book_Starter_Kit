@@ -22,30 +22,24 @@ Readers remember unfinished business.
 - **Suspense:** Waiting for resolution; reader knows something character doesn't.
 Both require reader investment in outcome.
 
-## 3. Beginnings
+## 3. SCENE-LEVEL PACING
 
-### First Scene Priorities [STRICT]
-The opening must:
-- Establish POV and voice immediately.
-- Introduce protagonist in action (not passive observation).
-- Signal genre and tone.
-- Create at least one question the reader wants answered.
-- Contain forward momentum.
+### 3.1 Micro-Tension
+Every scene must have:
+- **Goal:** What the character wants right now.
+- **Obstacle:** What stands in their way.
+- **Consequence:** What happens if they fail (or succeed).
+*If a scene lacks conflict, cut it.*
 
-### Avoid in Openings [STRICT]
-- Waking up/morning routine (unless subverted).
-- Extended description before action.
-- Weather reports as first line.
-- Protagonist looking in mirror to describe themselves.
-- "My name is..." introductions.
-- Extended backstory before present action.
+### 3.2 The Zeigarnik Effect
+Humans remember unfinished tasks. Use this to drive page turns:
+- **Open Loops:** Raise questions (Who is that? What is in the box?) and delay the answers.
+- **Interruption:** End scenes in the middle of action or decision, not after the dust settles.
 
-### Inciting Incident Timing
-- **Commercial fiction:** First 10-15%.
-- **Literary:** Can be delayed, but tension must exist immediately.
-- **Thriller/Mystery:** Often page one.
+### 3.3 The Ticking Clock
+Establish deadlines (literal or psychological) to force urgency. A scene without a timeframe is a scene without pressure.
 
-## 4. Surviving the Middle (Act 2)
+## 4. CHAPTER ENDINGS
 
 The middle 50% of your story is where most manuscripts die. Here's how to keep it alive.
 

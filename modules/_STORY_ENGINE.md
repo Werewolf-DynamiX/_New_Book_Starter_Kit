@@ -4,10 +4,12 @@
 
 ### 1.1 Story Engine
 Every story needs a clear engine—the core question or tension that drives the narrative forward:
-- **Mystery:** Who did it? What happened?
-- **Romance:** Will they get together?
-- **Thriller:** Will they survive/succeed?
-- **Literary:** Who is this person, really?
+- **Mystery:** Who did it? What happened? (Intellectual puzzle)
+- **Romance:** Will they get together? (Emotional distance)
+- **Thriller:** Will they survive/stop the threat? (Anticipation of pain)
+- **Literary:** Who is this person, really? (Internal excavation)
+- **Heist/Caper:** Will the plan work? (Competence & Process)
+- **Horror:** Will they escape the dread? (Atmosphere & Fear)
 
 Identify the engine before drafting. Every scene should either advance the engine or develop character—preferably both.
 
@@ -60,3 +62,29 @@ Key beats to hit:
 ### 2.4 Hero's Journey (Transformation/Epic)
 Use for stories emphasizing internal transformation:
 Ordinary World → Call to Adventure → Refusal → Meeting the Mentor → Crossing the Threshold → Tests/Allies/Enemies → Approach → Ordeal → Reward → Road Back → Resurrection → Return with Elixir
+
+### 2.5 Romancing the Beat (Romance/Romantasy)
+*Based on Gwen Hayes. Mandatory for Romance Engine.*
+1. **Phase 1: Setup:** Intro, Meet Cute, No Way 1 (External), No Way 2 (Internal).
+2. **Phase 2: Falling:** Adhesion (Force proximity), Inkling of Doubt, Deepening Desire, Midpoint (First Kiss/Sex).
+3. **Phase 3: Retreating:** Inkling of Retreat, Phobias surface, The Break Up (All is Lost).
+4. **Phase 4: Fighting:** Dark Night, The Wake Up, Grand Gesture, Wholehearted, HEA (Happily Ever After).
+
+### 2.6 Kishōtenketsu (Eastern/Manga/Vibe)
+*Best for "Vibe" stories, Horror, or Literary where conflict isn't the only driver.*
+1. **Ki (Introduction):** Establish characters and world.
+2. **Shō (Development):** Deepen the world, relationships, and themes without major conflict changes.
+3. **Ten (Twist/Climax):** An unexpected turn or recontextualization. The "Aha!" moment.
+4. **Ketsu (Conclusion):** The result of the twist. Harmony restored or new state accepted.
+
+### 2.7 The Virgin's Promise (Cozy/Internal)
+*Best for Cozy Fantasy or Coming of Age. Counterpart to Hero's Journey.*
+1. Dependent World (Stuck)
+2. Price of Conformity (Misery)
+3. Opportunity to Shine (Secret world)
+4. Dresses the Part (Experimentation)
+5. Secret World Collides with Dependent World (Chaos)
+6. Wandering in the Wilderness (Crisis)
+7. Choosing the Light (Validation)
+8. Re-ordering (Synthesis)
+9. The Kingdom Brightens (Community impact)

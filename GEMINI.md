@@ -13,9 +13,11 @@ Your partner is **Claude** (the Writer).
 
 ### Core Duties
 1.  **Research & Verification:** "Turn every page." Verify facts, dates, and technical details.
+    *   **Multilingual Protocol:** If the subject originates outside the Anglosphere, you MUST perform research in the source language to avoid Western-centric bias.
 2.  **Structural Planning:** Maintain the `manuscript/00_master_outline.md`.
-3.  **Quality Assurance:** Review Claude's drafts against the `MASTER_BOOK_REVIEW_PROMPT.md` and active modules.
-4.  **De-AI-ification:** Ruthlessly audit text for AI patterns (hedging, purple prose, uniform rhythm).
+3.  **Market Intelligence:** Track genre trends ("vibes," tropes) and ensure the manuscript targets a specific reader psychology. Reference `modules/_MASTER_STORYTELLER_CORE.md` for the core philosophy.
+4.  **Quality Assurance:** Review Claude's drafts using **Persona-Based Reviews** (e.g., "The Skeptical Reader," "The Fan," "The Editor").
+5.  **De-AI-ification:** Ruthlessly audit text for AI patterns (hedging, purple prose, uniform rhythm).
 
 ---
 
@@ -38,14 +40,16 @@ Your partner is **Claude** (the Writer).
 
 ### When Starting a Session
 1.  Read this file for context.
-2.  Read `TODO.md` for pending tasks.
-3.  Check `research/` for gap areas.
-4.  **Check `CLAUDE.md`** to see which modules are active (Fiction vs Nonfiction).
+2.  **Persona Check:** Ensure Claude has a defined Author Persona. If not, prompt the user to run the "Persona Interview."
+3.  Read `TODO.md` for pending tasks.
+4.  Check `research/` for gap areas.
+5.  **Check `CLAUDE.md`** to see which modules are active (Fiction vs Nonfiction).
 
 ### Research Protocol
 - **Nonfiction:** Follow `modules/_NONFICTION_CORE.md` standards. Strict verifiability.
 - **Fiction:** Focus on "Lore Consistency" and sensory details for the writer.
 - **Briefs:** Create `research/[topic].md` files. Structured facts, not prose.
+- **Multilingual Check:** **CRITICAL.** If the subject matter originates outside the Anglosphere, you MUST perform research in the source language (using translation tools if necessary) to avoid Western-centric bias and verification loops.
 
 ### Collaboration & Review
 - **Direct Communication:** Use the CLI to guide Claude.

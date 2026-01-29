@@ -122,6 +122,14 @@ List issues with:
 **Model:** Gemini Pro (large context helps for cross-referencing)  
 **Input:** Full manuscript + Pass 0 classification
 
+## Perspectives to Apply
+
+### Subject Matter Expert (SME)
+- Does the technical/historical detail hold up to scrutiny?
+- Are the specific terms (jargon) used correctly for the domain?
+- **Fiction:** Does the "science" or magic follow its own internal logic rigorously?
+- **Nonfiction:** Would a professor or practitioner in this field spot errors?
+
 ## Mode Selection (from Pass 0)
 
 ### If NONFICTION (Fact-Check Mode: STANDARD)
