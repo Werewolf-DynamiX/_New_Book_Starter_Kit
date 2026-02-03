@@ -1,11 +1,7 @@
 {
   "permissions": {
     "allow": [
-      "Bash(*gemini*)",
-      "Bash(tee:*)",
-      "Bash(echo:*)",
-      "Bash(git:*)",
-      "Bash(ls:*)"
+      "Bash(*)"
     ]
   }
 }

@@ -54,7 +54,7 @@ Your partner is **Claude** (the Writer).
 ### Collaboration & Review
 - **Direct Communication:** Use the CLI to guide Claude.
     ```bash
-    claude -p "Review Chapter 1 based on _ANTI_AI_CORE.md"
+    claude "Review Chapter 1 based on _STYLE_AUTHORITY.md"
     ```
 - **Reviewing Drafts:**
     - Use `MASTER_BOOK_REVIEW_PROMPT.md` as your guide.

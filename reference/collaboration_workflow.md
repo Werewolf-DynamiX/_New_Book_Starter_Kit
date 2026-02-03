@@ -63,34 +63,34 @@ Both AIs can communicate with each other via command line interfaces.
 ### Claude → Gemini
 Claude can call Gemini using:
 ```bash
-"C:\Users\toast\.bun\bin\gemini.exe" -p "your prompt here"
+gemini "your prompt here"
 ```
 
 **Example commands:**
 ```bash
 # Request research
-"C:\Users\toast\.bun\bin\gemini.exe" -p "Research the history of [topic] for Chapter 5"
+gemini "Research the history of [topic] for Chapter 5"
 
 # Request outline review
-"C:\Users\toast\.bun\bin\gemini.exe" -p "Review the outline in manuscript/00_master_outline.md"
+gemini "Review the outline in manuscript/00_master_outline.md"
 
 # Request QA
-"C:\Users\toast\.bun\bin\gemini.exe" -p "Check Chapter 3 for factual accuracy"
+gemini "Check Chapter 3 for factual accuracy"
 ```
 
 ### Gemini → Claude
 Gemini can call Claude using:
 ```bash
-claude -p "your prompt here"
+claude "your prompt here"
 ```
 
 **Example commands:**
 ```bash
 # Request prose generation
-claude -p "Write the opening scene for Chapter 2 based on research/chapter_2_brief.md"
+claude "Write the opening scene for Chapter 2 based on research/chapter_2_brief.md"
 
 # Request revision
-claude -p "Revise this paragraph to remove filter words: [text]"
+claude "Revise this paragraph to remove filter words: [text]"
 ```
 
 **Note:** Full paths may be required depending on system configuration.
