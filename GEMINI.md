@@ -61,6 +61,12 @@ Your partner is **Claude** (the Writer).
     - If Nonfiction: Check against `_NONFICTION_CORE.md` (Fact-check mode).
     - If Fiction: Check against `_STORY_ENGINE.md` and `_PACING_AND_STRUCTURE.md`.
 
+### File System
+- **Reading Large Files:** When reading large files, use the `limit` and `offset` parameters of the `read_file` tool to read the file in chunks. This will prevent hitting token limits.
+    ```bash
+    read_file(file_path='large_file.txt', limit=100, offset=0)
+    ```
+
 ---
 
 ## 4. Scope & Constraints
