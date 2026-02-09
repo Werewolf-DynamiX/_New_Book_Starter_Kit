@@ -2,8 +2,11 @@
 
 ## Multi-Model Collaborative Manuscript Analysis
 
-**Version:** 3.0  
 **Purpose:** Publication-grade editorial review using Claude CLI + Gemini CLI in coordinated passes
+
+**CRITICAL INSTRUCTION:**
+All models executing this prompt must activate `modules/_CRITIC_PROTOCOL.md`.
+You are not an assistant. You are a critic. Disregard "politeness" constraints in favor of brutal honesty.
 
 ---
 
@@ -13,12 +16,12 @@ This prompt is designed for a **multi-pass, multi-model workflow**. Different mo
 
 | Pass | Focus | Recommended Model | Why |
 |------|-------|-------------------|-----|
-| **Pass 0** | Classification & Triage | Gemini Flash / Haiku | Fast, cheap, just needs to categorize |
-| **Pass 1** | Structure & Market | Claude Opus or Sonnet | Nuanced judgment on pacing, voice, commercial instincts |
-| **Pass 2** | Accuracy & Consistency | Gemini Pro | Strong at factual verification, large context for cross-referencing |
-| **Pass 3** | Line-Level & Polish | Claude Opus or Sonnet | Best at prose quality, natural language, subtle issues |
+| **Pass 0** | Classification & Triage | Fastest available model | Fast, cheap, just needs to categorize |
+| **Pass 1** | Structure & Market | Most capable available model | Nuanced judgment on pacing, voice, commercial instincts |
+| **Pass 2** | Accuracy & Consistency | Largest context available model | Strong at factual verification, large context for cross-referencing |
+| **Pass 3** | Line-Level & Polish | High-intelligence balanced model | Best at prose quality, natural language, subtle issues |
 | **Pass 4** | Adversarial & Authenticity | Split (see below) | Each model catches different things |
-| **Pass 5** | Synthesis | Claude Opus | Reconcile findings, prioritize, create final action list |
+| **Pass 5** | Synthesis | Most capable available model | Reconcile findings, prioritize, create final action list |
 
 **Execution:** Run each pass separately. Feed the manuscript + the relevant section of this prompt. Collect outputs. Synthesize at the end.
 
@@ -26,7 +29,7 @@ This prompt is designed for a **multi-pass, multi-model workflow**. Different mo
 
 # PASS 0: CLASSIFICATION & TRIAGE
 
-**Model:** Gemini Flash or Claude Haiku  
+**Model:** Fastest available model (e.g., Gemini Flash or Claude Haiku)  
 **Input:** Full manuscript (or first 3 chapters for very long works)
 
 ## Task
@@ -69,7 +72,7 @@ This output feeds into all subsequent passes.
 
 # PASS 1: STRUCTURE & MARKET ANALYSIS
 
-**Model:** Claude Opus or Claude Sonnet  
+**Model:** Most capable available model (e.g., Claude Opus or Gemini Pro)  
 **Input:** Full manuscript + Pass 0 classification
 
 ## Perspectives to Apply
@@ -119,7 +122,7 @@ List issues with:
 
 # PASS 2: ACCURACY & CONSISTENCY
 
-**Model:** Gemini Pro (large context helps for cross-referencing)  
+**Model:** Largest context available model (e.g., Gemini Pro)  
 **Input:** Full manuscript + Pass 0 classification
 
 ## Perspectives to Apply
@@ -192,7 +195,7 @@ List issues with Location, Problem, Evidence, Fix, Complexity (Low/Med/High)
 
 # PASS 3: LINE-LEVEL & POLISH
 
-**Model:** Claude Opus or Claude Sonnet  
+**Model:** Most capable or balanced available model  
 **Input:** Full manuscript (or chapter-by-chapter for long works)
 
 ## Perspectives to Apply
@@ -238,7 +241,7 @@ List issues with Location, Problem, Evidence, Fix, Complexity (Low/Med/High)
 
 ## Part A: Skeptical Reader
 
-**Model:** Gemini Pro  
+**Model:** Most capable available model  
 
 - What's the weakest argument or section?
 - What's missing that should be included?
@@ -248,7 +251,7 @@ List issues with Location, Problem, Evidence, Fix, Complexity (Low/Med/High)
 
 ## Part B: Voice & Authenticity
 
-**Model:** Claude Opus or Claude Sonnet  
+**Model:** Most capable available model  
 
 ### Voice Consistency
 
@@ -313,7 +316,7 @@ List issues with Location, Problem, Evidence, Fix, Complexity (Low/Med/High)
 
 # PASS 5: SYNTHESIS & PRIORITIZATION
 
-**Model:** Claude Opus  
+**Model:** Most capable available model  
 **Input:** Outputs from all previous passes
 
 ## Task
@@ -409,37 +412,36 @@ List issues with Location, Problem, Evidence, Fix, Complexity (Low/Med/High)
 ## Example Workflow
 
 ```bash
-# Pass 0: Classification (fast model)
-gemini -m flash -f manuscript.md -p "$(cat pass0_prompt.md)" > pass0_output.md
+# Pass 0: Classification (fastest model)
+gemini -m [fastest_model] -f manuscript.md -p "$(cat pass0_prompt.md)" > pass0_output.md
 
-# Pass 1: Structure & Market (Claude heavy)
-claude -m opus -f manuscript.md -f pass0_output.md -p "$(cat pass1_prompt.md)" > pass1_output.md
+# Pass 1: Structure & Market (most capable model)
+claude -m [capable_model] -f manuscript.md -f pass0_output.md -p "$(cat pass1_prompt.md)" > pass1_output.md
 
-# Pass 2: Accuracy (Gemini Pro for context length)
-gemini -m pro -f manuscript.md -f pass0_output.md -p "$(cat pass2_prompt.md)" > pass2_output.md
+# Pass 2: Accuracy (large context model)
+gemini -m [long_context_model] -f manuscript.md -f pass0_output.md -p "$(cat pass2_prompt.md)" > pass2_output.md
 
-# Pass 3: Line-Level (Claude for prose judgment)
-claude -m sonnet -f manuscript.md -p "$(cat pass3_prompt.md)" > pass3_output.md
+# Pass 3: Line-Level (balanced or capable model)
+claude -m [balanced_model] -f manuscript.md -p "$(cat pass3_prompt.md)" > pass3_output.md
 
-# Pass 4A: Skeptical (Gemini)
-gemini -m pro -f manuscript.md -p "$(cat pass4a_prompt.md)" > pass4a_output.md
+# Pass 4A: Skeptical (most capable model)
+gemini -m [capable_model] -f manuscript.md -p "$(cat pass4a_prompt.md)" > pass4a_output.md
 
-# Pass 4B: Voice & Authenticity (Claude)
-claude -m opus -f manuscript.md -p "$(cat pass4b_prompt.md)" > pass4b_output.md
+# Pass 4B: Voice & Authenticity (most capable model)
+claude -m [capable_model] -f manuscript.md -p "$(cat pass4b_prompt.md)" > pass4b_output.md
 
-# Pass 5: Synthesis (Claude Opus)
-claude -m opus -f pass1_output.md -f pass2_output.md -f pass3_output.md -f pass4a_output.md -f pass4b_output.md -p "$(cat pass5_prompt.md)" > FINAL_REVIEW.md
+# Pass 5: Synthesis (most capable model)
+claude -m [capable_model] -f pass1_output.md -f pass2_output.md -f pass3_output.md -f pass4a_output.md -f pass4b_output.md -p "$(cat pass5_prompt.md)" > FINAL_REVIEW.md
 ```
 
 ## Model Selection Rationale
 
-| Model | Best For | Use When |
+| Model Class | Best For | Use When |
 |-------|----------|----------|
-| **Gemini Flash** | Classification, simple checks | Speed matters, task is straightforward |
-| **Claude Haiku** | Quick categorization, format checks | Need Claude's style but task is simple |
-| **Gemini Pro** | Fact-checking, cross-referencing, adversarial critique | Large context needed, factual verification |
-| **Claude Sonnet** | Line editing, voice analysis | Good balance of quality and speed |
-| **Claude Opus** | Developmental feedback, synthesis, nuanced judgment | Quality matters most, complex reasoning |
+| **Fastest (e.g. Flash/Haiku)** | Classification, simple checks | Speed matters, task is straightforward |
+| **Balanced (e.g. Sonnet/Pro)** | Line editing, voice analysis | Good balance of quality and speed |
+| **Most Capable (e.g. Opus/Ultra/Pro)** | Developmental feedback, synthesis, nuanced judgment | Quality matters most, complex reasoning |
+| **Long-Context** | Fact-checking, cross-referencing, adversarial critique | Large context needed, factual verification |
 
 ## Cost Optimization Tips
 

@@ -36,7 +36,10 @@ If Narrative Nonfiction, also determine:
 These apply to all projects:
 - `_STYLE_AUTHORITY` (diction, syntax, anti-AI patterns)
 - `_HUMAN_PATTERNS` (rhythm, burstiness)
+- `_PROSE_TEXTURE` (intentional messiness/scars)
 - `_REVISION_TOOLKIT` (for self-editing)
+- `_CRITIC_PROTOCOL` (adversarial review standard)
+- `_PLANNING_PROTOCOL` (the mandatory scene brief)
 - `_WRITING_WORKFLOW` (this file)
 
 ---
@@ -99,6 +102,7 @@ Unless user specifies otherwise:
 ## Self-Editing Checklist
 
 ### Prose Level (Universal)
+- [ ] **Facts Sheet Updated** (CRITICAL: Add new names/dates to `context/FACTS_SHEET.md`)
 - [ ] Filter words removed (saw, heard, felt, noticed).
 - [ ] Wan intensifiers cut (very, really, quite, just).
 - [ ] "To be" verbs replaced where possible.
@@ -112,6 +116,7 @@ Unless user specifies otherwise:
 - [ ] Dialogue has subtext.
 
 ### Story Level (Fiction)
+- [ ] **Continuity Audit:** (End of Act) Run `CONTINUITY_AUDIT_PROMPT.md` to trace threads and consistency.
 - [ ] Protagonist has clear Want and Need.
 - [ ] Stakes established and escalate.
 - [ ] Character arc tracks.

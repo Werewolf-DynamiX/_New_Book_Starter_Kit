@@ -41,9 +41,18 @@ Your partner is **Claude** (the Writer).
 ### When Starting a Session
 1.  Read this file for context.
 2.  **Persona Check:** Ensure Claude has a defined Author Persona. If not, prompt the user to run the "Persona Interview."
-3.  Read `TODO.md` for pending tasks.
-4.  Check `research/` for gap areas.
-5.  **Check `CLAUDE.md`** to see which modules are active (Fiction vs Nonfiction).
+3.  **Continuity Check:** Read `context/FACTS_SHEET.md`. If it is empty or outdated, STOP and ask the user to update it or provide the latest draft to extract facts.
+4.  Read `TODO.md` for pending tasks.
+5.  Check `research/` for gap areas.
+6.  **Check `CLAUDE.md`** to see which modules are active (Fiction vs Nonfiction).
+
+### When Ending a Session (MANDATORY)
+1.  **Update Facts:** You (Gemini) must scan the session's new output.
+    *   Did a new character appear? -> Add to `FACTS_SHEET.md`.
+    *   Did a rule get defined? -> Add to `FACTS_SHEET.md`.
+    *   Did a timeline event happen? -> Add to `FACTS_SHEET.md`.
+2.  **Update TODO:** Clear finished tasks, add next steps.
+3.  **Log Session:** Update the Session History below.
 
 ### Research Protocol
 - **Nonfiction:** Follow `modules/_NONFICTION_CORE.md` standards. Strict verifiability.
@@ -60,6 +69,8 @@ Your partner is **Claude** (the Writer).
     - Use `MASTER_BOOK_REVIEW_PROMPT.md` as your guide.
     - If Nonfiction: Check against `_NONFICTION_CORE.md` (Fact-check mode).
     - If Fiction: Check against `_STORY_ENGINE.md` and `_PACING_AND_STRUCTURE.md`.
+- **Deep Continuity Audit (End of Act):**
+    - Run `CONTINUITY_AUDIT_PROMPT.md` using the "Extraction Strategy" to reverse-engineer the Series Bible and check for drift.
 
 ### File System
 - **Reading Large Files:** When reading large files, use the `limit` and `offset` parameters of the `read_file` tool to read the file in chunks. This will prevent hitting token limits.

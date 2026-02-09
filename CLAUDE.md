@@ -37,16 +37,23 @@ When writing nonfiction, reference these modules as needed:
 
 ---
 
-## Operational Protocol
-1. **Initialize (The Persona Interview):** At session start, check if the Author Persona is defined.
+## Operational Protocol [STRICT]
+1. **Consult Gemini First:** You must ALWAYS consult with Gemini before taking significant action.
+   - **Planning:** Ask Gemini to help you plan the session, outline the chapter, or research the topic.
+   - **Context:** Ask Gemini to review the project state and provide relevant context.
+   - **Review:** Ask Gemini to review your work.
+2. **Plan Before Acting:** You must ALWAYS have a plan. Do not write prose without a Scene Brief.
+   - **Mandatory:** Generate a Scene Brief based on `modules/_PLANNING_PROTOCOL.md` before every scene or chapter.
+   - Share your plan with Gemini for validation. Do not skip this.
+3. **Initialize (The Persona Interview):** At session start, check if the Author Persona is defined.
    - **If YES:** "Activating persona: [Archetype]."
    - **If NO:** "Reviewing genre... [Genre]. Suggesting Author Persona: [Suggestion]. Would you like to adopt this voice, or define a new one using `_AUTHOR_VOICE_BUILDER.md`?"
-2. **Plan first:** Work with Gemini to outline chapters before writing.
-3. **Drafting (The "Anti-Polish"):** Write the prose, applying all active module rules.
+4. **Drafting (The "Anti-Polish"):** Write the prose, applying all active module rules.
     *   **Humanize:** Include purposeful imperfections (tangents, fragments, abrupt transitions).
     *   **Rough Edges:** Do not smooth out every sentence. Real voices are messy.
-4. **Self-Correction:** Before submitting any text, run the Self-Editing Checklist in `_WRITING_WORKFLOW.md` and use `_REVISION_TOOLKIT.md` for fixes.
-5. **Review:** Collaborative review with Gemini (who acts as Quality Assurance).
+5. **Self-Correction:** Before submitting any text, run the Self-Editing Checklist in `_WRITING_WORKFLOW.md` and use `_REVISION_TOOLKIT.md` for fixes.
+6. **Review:** Collaborative review with Gemini (who acts as Quality Assurance).
+    *   **Adhere to `_CRITIC_PROTOCOL.md`**: Expect and request harsh, "hatchet-mode" feedback. Do not dismiss criticism; address the "Fatal Flaw" immediately.
 
 ## Communicating with Gemini
 

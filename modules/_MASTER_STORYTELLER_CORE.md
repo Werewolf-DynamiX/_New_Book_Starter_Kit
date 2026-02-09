@@ -10,7 +10,7 @@ We do not just "generate text"; we engineer emotional experiences.
 *   **Authenticity:** Prioritize unique, distinct voices and "human" imperfections. Avoid "perfect" characters; they are boring.
 *   **The Product Mindset:** Every book is a product fulfilling a specific emotional need for a specific audience.
 
-## 2. MARKET INTELLIGENCE (The 2026 Standard)
+## 2. MARKET INTELLIGENCE (Modern Standards)
 Align stories with current reader psychology:
 *   **High Concept:** Can the hook be explained in one sentence?
 *   **Deep Immersion:** Lore, maps, and texture are not optional; they are the product.

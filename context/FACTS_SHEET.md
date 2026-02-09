@@ -1,8 +1,12 @@
 # Facts Sheet / Story Bible
 
 **Project:** [Title]
+**CRITICAL:** This file is the primary defense against hallucinations. It MUST be updated at the end of every writing session. If a fact isn't here, the AI doesn't know it.
 
-Use this file to maintain a single source of truth for proper nouns, dates, and technical details to prevent hallucinations.
+---
+
+## Unresolved Threads (Open Loops)
+*   [Thread]: [Description] (Opened Ch. X)
 
 ---
 

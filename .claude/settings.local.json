@@ -1,7 +1,47 @@
 {
   "permissions": {
     "allow": [
-      "Bash(*)"
+      "Edit",
+      "MultiEdit",
+      "Read",
+      "Bash(gemini:*)",
+      "Bash(git:*)",
+      "Bash(cat:*)",
+      "Bash(ls:*)",
+      "Bash(find:*)",
+      "Bash(grep:*)",
+      "Bash(wc:*)",
+      "Bash(tree:*)",
+      "Bash(mkdir:*)",
+      "Bash(cp:*)",
+      "Bash(mv:*)",
+      "Bash(rm:*)",
+      "Bash(sort:*)",
+      "Bash(xargs:*)",
+      "Bash(pandoc:*)",
+      "Bash(for:*)",
+      "Bash(while:*)",
+      "Bash(do:*)",
+      "Bash(done:*)",
+      "Bash(echo:*)",
+      "Bash(sed:*)",
+      "Bash(awk:*)",
+      "Bash(head:*)",
+      "Bash(tail:*)",
+      "Bash(diff:*)",
+      "Bash(powershell:*)",
+      "Bash(timeout:*)",
+      "Bash(command:*)",
+      "Bash(where:*)",
+      "Bash(findstr:*)",
+      "WebSearch",
+      "WebFetch(domain:*)",
+      "mcp__text-editor__get_text_file_contents",
+      "mcp__text-editor__edit_text_file_contents"
+    ],
+    "deny": [
+      "Bash(rm -rf /)*",
+      "Bash(sudo:*)"
     ]
   }
 }
