@@ -23,12 +23,16 @@ At session start, determine Fiction or Nonfiction. Load appropriate modules.
 When writing fiction, reference these modules as needed:
 - `modules/_STORY_ENGINE.md` (Engines, Stakes, Structure)
 - `modules/_CHARACTER_CRAFT.md` (Arcs, Voice, Dimensions)
+- `modules/_CHARACTER_VOICES.md` (Dialogue Patterns & Tics)
 - `modules/_PACING_AND_STRUCTURE.md` (Scene goals, Act 2, beginnings, endings)
 - `modules/_NARRATIVE_VOICE.md` (POV rules, all tenses and perspectives)
 - `modules/_DIALOGUE_CRAFT.md` (Subtext, voice differentiation, blocking)
 - `modules/_WORLDBUILDING.md` (Setting, magic systems, culture)
 - `modules/_GENRE_PLAYBOOK.md` (Genre-specific beats and rules)
 - `modules/_ROMANCE_HEAT.md` (Optional: If romance elements present)
+- `modules/_LESSONS_LEARNED.md` (Universal fiction pitfalls to avoid)
+- `modules/_KDP_REVIEW_FRAMEWORK.md` (Self-publishing quality assurance)
+- `modules/KDP_BOOK_FORMATTING_SKILL.md` (Amazon KDP technical specs)
 
 #### Track B: Nonfiction
 When writing nonfiction, reference these modules as needed:
