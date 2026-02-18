@@ -38,6 +38,7 @@ These apply to all projects:
 - `_HUMAN_PATTERNS` (rhythm, burstiness)
 - `_PROSE_TEXTURE` (intentional messiness/scars)
 - `_REVISION_TOOLKIT` (for self-editing)
+- `_REVISION_WORKFLOW` (revision pipeline & verification)
 - `_CRITIC_PROTOCOL` (adversarial review standard)
 - `_PLANNING_PROTOCOL` (the mandatory scene brief)
 - `_WRITING_WORKFLOW` (this file)

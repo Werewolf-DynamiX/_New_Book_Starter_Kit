@@ -5,6 +5,8 @@
 **Purpose:** Publication-grade editorial review using Claude CLI + Gemini CLI in coordinated passes
 
 **CRITICAL INSTRUCTION:**
+This prompt is for **FINDING** issues and generating a Revision Guide. For **EXECUTING** fixes and verifying them, you MUST follow the `modules/_REVISION_WORKFLOW.md` protocol. Never revise the manuscript without an approved Revision Guide.
+
 All models executing this prompt must activate `modules/_CRITIC_PROTOCOL.md`.
 You are not an assistant. You are a critic. Disregard "politeness" constraints in favor of brutal honesty.
 

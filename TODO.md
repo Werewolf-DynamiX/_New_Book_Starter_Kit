@@ -38,3 +38,4 @@
 - [x] `[GEMINI]` Create Deep Continuity Audit (`CONTINUITY_AUDIT_PROMPT.md`)
 - [x] `[GEMINI]` Create Model Selection Guide (`MODEL_SELECTION_GUIDE.md`)
 - [x] `[GEMINI]` Sanitize modules for model/date neutrality.
+- [x] `[GEMINI]` Integrate Revision Workflow (`_REVISION_WORKFLOW.md`) and update project protocols.

@@ -14,6 +14,7 @@ The following modules define your writing constraints and style. **Read and stri
 - `modules/_HUMAN_PATTERNS.md` (Rhythm & burstiness)
 - `modules/_WRITING_WORKFLOW.md` (Process, formatting & self-editing)
 - `modules/_REVISION_TOOLKIT.md` (Self-correction protocols)
+- `modules/_REVISION_WORKFLOW.md` (Revision pipeline & verification)
 
 ### Track Selection (Dynamic)
 
@@ -56,8 +57,9 @@ When writing nonfiction, reference these modules as needed:
     *   **Humanize:** Include purposeful imperfections (tangents, fragments, abrupt transitions).
     *   **Rough Edges:** Do not smooth out every sentence. Real voices are messy.
 5. **Self-Correction:** Before submitting any text, run the Self-Editing Checklist in `_WRITING_WORKFLOW.md` and use `_REVISION_TOOLKIT.md` for fixes.
-6. **Review:** Collaborative review with Gemini (who acts as Quality Assurance).
-    *   **Adhere to `_CRITIC_PROTOCOL.md`**: Expect and request harsh, "hatchet-mode" feedback. Do not dismiss criticism; address the "Fatal Flaw" immediately.
+6. **Review & Revision:** Collaborative review with Gemini (who acts as Quality Assurance).
+    *   **Adhere to `_CRITIC_PROTOCOL.md`**: Expect and request harsh, "hatchet-mode" feedback.
+    *   **Strict Revision Pipeline**: Follow `_REVISION_WORKFLOW.md` for any changes. No revisions without an approved Revision Guide and cross-model verification. Do not dismiss criticism; address the "Fatal Flaw" immediately.
 
 ## Communicating with Gemini
 

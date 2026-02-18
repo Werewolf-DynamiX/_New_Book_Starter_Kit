@@ -5,8 +5,8 @@
 1. **Gemini** researches and plans (outputs to `research/` and `TODO.md`).
 2. **Claude** writes prose based on Gemini's work (outputs to `manuscript/`).
 3. **Gemini** reviews Claude's prose for technical accuracy (outputs to `reviews/`).
-4. **Claude** revises based on review (updates `manuscript/`).
-5. **Gemini** signs off (updates `TODO.md`).
+4. **Triage & Revision:** Claude and Gemini follow the `_REVISION_WORKFLOW.md` to process findings and execute fixes.
+5. **Verification & Sign-off:** The opposite model verifies fixes before Gemini updates `TODO.md`.
 
 ---
 
@@ -75,7 +75,7 @@ gemini "Research the history of [topic] for Chapter 5"
 gemini "Review the outline in manuscript/00_master_outline.md"
 
 # Request QA
-gemini "Check Chapter 3 for factual accuracy"
+gemini "Run a full review of Chapter 3 per _REVISION_WORKFLOW.md"
 ```
 
 ### Gemini → Claude
@@ -89,8 +89,8 @@ claude "your prompt here"
 # Request prose generation
 claude "Write the opening scene for Chapter 2 based on research/chapter_2_brief.md"
 
-# Request revision
-claude "Revise this paragraph to remove filter words: [text]"
+# Request triage
+claude "Review these audit findings and create a Revision Guide per _REVISION_WORKFLOW.md"
 ```
 
 **Note:** Full paths may be required depending on system configuration.

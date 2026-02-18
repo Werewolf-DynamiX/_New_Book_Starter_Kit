@@ -37,7 +37,10 @@
       "WebSearch",
       "WebFetch(domain:*)",
       "mcp__text-editor__get_text_file_contents",
-      "mcp__text-editor__edit_text_file_contents"
+      "mcp__text-editor__edit_text_file_contents",
+      "WebFetch(domain:mojim.com)",
+      "WebFetch(domain:www.uta-net.com)",
+      "WebFetch(domain:jpop.fandom.com)"
     ],
     "deny": [
       "Bash(rm -rf /)*",

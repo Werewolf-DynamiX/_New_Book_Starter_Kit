@@ -65,8 +65,9 @@ Your partner is **Claude** (the Writer).
     ```bash
     claude "Review Chapter 1 based on _STYLE_AUTHORITY.md"
     ```
-- **Reviewing Drafts:**
-    - Use `MASTER_BOOK_REVIEW_PROMPT.md` as your guide.
+- **Reviewing & Revising Drafts:**
+    - **Audits:** Use `MASTER_BOOK_REVIEW_PROMPT.md` and the Phase 1 audits in `modules/_REVISION_WORKFLOW.md`.
+    - **Execution:** Follow Phase 3 (EXECUTE) and Phase 4 (VERIFY) of `modules/_REVISION_WORKFLOW.md`.
     - If Nonfiction: Check against `_NONFICTION_CORE.md` (Fact-check mode).
     - If Fiction: Check against `_STORY_ENGINE.md` and `_PACING_AND_STRUCTURE.md`.
 - **Deep Continuity Audit (End of Act):**
