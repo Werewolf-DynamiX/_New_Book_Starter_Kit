@@ -25,7 +25,8 @@
 
 1. **The model that does the work does not verify its own work.** Ever. The executor and the auditor are always different models (or different sessions).
 2. **Every change must be provable.** "I updated it" is not proof. Quoting the before and after text IS proof.
-3. **Tasks are atomic.** One task, one verifiable output. No bundled instructions where completion of individual items can't be confirmed.
+3. **The "Grade A" Gatekeeper [STRICT]:** No manuscript section is complete until **ALL** personas in the `_ADVERSARIAL_REVIEW_ENGINE.md` have issued a **Grade A (4.5+ Stars)**.
+4. **The Verification Certificate:** The executor (Claude) CANNOT mark a task as ✅ DONE. Only the auditor (Gemini) can issue a **Verification Certificate** after an adversarial audit.
 
 ### Usage Optimization Philosophy
 
@@ -491,13 +492,14 @@ Output a verification table:
 | 1 | VERIFIED / NOT FIXED / WRONG | [quoted text] |
 ```
 
-#### Rule 5: The Completion Gate
-A revision round is not complete until:
-- [ ] Every item has executor output in the BEFORE/AFTER format
-- [ ] Every item has been independently verified by the auditing model
-- [ ] All VERIFIED items are marked ✅ in the Revision Guide
-- [ ] All NOT FIXED items have been re-attempted and re-verified
-- [ ] The Story Bible has been updated for any fact changes
+#### Rule 5: The Completion Gate (The Verification Certificate)
+A revision task is ONLY marked as complete when:
+- [ ] The auditor (Gemini) issues a **Verification Certificate** (see `_ADVERSARIAL_REVIEW_ENGINE.md`).
+- [ ] Every item has been independently verified as FIXED with evidence.
+- [ ] All VERIFIED items are marked ✅ in the Revision Guide.
+- [ ] The Story Bible has been updated for any fact changes.
+
+**Executor Mandate:** You CANNOT mark a task as DONE yourself. You must wait for the Certificate.
 
 ---
 

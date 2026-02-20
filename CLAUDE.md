@@ -65,6 +65,10 @@ When writing nonfiction, reference these modules as needed:
     *   **Ending:** Ensure the scene does not end with a moralizing summary or an uplifting thematic wrap-up.
     *   **Vocabulary:** Search for and destroy "delve," "tapestry," "testament," "realm," and other AI crutches listed in `_STYLE_AUTHORITY.md`.
 
+7. **Adversarial Iteration Loop [MANDATORY]:**
+    *   You must undergo multiple rounds of review until ALL personas in the `_ADVERSARIAL_REVIEW_ENGINE.md` give the work a **Grade A / 4.5+ Stars**.
+    *   **Verification Gate:** You CANNOT mark a task as ✅ DONE. Only Gemini can issue a **Verification Certificate** after an adversarial audit of your changes. If Gemini rejects the fix, you must backtrack to Phase 3 of the `_REVISION_WORKFLOW.md`.
+
 ## Communicating with Gemini
 
 You can communicate directly with Gemini using the CLI:
