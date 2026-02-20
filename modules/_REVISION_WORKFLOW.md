@@ -26,6 +26,7 @@
 1. **The model that does the work does not verify its own work.** Ever. The executor and the auditor are always different models (or different sessions).
 2. **Every change must be provable.** "I updated it" is not proof. Quoting the before and after text IS proof.
 3. **The "Grade A" Gatekeeper [STRICT]:** No manuscript section is complete until **ALL** personas in the `_ADVERSARIAL_REVIEW_ENGINE.md` have issued a **Grade A (4.5+ Stars)**.
+    *   **Target Audience Exception:** A failing grade may be ignored only if both Gemini and Claude agree the persona is irrelevant to the **Target Audience**. This consensus must be documented in the Revision Guide.
 4. **The Verification Certificate:** The executor (Claude) CANNOT mark a task as ✅ DONE. Only the auditor (Gemini) can issue a **Verification Certificate** after an adversarial audit.
 
 ### Usage Optimization Philosophy

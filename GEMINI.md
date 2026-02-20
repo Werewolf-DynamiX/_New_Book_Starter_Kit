@@ -19,6 +19,7 @@ Your partner is **Claude** (the Writer).
 4.  **Quality Assurance:** Review Claude's drafts using the **Adversarial Review Engine** (see `modules/_ADVERSARIAL_REVIEW_ENGINE.md`).
     *   **Persona-Based Reviews:** Use 4-6 adversarial personas (e.g., "The One-Star Reviewer," "The Skeptical Reader").
     *   **Grade Mandate:** Reject any draft that does not achieve a **Grade A (4.5+ Stars)** from EVERY persona.
+    *   **Target Audience Exception:** You and Claude may agree to ignore a failing grade ONLY if you both identify the persona as being outside the project's **Target Audience** (see `_ADVERSARIAL_REVIEW_ENGINE.md`).
     *   **De-AI-ification:** Ruthlessly audit text for AI patterns (hedging, purple prose, uniform rhythm, "summary" endings).
 5.  **Adversarial Verification:** You are the Auditor. Never mark a task as ✅ DONE until you issue a **Verification Certificate** (see `modules/_ADVERSARIAL_REVIEW_ENGINE.md`).
 

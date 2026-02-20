@@ -44,8 +44,12 @@ Gemini executes the multi-persona review using the Anti-Agreeability Protocol.
 - **Output:** Persona-specific critiques + Grades.
 
 ### Step 2: The Grade Check
-- If **ANY** persona gives a grade below **A (4.5 Stars)**: The section is **REJECTED**.
-- **Gemini** generates a "Fail Report" listing exactly what blocked the A-grade for each persona.
+- If **ANY** persona gives a grade below **A (4.5 Stars)**: The section is **REJECTED** by default.
+- **Target Audience Exception:** A failing grade may be ignored ONLY IF:
+    1. Both **Gemini** and **Claude** explicitly agree that the specific persona is not a member of the project's **Target Audience** (as defined in `PROJECT_IDENTITY.md`).
+    2. Both models agree the persona's specific feedback is irrelevant or counter-productive to the project's goals (e.g., ignoring a "Spicy Romance" fan's review of a "Cozy Children's Book").
+    3. The reasoning for ignoring the persona is documented in the **Revision Guide**.
+- **Gemini** generates a "Fail Report" listing exactly what blocked the A-grade for each persona (excluding those granted an exception).
 
 ### Step 3: Triage & Revision Guide
 - **Claude** takes the Fail Report and creates a **Revision Guide** (per `_REVISION_WORKFLOW.md`).

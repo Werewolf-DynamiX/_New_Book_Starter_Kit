@@ -67,6 +67,7 @@ When writing nonfiction, reference these modules as needed:
 
 7. **Adversarial Iteration Loop [MANDATORY]:**
     *   You must undergo multiple rounds of review until ALL personas in the `_ADVERSARIAL_REVIEW_ENGINE.md` give the work a **Grade A / 4.5+ Stars**.
+    *   **Target Audience Exception:** If you and Gemini both agree that a persona is not a member of the project's **Target Audience**, that persona's failing grade may be ignored (see `_ADVERSARIAL_REVIEW_ENGINE.md`).
     *   **Verification Gate:** You CANNOT mark a task as ✅ DONE. Only Gemini can issue a **Verification Certificate** after an adversarial audit of your changes. If Gemini rejects the fix, you must backtrack to Phase 3 of the `_REVISION_WORKFLOW.md`.
 
 ## Communicating with Gemini
