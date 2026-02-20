@@ -13,6 +13,10 @@ These are literal AI remnants. Their presence instantly breaks immersion. **Neve
 - "I cannot" / "I'm unable to" (in narrative voice)
 - "Here's" / "Here are" to introduce lists (in prose)
 - Refusal language or safety hedging in narrative contexts
+- **"In conclusion," "Ultimately," "At the end of the day"** (as a summary wrap-up)
+- **"It’s not just about X, it’s about Y"** (The 'Pseudo-Deep' AI pivot)
+- **"A testament to..." / "A reminder that..."** (Moralizing at the end of a section)
+- **"Let's dive in," "Let's explore," "In this chapter, we will..."** (The "Tour Guide" AI voice)
 
 ### Banned Transitions
 - "To understand X, you have to understand Y"
@@ -21,10 +25,28 @@ These are literal AI remnants. Their presence instantly breaks immersion. **Neve
 - "But that's the next chapter" / "The story belongs to a later chapter"
 - "It is important to note that"
 - "In today's digital age"
+- **"Whether it's X or Y..."** (The 'inclusive' AI list)
+- **"Only time will tell..."** (The cliché cliffhanger)
+- **"Think of X as a Y..."** (The 'Generic Analogy' AI crutch)
 
 ---
 
-## 2. HEURISTIC FLAGS (Contextual Audit)
+## 2. STRUCTURAL PREDICTABILITY (The "AI Rhythm")
+
+AI often writes in a "Sandwich" structure. Avoid this pattern:
+1. **The Bread:** General statement / setup.
+2. **The Meat:** Three examples or points, often connected by "Furthermore," "Additionally," or "Moreover."
+3. **The Bread:** A summarizing sentence that rehashes the first point or offers an "uplifting" takeaway.
+
+**How to break it in Nonfiction:**
+- **Start with a Fact or Anecdote:** Skip the "general statement."
+- **Asymmetrical Depth:** Give one example three paragraphs of depth and another just a sentence. Never exactly three.
+- **The "So What?":** Instead of a summary, explain the immediate practical application or the dark implication of the fact.
+- **End on a Hook:** Leave the reader with a question or a new piece of data that points toward the *next* section, rather than looking back.
+
+---
+
+## 3. HEURISTIC FLAGS (Contextual Audit)
 
 These words are not strictly banned but are statistical indicators of AI writing when used to *smooth over* complexity rather than *describe* it.
 
@@ -175,3 +197,19 @@ Common errors to avoid:
 | **Contractions** | Use them (it's human) |
 | **Definition Loop** | Explain once, reference thereafter |
 | **Voice** | Opinionated > hedged |
+
+---
+
+## 9. BURSTINESS & PERPLEXITY AUDIT [GEMINI QA]
+
+Use these criteria when reviewing Claude's prose:
+
+### Burstiness (Rhythmic Variation)
+- **Check Sentence Length:** Calculate the word count of 10 consecutive sentences. If they are all within 12-18 words, it's "AI Flatline." Reject.
+- **Check Sentence Structure:** Look for consecutive "Subject-Verb-Object" patterns. If three or more start the same way (e.g., "He went...", "He saw...", "He felt..."), it's AI.
+- **Check Paragraph Variation:** Are there any one-sentence paragraphs? Are there any that run for 5+ lines? If they are all uniform blocks, it's AI.
+
+### Perplexity (Unexpected Detail & Depth)
+- **Check Specificity:** Did the writer use "tree" or "gnarled oak"? "A car" or "a rusted 1994 Camry"? Generic nouns = AI.
+- **Check Intellectual Friction:** Does the narrator ever correct themselves? Do they ever use a slang term in a formal sentence? Do they ever express a weird, specific opinion that isn't a "universal truth"?
+- **Check The "Ending Trap":** Does the scene end with a summary sentence like "And so, she learned that..." or "In the end, it was a testament to..."? If yes, it's 100% AI. Strip it.

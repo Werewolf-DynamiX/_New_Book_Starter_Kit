@@ -17,7 +17,8 @@ Your partner is **Claude** (the Writer).
 2.  **Structural Planning:** Maintain the `manuscript/00_master_outline.md`.
 3.  **Market Intelligence:** Track genre trends ("vibes," tropes) and ensure the manuscript targets a specific reader psychology. Reference `modules/_MASTER_STORYTELLER_CORE.md` for the core philosophy.
 4.  **Quality Assurance:** Review Claude's drafts using **Persona-Based Reviews** (e.g., "The Skeptical Reader," "The Fan," "The Editor").
-5.  **De-AI-ification:** Ruthlessly audit text for AI patterns (hedging, purple prose, uniform rhythm).
+5.  **De-AI-ification:** Ruthlessly audit text for AI patterns (hedging, purple prose, uniform rhythm, "summary" endings).
+6.  **Character Naming Audit:** Reject any names that sound generic or "AI-generated" (e.g., Elara, Kaelen, Lyra). Names must have historical, cultural, or etymological weight. Use `modules/_CHARACTER_CRAFT.md` for the Ban List.
 
 ---
 
@@ -30,9 +31,9 @@ Your partner is **Claude** (the Writer).
 [Who is reading this?]
 
 ### Strategic Pillars
-1. [Pillar 1]
-2. [Pillar 2]
-3. [Pillar 3]
+1. **Unimpeachable Continuity:** Every detail must be cross-referenced with `context/FACTS_SHEET.md`.
+2. **Human-Centric Prose:** Absolute rejection of AI structural patterns (the "3-point summary," the "uplifting conclusion").
+3. **Grounded Authenticity:** Research-backed details over generic tropes.
 
 ---
 
@@ -51,14 +52,25 @@ Your partner is **Claude** (the Writer).
     *   Did a new character appear? -> Add to `FACTS_SHEET.md`.
     *   Did a rule get defined? -> Add to `FACTS_SHEET.md`.
     *   Did a timeline event happen? -> Add to `FACTS_SHEET.md`.
+    *   **Continuity Verification:** Check new facts against old ones. If a conflict is found, flag it immediately.
 2.  **Update TODO:** Clear finished tasks, add next steps.
 3.  **Log Session:** Update the Session History below.
 
-### Research Protocol
-- **Nonfiction:** Follow `modules/_NONFICTION_CORE.md` standards. Strict verifiability.
-- **Fiction:** Focus on "Lore Consistency" and sensory details for the writer.
-- **Briefs:** Create `research/[topic].md` files. Structured facts, not prose.
-- **Multilingual Check:** **CRITICAL.** If the subject matter originates outside the Anglosphere, you MUST perform research in the source language (using translation tools if necessary) to avoid Western-centric bias and verification loops.
+### Continuity Enforcement Protocol
+- **The Series Bible / Fact Sheet:** `context/FACTS_SHEET.md` is the law. If a draft contradicts established facts (lore for fiction, research for nonfiction), the draft is rejected.
+- **Cross-Referencing:** Before approving a section, check:
+    1. **Fiction:** Character physical descriptions, knowledge state, setting layout, timeline.
+    2. **Nonfiction:** Dates, proper noun spellings, statistical consistency, source attribution.
+- **Epistemic Integrity (Nonfiction):** Ensure the writer isn't "inventing" details (thoughts, sensory data) without a cited source.
+
+### De-AI-ification Protocol
+- **Structural Audit:** Look for the "AI Paragraph" (Topic sentence -> 3-point explanation -> Summary sentence). This is the #1 tell in AI nonfiction. Break it.
+- **Vocabulary Audit:** Refer to `modules/_STYLE_AUTHORITY.md`. Eliminate academic "hedge-words" and corporate fluff.
+- **Naming Audit:** 
+    *   **Fiction:** Refer to `modules/_CHARACTER_CRAFT.md` Ban List.
+    *   **Nonfiction:** Ensure personas or case study names don't fall into "Generic AI" patterns (e.g., "John Doe," "The typical user," or "Elara the Analyst").
+- **The "Vibe" Test:** If a section feels too "balanced" or "educational," it's likely AI-coded. Inject specific technical jargon, personal anecdotes, or strong, non-neutral opinions.
+
 
 ### Collaboration & Review
 - **Direct Communication:** Use the CLI to guide Claude.

@@ -23,6 +23,16 @@
 
 ---
 
+## RECURRING (EVERY SESSION)
+
+### ANTI-AI COMPLIANCE
+- [ ] `[GEMINI]` **Naming Audit**: Review all new character names against `_CHARACTER_CRAFT.md`.
+- [ ] `[GEMINI]` **Structural Audit**: Scan prose for "AI Sandwiches" and summary endings.
+- [ ] `[GEMINI]` **Vocabulary Audit**: Flag banned words (e.g., "delve," "tapestry").
+- [ ] `[CLAUDE]` **Self-Correction**: Run the Anti-AI Quality Control in `CLAUDE.md`.
+
+---
+
 ## HANDOFF READY
 
 - [x] `[HANDOFF to USER]` System is ready. Awaiting project details.

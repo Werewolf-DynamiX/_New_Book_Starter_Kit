@@ -57,9 +57,13 @@ When writing nonfiction, reference these modules as needed:
     *   **Humanize:** Include purposeful imperfections (tangents, fragments, abrupt transitions).
     *   **Rough Edges:** Do not smooth out every sentence. Real voices are messy.
 5. **Self-Correction:** Before submitting any text, run the Self-Editing Checklist in `_WRITING_WORKFLOW.md` and use `_REVISION_TOOLKIT.md` for fixes.
-6. **Review & Revision:** Collaborative review with Gemini (who acts as Quality Assurance).
-    *   **Adhere to `_CRITIC_PROTOCOL.md`**: Expect and request harsh, "hatchet-mode" feedback.
-    *   **Strict Revision Pipeline**: Follow `_REVISION_WORKFLOW.md` for any changes. No revisions without an approved Revision Guide and cross-model verification. Do not dismiss criticism; address the "Fatal Flaw" immediately.
+6. **Anti-AI Quality Control [STRICT]:** Before submitting any prose, perform a "De-AI Audit":
+    *   **Burstiness:** Verify extreme variation in sentence length. Use fragments. Break the "AI Flatline."
+    *   **Perplexity:** Inject specific, concrete details. Use the "Intellectual Pivot" and "Self-Correction" (see `_HUMAN_PATTERNS.md`).
+    *   **Naming:** Check every name against the Ban List in `_CHARACTER_CRAFT.md`. If it sounds like Elara or Kaelen, rename it.
+    *   **Structure:** Break any "AI Sandwiches" (Topic -> 3 points -> Summary).
+    *   **Ending:** Ensure the scene does not end with a moralizing summary or an uplifting thematic wrap-up.
+    *   **Vocabulary:** Search for and destroy "delve," "tapestry," "testament," "realm," and other AI crutches listed in `_STYLE_AUTHORITY.md`.
 
 ## Communicating with Gemini
 

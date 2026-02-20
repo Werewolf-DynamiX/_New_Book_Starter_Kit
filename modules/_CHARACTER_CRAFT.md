@@ -11,7 +11,26 @@ Characters must have:
 
 **[STRICT]** Avoid "perfect" protagonists. Flawlessness kills reader investment.
 
-## 2. Character Arc Types
+## 2. Character Naming Protocol [ANTI-AI]
+
+**Note:** This applies to Fiction characters, as well as Nonfiction personas, case studies, and pseudonyms.
+
+### The Ban List (Generic AI Names)
+Reject these and their variations immediately. They scream "procedurally generated":
+- **The "L-E" Names:** Lyra, Elara, Liora, Elena, Lena, Luna.
+- **The "K-N" Names:** Kaelen, Kaiden, Kael, Kaelith, Kieran.
+- **The "S-A" Names:** Seraphina, Selene, Sora, Aria, Althea.
+- **The "Th-O" Names:** Theron, Thalric, Thorne.
+- **Generic High-Fantasy:** Malakor, Xylo, Zephyr, Orion, Aurora.
+
+### Grounded Naming Principles
+1. **Etymological Roots:** Names must be tied to a specific linguistic or cultural history (e.g., Old English, Norse, Sanskrit, etc.) that fits the setting.
+2. **The "Phone Book" Test:** For modern/grounded settings, use names that actually exist in census data or historical records.
+3. **Phonetic Variety:** Avoid names that all start with the same letter or have the same syllable count.
+4. **Nickname Evolution:** Human names get shortened, butchered, and turned into inside jokes. "Kez" is better than "Kezara-Thal."
+5. **Class & Context:** A character's name should reflect their parents' status, aspirations, or background, not just "coolness."
+
+## 3. Character Arc Types
 
 ### Positive Arc
 Character believes a Lie → Experiences conflict → Embraces Truth → Transforms

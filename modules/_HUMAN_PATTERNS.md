@@ -29,6 +29,15 @@
 - Occasional informal constructions: "gonna," "kinda," "way too".
 - Let grammar bend for voice: "Which, okay, fair" is fine in her internal monologue.
 
+### Perplexity Techniques (Higher Cognitive Signal)
+1. **The Intellectual Pivot:** Start a sentence moving in one direction, then pivot mid-sentence to a contradictory or clarifying thought. 
+   - *Example:* "I knew the plan was flawless—except for the part where it relied on me keeping my mouth shut."
+2. **Unexpected Juxtaposition:** Pair a technical or formal word with a visceral, low-register word.
+   - *Example:* "The architectural symmetry was ruined by a massive, wet glob of chewing gum."
+3. **Intentional Obscurity (The "Inside Joke"):** Reference a detail or concept that isn't fully explained yet, as if the narrator is speaking to an equal. Don't "tour guide" the reader through every definition.
+4. **The "Wait, No" (Self-Correction):** Have the narrator correct themselves in real-time. This is a high-signal human trait that AI rarely replicates well.
+   - *Example:* "She was wearing a blue dress. No, it was more of a faded navy, the kind that looks like it's been through a hundred washes."
+
 ## Structural Tells to Avoid
 - Don't use three examples when one lands harder.
 - Not every scene needs beginning/middle/end—some can start late, end early.
