@@ -25,9 +25,10 @@
 
 1. **The model that does the work does not verify its own work.** Ever. The executor and the auditor are always different models (or different sessions).
 2. **Every change must be provable.** "I updated it" is not proof. Quoting the before and after text IS proof.
-3. **The "Grade A" Gatekeeper [STRICT]:** No manuscript section is complete until **ALL** personas in the `_ADVERSARIAL_REVIEW_ENGINE.md` have issued a **Grade A (4.5+ Stars)**.
-    *   **Target Audience Exception:** A failing grade may be ignored only if both Gemini and Claude agree the persona is irrelevant to the **Target Audience**. This consensus must be documented in the Revision Guide.
-4. **The Verification Certificate:** The executor (Claude) CANNOT mark a task as ✅ DONE. Only the auditor (Gemini) can issue a **Verification Certificate** after an adversarial audit.
+3. **The "Grade A" Gatekeeper [STRICT]:** No manuscript section is complete until all **Primary Panel** personas (see `_ADVERSARIAL_REVIEW_ENGINE.md`) have issued a **Grade A (4.5+ Stars)**. Advisory Panel personas inform but do not gate.
+4. **The Verification Certificate:** The executor (Claude) CANNOT mark a task as done. Only the auditor (Gemini) can issue a **Verification Certificate** after an adversarial audit.
+5. **The Iteration Cap:** Maximum 3 rounds of adversarial review per section. After 3 rounds, escalate to the user (see `_ADVERSARIAL_REVIEW_ENGINE.md` Section 4).
+6. **User Checkpoints:** The pipeline pauses for explicit user approval at defined points (see `_ADVERSARIAL_REVIEW_ENGINE.md` Section 5). Silence is not approval.
 
 ### Usage Optimization Philosophy
 
@@ -102,6 +103,8 @@ Claude reviews Gemini's findings and makes editorial judgment calls:
 
 The Revision Guide is the ONLY document that authorizes changes to the manuscript.
 
+**USER CHECKPOINT:** Present the Revision Guide to the user. Do NOT proceed to Phase 3 until the user explicitly approves it. The user may modify priorities, reject fixes, or add items. "Approved" means the user says "approved," "go ahead," "yes," or equivalent. Silence is not approval.
+
 ---
 
 ### Phase 3: EXECUTE (Gemini executes, unless prose work)
@@ -159,12 +162,16 @@ Items marked INCOMPLETE, WRONG, or NEW ISSUE cycle back to Phase 3.
 
 ---
 
-### Phase 5: SIGN-OFF (User or Claude)
+### Phase 5: SIGN-OFF (User)
 
 **Input:** Verification report
 **Output:** Updated revision guide with completion status
 
-Mark items as done (using the KEPT format: `~~task~~ ✅ DONE — [what was changed]`). Archive the revision guide.
+Mark items as done (using format: `~~task~~ DONE — [what was changed]`). Archive the revision guide.
+
+**USER CHECKPOINT — Chapter Completion:** Before marking a chapter as complete, run the **Chapter Completion Checklist** from `_WRITING_WORKFLOW.md`. Present the results to the user. The chapter is only "done" when the user explicitly signs off.
+
+**This is the "look at the forest" step.** Individual fixes may all be verified, but the chapter needs to work as a whole unit. Read the full chapter after all fixes and confirm it still flows, the voice is consistent, and no fix broke something else.
 
 ---
 
@@ -200,195 +207,25 @@ If the user asks for a specific type of review:
 
 ## 4. PERSONA REVIEWS
 
-Persona reviews simulate how different real-world readers would experience the manuscript. They catch problems that technical audits miss — pacing feel, emotional engagement, market fit, and trust.
+**All persona definitions, the rating system, audience weighting, and the iteration loop are defined in `_ADVERSARIAL_REVIEW_ENGINE.md`.** That file is the single source of truth for persona-based review. Do not duplicate persona definitions here.
 
-### Why Personas Work
+### Quick Reference
 
-Technical audits find errors. Persona reviews find *weaknesses*. A manuscript can be technically flawless and still bore readers, fail to deliver on genre promises, or feel hollow. Personas catch the subjective problems that determine whether a book sells.
+- **Persona Library:** See `_ADVERSARIAL_REVIEW_ENGINE.md` Section 2
+- **Rating Scale:** See `_ADVERSARIAL_REVIEW_ENGINE.md` Section 3
+- **Audience Weighting (Primary vs. Advisory Panel):** See `_ADVERSARIAL_REVIEW_ENGINE.md` Section 3
+- **Iteration Loop & Cap:** See `_ADVERSARIAL_REVIEW_ENGINE.md` Section 4
+- **User Checkpoints:** See `_ADVERSARIAL_REVIEW_ENGINE.md` Section 5
+- **Genre-Specific Defaults:** See `_ADVERSARIAL_REVIEW_ENGINE.md` Section 3
 
-### How to Execute a Persona Review
+### When to Run Persona Reviews
 
-Each persona review follows the same structure:
+Persona reviews are part of Phase 1D (Full Review). They run after the three technical audits (Continuity, Logic, Voice/AI-Pattern).
 
-```
-"Read this manuscript as [PERSONA NAME AND DESCRIPTION].
-
-You are not an AI reviewing text. You are this person, reading this book.
-React authentically. Be specific. Quote the text when referencing a moment.
-
-Answer these questions from your persona's perspective:
-[PERSONA-SPECIFIC QUESTIONS — see below]
-
-Then provide:
-1. YOUR VERDICT: Would you finish this book? Recommend it? Buy the next one?
-2. THE BEST MOMENT: What's the single strongest moment and why?
-3. THE WORST MOMENT: What almost made you put the book down?
-4. THE ONE-STAR SENTENCE: Write the opening line of a harsh review.
-5. THE FIVE-STAR SENTENCE: Write the opening line of a glowing review."
-```
-
-### The Persona Library
-
-Select 4-6 personas per review. **Always include at least one from each category** (Reader, Professional, Adversarial). Add genre-specific personas as appropriate.
-
----
-
-### CATEGORY A: READER PERSONAS
-
-#### A1. The Genre Devotee
-**Who:** Reads 50+ books/year in this specific genre. Knows every trope, every comp title, every convention.
-**What they catch:** Missing genre beats, underdelivered tropes, stale execution, derivative feeling.
-**Questions:**
-- Does this deliver on its genre promises within the first 10%?
-- Which tropes are executed well vs. undercooked?
-- How does this rank against the top 10 books in its category right now?
-- What's the hook that distinguishes this from 100 similar books?
-- Would I recommend this in a genre-specific community (subreddit, Discord, BookTok)?
-- Am I getting the emotional payoff I came here for?
-
-#### A2. The BookTok/Bookstagram Reader
-**Who:** Ages 18-30. Reads for emotional experience and aesthetic. Shares books socially. Visual thinker.
-**What they catch:** Missing "moments," weak quotability, pacing that kills momentum, lack of aesthetic cohesion.
-**Questions:**
-- Which scene would I screenshot and post? (If none — problem.)
-- What's the "moment" I'd describe to friends?
-- Does the romance/tension have at least 3 scenes I'd reread?
-- Could I describe this book in an aesthetic (dark academia, cozy fantasy, morally grey, etc.)?
-- Does it have at least one line I'd underline?
-- Would I actually finish this, or DNF at 30%?
-
-#### A3. The Casual Reader
-**Who:** Reads 5-10 books/year. Picks books based on covers and recommendations. Low tolerance for confusion or boredom.
-**What they catch:** Accessibility problems, pacing drag, confusing worldbuilding, unclear stakes.
-**Questions:**
-- Could I follow the plot without rereading any section?
-- Did I care about the protagonist by chapter 3?
-- Did any section make me want to skim?
-- Was I ever confused about what was happening or why it mattered?
-- Would I recommend this to a friend who "doesn't read much"?
-- Can I explain what this book is about in one sentence?
-
-#### A4. The Skeptical Reader
-**Who:** Reads widely across genres. Has strong opinions. Notices craft. Not easily impressed.
-**What they catch:** Plot holes, character inconsistencies, thematic shallowness, convenient plotting.
-**Questions:**
-- What's the weakest scene and why?
-- Where did a character do something that felt author-forced rather than character-driven?
-- Is the theme explored or just stated?
-- Does the ending feel earned or convenient?
-- What would I complain about to a friend?
-- Where did the author take the easy road?
-
----
-
-### CATEGORY B: PROFESSIONAL PERSONAS
-
-#### B1. The Developmental Editor
-**Who:** 15+ years in publishing. Has edited bestsellers. Sees structure instinctively. Does not care about your feelings.
-**What they catch:** Structural problems, arc failures, pacing issues, narrative efficiency.
-**Questions:**
-- Does the opening hook earn the reader's investment?
-- Is every chapter necessary? Which could be cut or combined?
-- Does the protagonist's arc track cleanly (want → obstacle → growth → change)?
-- Where does pacing flag? Where does it rush?
-- Do subplots connect to the main plot or run parallel?
-- Is there a sagging middle? Where exactly does momentum die?
-- What's the single biggest structural problem?
-
-#### B2. The Line Editor
-**Who:** Obsessed with sentences. Reads everything aloud in their head. Notices rhythm, word choice, and precision.
-**What they catch:** Prose quality issues, dialogue problems, voice inconsistency, overwriting.
-**Questions:**
-- Does dialogue sound distinct per character? (Cover the tags — who's talking?)
-- Where is the prose overwritten (purple) or underwritten (thin)?
-- Are there sections of uniform sentence length that feel robotic?
-- Is showing/telling balance appropriate? Where does it tip wrong?
-- Are chapter endings strong enough to pull the reader forward?
-- Does the narrative voice stay consistent?
-
-#### B3. The Acquisitions Editor / Publisher
-**Who:** Thinks about books as products. Evaluates commercial viability, market positioning, and sell-through.
-**What they catch:** Market misalignment, weak hooks, comp title problems, series potential issues.
-**Questions:**
-- Can I pitch this in one sentence? What's the hook?
-- Who is the target reader, specifically? Is that audience large enough?
-- What are the comp titles? How does this compare?
-- Is the title search-optimized for the category?
-- Would the cover concept and blurb convert a browser to a buyer?
-- Does this have series potential? Would readers buy book 2?
-- What's the Amazon category and keyword strategy?
-
-#### B4. The Subject Matter Expert (SME)
-**Who:** Deep domain knowledge relevant to the book's content. For fantasy: a worldbuilding nerd. For historical: a historian. For romance: a relationship dynamics expert. For biography: an expert on the subject.
-**What they catch:** Technical inaccuracies, implausible systems, cultural errors, domain-specific nonsense.
-**Questions:**
-- Does the [magic system / historical setting / technical detail / subject biography] hold up to informed scrutiny?
-- What would someone who knows this domain find laughable?
-- Are specialized terms used correctly?
-- Where does the author's research show gaps?
-- What's one detail that would make a knowledgeable reader trust the author?
-- What's one detail that would make them lose trust?
-
----
-
-### CATEGORY C: ADVERSARIAL PERSONAS
-
-#### C1. The One-Star Reviewer
-**Who:** Came in skeptical. Looking for reasons to dislike the book. Will find the weakest link.
-**What they catch:** The things your fans will forgive but your detractors will amplify.
-**Questions:**
-- What is the single worst thing about this book?
-- What feels lazy, unearned, or derivative?
-- Where did the author clearly not do the work?
-- What's the most eye-rolling moment?
-- Write the full one-star review (3-4 sentences). Be brutal.
-
-#### C2. The AI-Detection Reader
-**Who:** Suspicious that this might be AI-generated. Reading with that lens active. Knows the tells.
-**What they catch:** AI patterns, voice uniformity, emotional flatness, suspicious perfection.
-**Questions:**
-- Does this feel like one person wrote it, or does the voice shift?
-- Are there passages that feel "too smooth" — lacking the texture of human thought?
-- Does any dialogue feel like a language model being diplomatic rather than a character being themselves?
-- Are there clusters of AI-associated vocabulary? (per `_STYLE_AUTHORITY.md`)
-- Do emotional moments land, or do they feel described rather than felt?
-- Is there anything that would make me check an AI detector?
-
-#### C3. The Sensitivity / Legal Reader
-**Who:** Evaluates representation, potential harm, and legal exposure.
-**What they catch:** Stereotypes, defamation risk, harmful representation, missing sensitivity.
-**Questions:**
-- Are living people portrayed fairly and accurately?
-- Could any statement be defamatory?
-- Are marginalized groups represented without stereotype?
-- Is potentially harmful content handled responsibly?
-- Are there disclaimers that should be added?
-- Would any specific community feel harmed by this portrayal?
-
----
-
-### Genre-Specific Persona Selection
-
-| Genre | Always Include | Add These |
-|-------|---------------|-----------|
-| **Romantasy** | A1 (Devotee), A2 (BookTok), B1 (Dev Editor), C2 (AI Detection) | A4 (Skeptical), B4 (SME: worldbuilding) |
-| **Romance** | A1 (Devotee), A2 (BookTok), B1 (Dev Editor), C1 (One-Star) | B3 (Acquisitions) |
-| **Biography** | A3 (Casual), A4 (Skeptical), B4 (SME: subject expert), C3 (Sensitivity) | B3 (Acquisitions), B2 (Line Editor) |
-| **Thriller** | A1 (Devotee), A4 (Skeptical), B1 (Dev Editor), C1 (One-Star) | A3 (Casual) |
-| **Literary** | A4 (Skeptical), B1 (Dev Editor), B2 (Line Editor), C2 (AI Detection) | C1 (One-Star) |
-| **Cozy Fantasy** | A1 (Devotee), A2 (BookTok), A3 (Casual), B1 (Dev Editor) | C2 (AI Detection) |
-| **Nonfiction** | A3 (Casual), A4 (Skeptical), B4 (SME), B3 (Acquisitions) | C3 (Sensitivity) |
-
----
-
-### Synthesizing Persona Findings
-
-After all persona reviews are complete:
-
-1. **Convergence signals strength.** If 4/6 personas flag the same problem, it's real.
-2. **Divergence signals taste.** If one persona loves what another hates, it's a stylistic choice, not a defect. Note it; don't fix it.
-3. **Weight by target audience.** If your target is BookTok readers and persona A2 has a problem, that outweighs persona A4's complaint.
-4. **The "Protect" test.** If a persona flags something on the "What's Working" list, think twice. Some things work precisely because they're unusual.
+### Minimum Personas
+- **For publication:** Full genre-appropriate set (3 Primary + 2-3 Advisory)
+- **For quick check:** A1 (Devotee) + B1 (Dev Editor) + C2 (AI Detection) — all Advisory (no gating)
+- **Always:** At least 1 Reader + 1 Professional + 1 Adversarial
 
 ---
 
@@ -497,10 +334,13 @@ Output a verification table:
 A revision task is ONLY marked as complete when:
 - [ ] The auditor (Gemini) issues a **Verification Certificate** (see `_ADVERSARIAL_REVIEW_ENGINE.md`).
 - [ ] Every item has been independently verified as FIXED with evidence.
-- [ ] All VERIFIED items are marked ✅ in the Revision Guide.
+- [ ] All VERIFIED items are marked in the Revision Guide.
 - [ ] The Story Bible has been updated for any fact changes.
 
 **Executor Mandate:** You CANNOT mark a task as DONE yourself. You must wait for the Certificate.
+
+#### Rule 6: The Iteration Cap
+Maximum 3 rounds of adversarial review per section. After Round 3, escalate to the user. See `_ADVERSARIAL_REVIEW_ENGINE.md` Section 4 for the escalation protocol.
 
 ---
 
@@ -603,10 +443,11 @@ Each item gets checked off using the KEPT format.]
 ## 8. QUICK REFERENCE
 
 ### When the user says "review this"
-1. Gemini: Run all three audits (Continuity, Logic, Voice)
-2. Gemini: Run 4-6 persona reviews (selected by genre)
-3. Claude: Synthesize into Revision Guide
-4. Present to user for approval
+1. Gemini: Assign Primary/Advisory panels (USER CHECKPOINT: user approves panel)
+2. Gemini: Run all three audits (Continuity, Logic, Voice)
+3. Gemini: Run persona reviews (per `_ADVERSARIAL_REVIEW_ENGINE.md`)
+4. Claude: Synthesize into Revision Guide
+5. Present to user for approval (USER CHECKPOINT: user approves Revision Guide)
 
 ### When the user says "fix this" (with approved Revision Guide)
 1. Assign each task to appropriate model (see matrix)
@@ -628,10 +469,16 @@ Each item gets checked off using the KEPT format.]
 - Does it require creative judgment about what sounds right? → Claude
 - Everything else → Gemini
 
-### Persona Review Minimums
+### Persona Review Minimums (see `_ADVERSARIAL_REVIEW_ENGINE.md`)
 - **Always:** At least 1 Reader + 1 Professional + 1 Adversarial
-- **For publication:** Run the full genre-appropriate set from Section 4
-- **For quick check:** Run A1 (Devotee) + B1 (Dev Editor) + C2 (AI Detection)
+- **For publication:** Full genre set (3 Primary + 2-3 Advisory)
+- **For quick check:** A1 (Devotee) + B1 (Dev Editor) + C2 (AI Detection) — all Advisory
+
+### User Checkpoints (see `_ADVERSARIAL_REVIEW_ENGINE.md` Section 5)
+- Panel assignment → before first persona review
+- Revision Guide → before execution
+- Round 3 escalation → if 3 rounds fail
+- Chapter sign-off → after all fixes verified
 
 ---
 
@@ -701,5 +548,5 @@ Do not take the executor's word for anything.
 
 ---
 
-*Module Version 1.0 — February 2026*
-*Derived from KEPT revision workflow + multi-model collaboration experience*
+*Module Version 2.0 — February 2026*
+*Derived from KEPT revision workflow. v2.0: Consolidated personas to _ADVERSARIAL_REVIEW_ENGINE.md, added user checkpoints, iteration cap, audience weighting.*

@@ -415,25 +415,25 @@ List issues with Location, Problem, Evidence, Fix, Complexity (Low/Med/High)
 
 ```bash
 # Pass 0: Classification (fastest model)
-gemini -m [fastest_model] -f manuscript.md -p "$(cat pass0_prompt.md)" > pass0_output.md
+gemini -m [fastest_model] -f manuscript.md "$(cat pass0_prompt.md)" > pass0_output.md
 
 # Pass 1: Structure & Market (most capable model)
-claude -m [capable_model] -f manuscript.md -f pass0_output.md -p "$(cat pass1_prompt.md)" > pass1_output.md
+claude -m [capable_model] -f manuscript.md -f pass0_output.md "$(cat pass1_prompt.md)" > pass1_output.md
 
 # Pass 2: Accuracy (large context model)
-gemini -m [long_context_model] -f manuscript.md -f pass0_output.md -p "$(cat pass2_prompt.md)" > pass2_output.md
+gemini -m [long_context_model] -f manuscript.md -f pass0_output.md "$(cat pass2_prompt.md)" > pass2_output.md
 
 # Pass 3: Line-Level (balanced or capable model)
-claude -m [balanced_model] -f manuscript.md -p "$(cat pass3_prompt.md)" > pass3_output.md
+claude -m [balanced_model] -f manuscript.md "$(cat pass3_prompt.md)" > pass3_output.md
 
 # Pass 4A: Skeptical (most capable model)
-gemini -m [capable_model] -f manuscript.md -p "$(cat pass4a_prompt.md)" > pass4a_output.md
+gemini -m [capable_model] -f manuscript.md "$(cat pass4a_prompt.md)" > pass4a_output.md
 
 # Pass 4B: Voice & Authenticity (most capable model)
-claude -m [capable_model] -f manuscript.md -p "$(cat pass4b_prompt.md)" > pass4b_output.md
+claude -m [capable_model] -f manuscript.md "$(cat pass4b_prompt.md)" > pass4b_output.md
 
 # Pass 5: Synthesis (most capable model)
-claude -m [capable_model] -f pass1_output.md -f pass2_output.md -f pass3_output.md -f pass4a_output.md -f pass4b_output.md -p "$(cat pass5_prompt.md)" > FINAL_REVIEW.md
+claude -m [capable_model] -f pass1_output.md -f pass2_output.md -f pass3_output.md -f pass4a_output.md -f pass4b_output.md "$(cat pass5_prompt.md)" > FINAL_REVIEW.md
 ```
 
 ## Model Selection Rationale

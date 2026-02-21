@@ -71,19 +71,19 @@ These apply to all projects:
 Claude can communicate with Gemini using the command line interface.
 
 ```bash
-"C:\Users\toast\.bun\bin\gemini.exe" -p "your prompt here"
+gemini "your prompt here"
 ```
 
 **Common use cases:**
 ```bash
 # Research (Nonfiction/Fiction)
-"C:\Users\toast\.bun\bin\gemini.exe" -p "Research the history of [topic] with primary sources"
+gemini "Research the history of [topic] with primary sources"
 
 # QA Review
-"C:\Users\toast\.bun\bin\gemini.exe" -p "Review this chapter against _NONFICTION_CORE.md"
+gemini "Review this chapter against _NONFICTION_CORE.md"
 
 # Context
-"C:\Users\toast\.bun\bin\gemini.exe" -p "Please review all files to understand the project"
+gemini "Please review all files to understand the project"
 ```
 
 ---
@@ -129,6 +129,40 @@ Unless user specifies otherwise:
 - [ ] "I" is used only where purposeful (not just filler).
 - [ ] Jargon is defined or scaffolded.
 - [ ] Counter-arguments are acknowledged.
+
+---
+
+## Chapter Completion Checklist (The "Forest" Check)
+
+**When to run:** After all individual revision fixes have been verified (Phase 5 of `_REVISION_WORKFLOW.md`), before the user signs off on the chapter.
+
+**Purpose:** Individual fixes may all be correct, but the chapter needs to work as a whole. This checklist catches problems that only appear when you step back from the trees.
+
+**Executor:** The auditing model reads the full chapter after all fixes and runs this checklist.
+
+### Holistic Quality
+- [ ] **Flow:** Read the chapter start to finish. Does it flow naturally, or do the fixes create jarring transitions?
+- [ ] **Voice consistency:** Does the narrative voice stay consistent throughout? Did any fix introduce a tonal shift?
+- [ ] **Pacing:** Does the chapter feel evenly paced? Did inserting/removing content create a lull or a rush?
+- [ ] **Emotional arc:** Does the chapter have a clear emotional trajectory? Does it feel complete as a unit?
+
+### Fix Integration
+- [ ] **No seams:** Perform a granular audit of **sentence transitions** between newly modified paragraphs and surrounding unedited text. Does the rhythm, pacing, and tone match flawlessly? If the boundary is visible, smooth the seams.
+- [ ] **No orphaned references:** Did removing or rewriting a passage break a reference earlier or later in the chapter?
+- [ ] **No contradictions:** Do the fixed sections contradict unfixed sections within the same chapter?
+- [ ] **No tone drift:** Do fixed paragraphs sound like the same author as unfixed paragraphs?
+
+### Continuity (Post-Fix)
+- [ ] **Facts Sheet current:** Does `FACTS_SHEET.md` reflect all changes made in this chapter?
+- [ ] **Story Bible current:** Are character states, locations, and timeline accurate after this chapter?
+- [ ] **Thread status:** Are all open threads from this chapter either advanced, acknowledged, or intentionally left dormant?
+
+### Final Read
+- [ ] **Opening line:** Does the chapter's first line still work? (Fixes elsewhere may have changed context.)
+- [ ] **Closing line:** Does the chapter end with enough pull to make the reader turn the page?
+- [ ] **Would I read this chapter in a bookstore?** Honest gut check. Not "is it technically correct" — does it *work*?
+
+**USER CHECKPOINT:** Present checklist results to the user. The chapter is "done" only when the user explicitly signs off.
 
 ---
 

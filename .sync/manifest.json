@@ -1,0 +1,61 @@
+{
+  "kit_version": "1.3.0",
+  "kit_path": "/mnt/c/Users/toast/Documents/Books/_New_Book_Starter_Kit",
+  "project_id": "",
+  "created": "",
+  "last_sync": "",
+  "files": {
+    "linked": [
+      "modules/",
+      ".vale/"
+    ],
+    "template_copy": [
+      "CLAUDE.md",
+      "GEMINI.md",
+      "GEMINI_REVIEW.md",
+      "PROJECT_IDENTITY.md",
+      "PROJECT_COMPENDIUM.md",
+      "MASTER_BOOK_REVIEW_PROMPT.md",
+      "CONTINUITY_AUDIT_PROMPT.md",
+      "TODO.md",
+      "README.md",
+      ".gitignore",
+      ".claude/settings.local.json",
+      ".gemini/settings.json",
+      "context/FACTS_SHEET.md",
+      "context/WRITER_VOICE.md",
+      "reference/art_brief.md",
+      "reference/collaboration_workflow.md",
+      "reference/KDP_BOOK_FORMATTING_SKILL.md",
+      "reference/MODEL_SELECTION_GUIDE.md"
+    ],
+    "sync_always": [
+      "PROJECT_COMPENDIUM.md",
+      "MASTER_BOOK_REVIEW_PROMPT.md",
+      "CONTINUITY_AUDIT_PROMPT.md",
+      "GEMINI_REVIEW.md",
+      "reference/collaboration_workflow.md",
+      "reference/CENTRAL_FRAMEWORK_SETUP.md",
+      "reference/MODEL_SELECTION_GUIDE.md",
+      "reference/art_brief.md",
+      "reference/KDP_BOOK_FORMATTING_SKILL.md"
+    ],
+    "project_owned": [
+      "CLAUDE.md",
+      "GEMINI.md",
+      "PROJECT_IDENTITY.md",
+      "TODO.md",
+      "README.md",
+      "CHANGELOG.md",
+      ".gitignore",
+      ".claude/settings.local.json",
+      ".gemini/settings.json",
+      "context/FACTS_SHEET.md",
+      "context/WRITER_VOICE.md",
+      "manuscript/",
+      "output/",
+      "research/",
+      "visuals/"
+    ]
+  }
+}

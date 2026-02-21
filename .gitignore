@@ -1,8 +1,19 @@
-# Local settings
+# Claude session files
 .claude/settings.local.json
 
 # Backup folder
 backup/
 
-# Windows artifacts
+# OS files
+.DS_Store
+Thumbs.db
 nul
+
+# Editor files
+*.swp
+*.swo
+*~
+
+# Archives
+*.tar
+*.zip

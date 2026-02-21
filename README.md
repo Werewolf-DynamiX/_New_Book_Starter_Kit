@@ -2,12 +2,19 @@
 
 This is the standard starting point for all new book projects. It features a **modular writing system** that allows you to configure the AI writer (Claude) for specific genres (Fiction/Romantasy or Biography/Non-Fiction) while enforcing universal high-quality "human" writing standards.
 
+## Prerequisites
+
+Before using this kit, ensure you have the following installed:
+- **[Bun](https://bun.sh/):** JavaScript runtime and package manager.
+- **[Vale](https://vale.sh/):** A syntax-aware linter for prose.
+- **Gemini CLI:** The interactive CLI agent. Ensure it is available globally as `gemini`.
+
 ## How to Use This Kit
 
 1. **Copy** this entire folder to your new project location and rename it.
 2. **Configure `CLAUDE.md`**:
    - Open `CLAUDE.md`.
-   - Uncomment the modules relevant to your project (e.g., `_FICTION_POV.md` for a novel).
+   - **Toggle Modules:** Delete the track modules you do not need (Fiction or Nonfiction) or use Markdown HTML comments (`<!-- comment -->`) to disable them.
    - Fill in the "Project Specifics" section at the bottom.
 3. **Initialize `GEMINI.md`**:
    - Open `GEMINI.md`.

@@ -1,62 +1,94 @@
 # How to Use as a Central Framework
 
-Instead of copying this entire folder for every new book, you can treat this `_New_Book_Starter_Kit` as a central "library" and reference it from your individual book projects.
+The `_New_Book_Starter_Kit` is a central "library" that your book projects link to. When you update a module, **all** linked projects automatically get the improvement.
 
-This ensures that when you update a module (like `_ANTI_AI_CORE.md`), **all** your book projects automatically benefit from the improvement.
+## Quick Start: New Project
 
-## Method 1: Symbolic Links (Recommended)
+```bash
+mkdir MyNewBook && cd MyNewBook
+bash /mnt/c/Users/toast/Documents/Books/_New_Book_Starter_Kit/init_book.sh
+```
 
-This method creates a "shortcut" folder in your new project that points to the central `modules` folder. To the AI and your file system, it looks like the files are right there.
+This creates your project with:
+- **Symlinks** for `modules/` and `.vale/` (auto-updating from the kit)
+- **Copies** of template files you'll customize (CLAUDE.md, GEMINI.md, etc.)
+- **Infrastructure files** that stay synced to the kit
+- A **manifest** (`.sync/manifest.json`) tracking everything
 
-1.  **Create your new project folder:**
-    ```bash
-    mkdir MyNewBook
-    cd MyNewBook
-    ```
+## Updating an Existing Project
 
-2.  **Link the `modules` folder:**
-    Run this command (replace the path with the actual path to your starter kit):
-    ```bash
-    # Linux / Mac / WSL / PowerShell 7+
-    ln -s /mnt/c/Users/toast/Documents/Books/_New_Book_Starter_Kit/modules ./modules
-    ```
-    *(Note: On standard Windows Command Prompt, use `mklink /D modules "C:\Users\toast\Documents\Books\_New_Book_Starter_Kit\modules"`)*
+```bash
+cd MyExistingBook
+bash update_book.sh
+```
 
-3.  **Copy the Config Files:**
-    You still need your own `CLAUDE.md` and `GEMINI.md` because they contain project-specific details (Characters, Plot, Tone).
-    ```bash
-    cp /mnt/c/Users/toast/Documents/Books/_New_Book_Starter_Kit/CLAUDE.md .
-    cp /mnt/c/Users/toast/Documents/Books/_New_Book_Starter_Kit/GEMINI.md .
-    ```
+The update script:
+1. Verifies symlinks are intact
+2. Auto-updates infrastructure files (PROJECT_COMPENDIUM.md, review prompts, reference docs)
+3. Shows diffs for project-owned files so you can merge changes manually
+4. Detects new files added to the kit
+5. Updates the manifest with the new kit version
 
-4.  **Ready!**
-    Your `CLAUDE.md` will work without changes because it looks for `modules/File.md`, and your symbolic link makes that path valid.
+## File Classification
 
----
+Every file falls into one of these categories:
 
-## Method 2: Absolute Paths
+### Linked (auto-updating)
+These are symlinks pointing to the kit. Changes to the kit are instantly visible.
+- `modules/` — All writing constraint modules
+- `.vale/` — Vale linting styles
 
-If you prefer not to use links, you can edit your `CLAUDE.md` to point directly to the central files.
+**Project-specific modules** (like `_PROJECT_RULES.md`) should go in the project root or a `local_modules/` directory, not inside the symlinked `modules/` folder.
 
-1.  **Copy the Config Files** to your new project.
-2.  **Edit `CLAUDE.md`** to use full paths:
+### Sync-Always (infrastructure)
+These are copies that `update_book.sh` overwrites automatically. They contain no project-specific content.
+- `PROJECT_COMPENDIUM.md`
+- `MASTER_BOOK_REVIEW_PROMPT.md`
+- `CONTINUITY_AUDIT_PROMPT.md`
+- `GEMINI_REVIEW.md`
+- `reference/collaboration_workflow.md`
+- `reference/CENTRAL_FRAMEWORK_SETUP.md`
+- `reference/MODEL_SELECTION_GUIDE.md`
+- `reference/art_brief.md`
+- `reference/KDP_BOOK_FORMATTING_SKILL.md`
 
-    ```markdown
-    ### Foundation (Always Active)
-    - `/mnt/c/Users/toast/Documents/Books/_New_Book_Starter_Kit/modules/_MASTER_STORYTELLER_CORE.md`
-    - `/mnt/c/Users/toast/Documents/Books/_New_Book_Starter_Kit/modules/_AUTHOR_VOICE_BUILDER.md`
-    ...
-    ```
+### Project-Owned (yours to customize)
+These start as copies of kit templates but become project-specific. `update_book.sh` will **never overwrite** them automatically — it shows diffs and asks.
+- `CLAUDE.md` — Writer role, active modules, project-specific rules
+- `GEMINI.md` — QA role, thesis, session history
+- `PROJECT_IDENTITY.md` — Title, genre, tone, audience
+- `TODO.md` — Project task tracking
+- `README.md` — Project onboarding
+- `CHANGELOG.md` — Project history
+- `.gitignore` — Project ignore rules
+- `.claude/settings.local.json` — Claude permissions
+- `.gemini/settings.json` — Gemini settings
+- `context/` — Facts sheet, writer voice
+- `manuscript/` — All content
+- `output/` — Compiled outputs
+- `research/` — Sources and reviews
+- `visuals/` — Diagrams, figures, generated art
 
-*Pros:* Explicit and clear.
-*Cons:* If you move the Starter Kit, you break every project's links.
+## The Manifest
 
-## Method 3: Git Submodules (Advanced)
+Every project has `.sync/manifest.json` which records:
+- `kit_version` — Which kit version the project was created from / last synced to
+- `kit_path` — Where the kit lives on disk
+- `project_id` — Unique project identifier
+- `created` / `last_sync` — Timestamps
+- `files` — Classification of every file
 
-If you want to version control exactly *which* version of the framework a book uses (to prevent an update from breaking an old book):
+## Retrofitting an Existing Project
 
-1.  Initialize your new book as a git repo.
-2.  Add the Starter Kit as a submodule:
-    ```bash
-    git submodule add <URL_TO_STARTER_KIT_REPO> modules
-    ```
+If you have a project that was created before this system:
+
+1. Create `.sync/manifest.json` (copy from kit, fill in project_id and dates)
+2. Replace your `modules/` directory with a symlink:
+   ```bash
+   # Back up any project-specific modules first!
+   mv modules/_PROJECT_RULES.md ./local_modules/_PROJECT_RULES.md
+   rm -rf modules
+   ln -s /mnt/c/Users/toast/Documents/Books/_New_Book_Starter_Kit/modules ./modules
+   ```
+3. Copy `update_book.sh` from the kit
+4. Run `bash update_book.sh` to verify everything

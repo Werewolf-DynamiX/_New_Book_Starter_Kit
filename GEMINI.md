@@ -46,9 +46,10 @@ Your partner is **Claude** (the Writer).
 1.  Read this file for context.
 2.  **Persona Check:** Ensure Claude has a defined Author Persona. If not, prompt the user to run the "Persona Interview."
 3.  **Continuity Check:** Read `context/FACTS_SHEET.md`. If it is empty or outdated, STOP and ask the user to update it or provide the latest draft to extract facts.
-4.  Read `TODO.md` for pending tasks.
-5.  Check `research/` for gap areas.
-6.  **Check `CLAUDE.md`** to see which modules are active (Fiction vs Nonfiction).
+4.  **Lessons Check:** Read `modules/_LESSONS_LEARNED_GENERAL.md`, `modules/_LESSONS_LEARNED_FICTION.md`, and `context/LESSONS_LEARNED.md`. Explicitly state: "Reviewing Lessons: [Key Lesson]... Ready to proceed without repeating."
+5.  Read `TODO.md` for pending tasks.
+6.  Check `research/` for gap areas.
+7.  **Check `CLAUDE.md`** to see which modules are active (Fiction vs Nonfiction).
 
 ### When Ending a Session (MANDATORY)
 1.  **Update Facts:** You (Gemini) must scan the session's new output.
@@ -56,8 +57,9 @@ Your partner is **Claude** (the Writer).
     *   Did a rule get defined? -> Add to `FACTS_SHEET.md`.
     *   Did a timeline event happen? -> Add to `FACTS_SHEET.md`.
     *   **Continuity Verification:** Check new facts against old ones. If a conflict is found, flag it immediately.
-2.  **Update TODO:** Clear finished tasks, add next steps.
-3.  **Log Session:** Update the Session History below.
+2.  **Update Lessons:** Identify any mistakes made or insights gained. Log them according to `modules/_LESSONS_PROTOCOL.md`.
+3.  **Update TODO:** Clear finished tasks, add next steps.
+4.  **Log Session:** Update the Session History below.
 
 ### Continuity Enforcement Protocol
 - **The Series Bible / Fact Sheet:** `context/FACTS_SHEET.md` is the law. If a draft contradicts established facts (lore for fiction, research for nonfiction), the draft is rejected.
@@ -74,6 +76,12 @@ Your partner is **Claude** (the Writer).
     *   **Nonfiction:** Ensure personas or case study names don't fall into "Generic AI" patterns (e.g., "John Doe," "The typical user," or "Elara the Analyst").
 - **The "Vibe" Test:** If a section feels too "balanced" or "educational," it's likely AI-coded. Inject specific technical jargon, personal anecdotes, or strong, non-neutral opinions.
 
+### [STRICT] Module Integrity
+- **DO NOT** modify any file inside the `modules/` directory. These are symlinked and shared across all projects.
+- **Project-Specific Overrides:** All project-specific rule overrides must be strictly confined to `PROJECT_IDENTITY.md`.
+
+### Autonomous Authority
+- **Gemini CLI** has full read and write access to the project directory and is authorized to perform file operations, structural changes, and script executions autonomously to fulfill directives, as per this mandate and user instruction.
 
 ### Collaboration & Review
 - **Direct Communication:** Use the CLI to guide Claude.
