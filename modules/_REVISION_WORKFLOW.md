@@ -169,6 +169,12 @@ Items marked INCOMPLETE, WRONG, or NEW ISSUE cycle back to Phase 3.
 
 Mark items as done (using format: `~~task~~ DONE — [what was changed]`). Archive the revision guide.
 
+**GLOBAL CONTINUITY GATE [STRICT]:** Before the final sign-off for any chapter, you MUST run a **Global Continuity Check**. 
+1. Use `update_bible.sh` (or Strategy 1 from `CONTINUITY_AUDIT_PROMPT.md`) on the **entire manuscript folder**.
+2. Gemini must compare the *entire existing book* against the new chapter.
+3. Explicitly look for "Teleportation," "Spontaneous Healing," "Character Knowledge Leaks," and "Physical Contradictions" (see `_LOGIC_CHECK.md`).
+4. If a contradiction is found, the chapter CANNOT be signed off until fixed.
+
 **USER CHECKPOINT — Chapter Completion:** Before marking a chapter as complete, run the **Chapter Completion Checklist** from `_WRITING_WORKFLOW.md`. Present the results to the user. The chapter is only "done" when the user explicitly signs off.
 
 **This is the "look at the forest" step.** Individual fixes may all be verified, but the chapter needs to work as a whole unit. Read the full chapter after all fixes and confirm it still flows, the voice is consistent, and no fix broke something else.
@@ -309,33 +315,32 @@ Never give more than 3 tasks in a single prompt. Ideally, one. The more tasks bu
 > Prompt 2: "Rename Seri to Miri. List every instance you changed with line numbers."
 > Prompt 3: "Update lines 7221, 7245, 7349, 7631, 7665 to say 'human and lesser fae welfare policy.' Show each BEFORE and AFTER."
 
-#### Rule 4: Adversarial Verification
-After execution, the auditing model gets this prompt:
+#### Rule 4: Adversarial Verification (The "Hard Evidence" Mandate)
+After execution, the auditing model MUST verify the changes using this forensic prompt:
 
 ```
-"Here is the revision guide with the intended changes.
-Here is the manuscript section AFTER the executor claims to have made changes.
-
-Your job is ADVERSARIAL. Assume nothing was done until you see proof in the text.
-
-For each revision guide item:
-1. Search the manuscript for the ORIGINAL text. Is it still there? (If yes: NOT FIXED.)
-2. Search for the REPLACEMENT text. Is it present? (If yes: FIXED.)
-3. Does the fix match the revision guide's intent?
-4. Did the fix introduce any new problems?
+"ADVERSARIAL VERIFICATION TASK. Assume the executor is lying.
+1. Use `read_file` or `grep_search` to find the ORIGINAL (BEFORE) text. If it still exists anywhere in the manuscript, the task is **FAILED: NOT REMOVED**.
+2. Use `read_file` or `grep_search` to find the NEW (AFTER) text. If it is not present exactly as requested, the task is **FAILED: NOT IMPLEMENTED**.
+3. Report the EXACT line number(s) where the new text now resides.
+4. If the executor claimed success but you find the change was not made, flag this as a **CRITICAL INTEGRITY FAILURE**.
 
 Output a verification table:
-| Item | Status | Evidence |
-|------|--------|----------|
-| 1 | VERIFIED / NOT FIXED / WRONG | [quoted text] |
+| Item | Status | Line # | Evidence (Quoted) |
+|------|--------|--------|-------------------|
+| 1 | VERIFIED / FAILED | [Line] | [Actual text from file] |
 ```
+
+**Auditor Mandate:** Do not take the executor's word for anything. If you do not perform a fresh `read_file` call AFTER the execution phase, your verification is invalid.
 
 #### Rule 5: The Completion Gate (The Verification Certificate)
 A revision task is ONLY marked as complete when:
 - [ ] The auditor (Gemini) issues a **Verification Certificate** (see `_ADVERSARIAL_REVIEW_ENGINE.md`).
-- [ ] Every item has been independently verified as FIXED with evidence.
+- [ ] Every item has been independently verified as FIXED with "Hard Evidence" (Line # and grep proof).
 - [ ] All VERIFIED items are marked in the Revision Guide.
 - [ ] The Story Bible has been updated for any fact changes.
+
+**Critical Integrity Failure:** If a model reports a task as "DONE" or "VERIFIED" but the change is not present in the actual file, this is a system-level failure. The session must STOP, and the model must be re-initialized with a "Strict Honesty" injection.
 
 **Executor Mandate:** You CANNOT mark a task as DONE yourself. You must wait for the Certificate.
 
