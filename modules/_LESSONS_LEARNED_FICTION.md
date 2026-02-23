@@ -201,6 +201,81 @@ If the final scene could work with 50% less dialogue, cut it.
 
 ---
 
+## CONTINUITY & TIMELINES
+
+### Lesson 10: Timelines are Binding Contracts
+
+**The Mistake:**
+Writing emotionally correct sequences that ignore the literal clock.
+
+**Example from this project:**
+Festival durations, ceremony timings ("tonight" vs. noon next day), and countdowns ("three days left") shifting across drafts.
+
+**The Fix:**
+- Treat every time marker ("tomorrow," "in three days") as a binding contract with the reader.
+- Build a timeline spreadsheet BEFORE writing the final act (Rows = days, Columns = events/character knowledge).
+- Verify all temporal math before finalizing a scene.
+
+---
+
+### Lesson 11: The Ripple Effects of Local Revision
+
+**The Mistake:**
+Revising a local chapter without tracing the factual and chronological ripple effects forward and backward.
+
+**Example from this project:**
+Changing a character's surname or altering the backstory of an object (a damaged lantern becoming a stolen lantern) in one chapter, but leaving contradictions in later chapters.
+
+**The Fix:**
+- Maintain a Continuity Tracker: a simple ledger of factual claims, who knows what, and where items are currently located.
+- If a fact changes in one chapter, immediately run a search for that fact across all subsequent and preceding chapters.
+
+---
+
+## PROSE & SUBTEXT
+
+### Lesson 12: Trust the Reader (Stop Explaining)
+
+**The Mistake:**
+Over-declaring character identities or explaining emotions the reader has already deduced.
+
+**Example from this project:**
+Itemizing every character's reaction to machinery kicking in, or explaining that a character is "the good kind of tired" when the preceding scene already established the mood.
+
+**The Fix:**
+- Cut the summary/explanation paragraph.
+- Let the behavior, silence, or action carry the meaning. The reader gets it.
+
+---
+
+### Lesson 13: Dramatize Emotional Bridges
+
+**The Mistake:**
+Writing summary paragraphs for emotional transitions instead of scene-level interactions.
+
+**Example from this project:**
+Writing "the silence thawed by degrees over the week" instead of writing the specific argument over the almanac that actually broke the tension.
+
+**The Fix:**
+- When you catch yourself writing "by the end of the week, she was doing X," STOP.
+- Write the scene where X happens for the *first time*.
+
+---
+
+### Lesson 14: Threat Calibration in Cozy Fiction
+
+**The Mistake:**
+Introducing danger and either overshooting into thriller urgency or undershooting by forgetting the threat exists.
+
+**Example from this project:**
+A spotter scene written with Bourne Identity-level suspense ("He knows where I am") inside a cozy narrative.
+
+**The Fix:**
+- The correct register for cozy danger is UNEASE, not EMERGENCY.
+- The protagonist must make a conscious choice about the danger (don't let it vanish), but the narrative tone should remain grounded, not frantic.
+
+---
+
 ## APPLICATION CHECKLIST
 
 Before submitting any fiction draft, verify:
@@ -225,6 +300,16 @@ Before submitting any fiction draft, verify:
 - [ ] Final dialogue necessary (not decorative)
 - [ ] Arcs completed through action
 
+**Continuity & Timelines:**
+- [ ] Temporal math verified (no "yesterday" that was actually "noon today")
+- [ ] Local changes (names, backstories) traced forward/backward for consistency
+- [ ] Character knowledge state matches the timeline
+
+**Prose & Subtext:**
+- [ ] Summaries/Explanations cut in favor of character action
+- [ ] Emotional transitions dramatized through scenes, not summary
+- [ ] Threat level appropriate for genre (Unease vs. Emergency)
+
 ---
 
 ## REVISION PRIORITIES
@@ -234,14 +319,17 @@ When these issues are identified in draft:
 **Fix First (Structural):**
 1. Manufactured crisis → Rewrite to emerge from character
 2. Missing distinctive world element → Add before other revisions
+3. Continuity/Timeline breaks → Fix temporal math and factual ripple effects
 
 **Fix Second (Character):**
-3. Flat love interest → Add independent arc
-4. Thin supporting cast → Develop 3-4 characters
+4. Flat love interest → Add independent arc
+5. Thin supporting cast → Develop 3-4 characters
 
 **Fix Third (Polish):**
-5. Over-stated theme → Cut repetitions
-6. Announced ending → Revise to show
+6. Over-stated theme → Cut repetitions
+7. Announced ending → Revise to show
+8. Threat calibration → De-escalate thriller-level suspense to grounded unease
+9. Emotional bridge dramatization → Replace summary with scene-level interaction
 
 ---
 

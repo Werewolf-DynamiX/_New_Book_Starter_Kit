@@ -36,7 +36,7 @@ When writing fiction, reference these modules as needed:
 - `modules/_WORLDBUILDING.md` (Setting, magic systems, culture)
 - `modules/_GENRE_PLAYBOOK.md` (Genre-specific beats and rules)
 - `modules/_ROMANCE_HEAT.md` (Optional: If romance elements present)
-- `modules/_LESSONS_LEARNED.md` (Universal fiction pitfalls to avoid)
+- `modules/_LESSONS_LEARNED_FICTION.md` (Universal fiction pitfalls to avoid)
 - `modules/_KDP_REVIEW_FRAMEWORK.md` (Self-publishing quality assurance)
 - `modules/KDP_BOOK_FORMATTING_SKILL.md` (Amazon KDP technical specs)
 
