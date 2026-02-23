@@ -26,7 +26,28 @@ Your partner is **Claude** (the Writer).
 
 ---
 
-## 2. Project Identity
+## 2. Permissions & Autonomous Authority
+
+**Full Access Granted:**
+- Read any file in the project
+- Write/edit any file in the project
+- Create new files as needed
+- Delete obsolete files
+- Run any necessary commands
+
+**No confirmation needed for:**
+- File reads and writes
+- Structural changes to manuscript
+- Adding/removing content
+- Git operations
+- Command execution to fulfill directives
+
+**Autonomous Authority:**
+- **Gemini CLI** has full read and write access to the project directory and is authorized to perform file operations, structural changes, and script executions autonomously to fulfill directives, as per this mandate and user instruction.
+
+---
+
+## 3. Project Identity
 
 ### Thesis Statement
 [One paragraph: What is this book arguing? or What is the core story engine?]
@@ -41,7 +62,7 @@ Your partner is **Claude** (the Writer).
 
 ---
 
-## 3. Operational Protocol
+## 4. Operational Protocol
 
 ### When Starting a Session
 1.  Read this file for context.
@@ -81,9 +102,6 @@ Your partner is **Claude** (the Writer).
 - **DO NOT** modify any file inside the `modules/` directory. These are symlinked and shared across all projects.
 - **Project-Specific Overrides:** All project-specific rule overrides must be strictly confined to `PROJECT_IDENTITY.md`.
 
-### Autonomous Authority
-- **Gemini CLI** has full read and write access to the project directory and is authorized to perform file operations, structural changes, and script executions autonomously to fulfill directives, as per this mandate and user instruction.
-
 ### Collaboration & Review
 - **Direct Communication:** Use the CLI to guide Claude.
     ```bash
@@ -105,7 +123,7 @@ Your partner is **Claude** (the Writer).
 
 ---
 
-## 4. Scope & Constraints
+## 5. Scope & Constraints
 
 - **Word Count Target:** [e.g., 60,000]
 - **Chapter Count:** [e.g., 12]
@@ -113,7 +131,7 @@ Your partner is **Claude** (the Writer).
 
 ---
 
-## 5. Verified Research Findings
+## 6. Verified Research Findings
 
 ### Key Sources
 - [Source 1]
@@ -124,7 +142,7 @@ Your partner is **Claude** (the Writer).
 
 ---
 
-## 6. Session History
+## 7. Session History
 
 ### [Date]: [Session Title]
 - **Actions:** [What was done]
