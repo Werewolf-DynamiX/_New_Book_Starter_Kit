@@ -278,37 +278,27 @@ A spotter scene written with Bourne Identity-level suspense ("He knows where I a
 
 ## APPLICATION CHECKLIST
 
-Before submitting any fiction draft, verify:
+Before submitting any fiction draft or closing a writing session, verify:
 
-**Plot:**
+**Plot & Structure:**
 - [ ] Crisis emerges from character choices, not author convenience
 - [ ] Conflict appropriate to genre (no chase scenes in cozy)
 - [ ] Theme shown through action, not stated in dialogue
 
-**Character:**
+**Character & Romance:**
 - [ ] Love interest has independent arc/goals
 - [ ] 3+ supporting characters with distinct personalities
 - [ ] Romance has at least one real obstacle
 
-**World:**
+**World & Endings:**
 - [ ] At least one distinctive/memorable element
 - [ ] Non-human characters have established context
-- [ ] Setting could only be THIS place
-
-**Ending:**
 - [ ] Emotional payoff shown, not announced
-- [ ] Final dialogue necessary (not decorative)
-- [ ] Arcs completed through action
 
-**Continuity & Timelines:**
-- [ ] Temporal math verified (no "yesterday" that was actually "noon today")
-- [ ] Local changes (names, backstories) traced forward/backward for consistency
-- [ ] Character knowledge state matches the timeline
-
-**Prose & Subtext:**
-- [ ] Summaries/Explanations cut in favor of character action
-- [ ] Emotional transitions dramatized through scenes, not summary
-- [ ] Threat level appropriate for genre (Unease vs. Emergency)
+**Continuity & Artifacts (The Sync Check):**
+- [ ] `FACTS_SHEET.md` updated with new character names, objects, or locations.
+- [ ] Temporal Ledger updated with newly established day/time markers.
+- [ ] Changes to backstory or character arcs synced to `PROJECT_COMPENDIUM.md`.
 
 ---
 

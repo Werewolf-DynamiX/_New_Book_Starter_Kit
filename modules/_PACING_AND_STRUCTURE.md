@@ -39,6 +39,12 @@ Humans remember unfinished tasks. Use this to drive page turns:
 ### 3.3 The Ticking Clock
 Establish deadlines (literal or psychological) to force urgency. A scene without a timeframe is a scene without pressure.
 
+### 3.4 Dramatized Bridges (Lesson 13)
+When writing emotional transitions, avoid summary paragraphs (e.g., "they grew closer over the month"). Instead, write the specific scene where the change happens for the *first time*. Show the argument or the shared moment that breaks the tension.
+
+### 3.5 Trust the Reader (Lesson 12)
+Never explain an emotion that the character's behavior has already shown. If a character is trembling and silent, do not write "she was terrified." Cut the summary/explanation.
+
 ## 4. CHAPTER ENDINGS
 
 The middle 50% of your story is where most manuscripts die. Here's how to keep it alive.

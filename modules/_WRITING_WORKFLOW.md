@@ -176,3 +176,16 @@ Unless user specifies otherwise:
    - **Fiction:** Add obstacles, time pressure, interpersonal conflict.
    - **Nonfiction:** Highlight the stakes of the problem, the difficulty of the solution, or the conflict of ideas.
 4. **"Fix the dialogue":** Add subtext, cut names, vary speech patterns.
+
+## Pre-Generation Fact Assertions
+Before generating any new prose, the AI must output a hidden markdown block (or a block comment) at the top of the generation that declares the physical and temporal constraints of the scene.
+
+**Example Block:**
+> [SCENE ASSERTIONS]
+> Day: 4 (Thursday)
+> Weather: Raining (started in previous chapter)
+> Protagonist Inventory: Dagger (left boot), Stolen ledger (coat pocket)
+> Protagonist Physical State: Limping (right ankle injured in Ch 3)
+> [END ASSERTIONS]
+
+The generation engine MUST consult this block every 500 words to ensure the constraints have not been dropped or violated.

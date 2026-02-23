@@ -54,8 +54,10 @@ Gemini reads the entire manuscript and produces findings. Use the appropriate au
 Gemini: "Read the full manuscript. Perform a forensic audit:
 1. List every physical description of each character with chapter/line numbers.
 2. List every timeline reference (dates, durations, 'three days later').
+   - VERIFY TEMPORAL MATH: Treat every time marker as a binding contract. Does 'tonight' still mean tonight? 
 3. List every stated rule of magic/world and every instance of its use.
 4. List every location description and travel time.
+5. FACTUAL RIPPLE EFFECTS: Identify every factual claim (names, backstory, object status).
 Flag ALL internal contradictions. Quote the conflicting text."
 ```
 
@@ -66,6 +68,8 @@ Gemini: "Read literally. For every action, reaction, and comparison:
 - Is the physical action possible given established constraints?
 - Does the cause precede the effect?
 - Do comparisons point in the right direction?
+- EMOTIONAL BRIDGES: Flag summary paragraphs used for emotional transitions. Look for 'by the end of the week, X.'
+- OVER-DECLARATION: Flag instances where character identities or deducible emotions are explicitly explained.
 Quote every problem. Cite line numbers."
 ```
 
@@ -132,7 +136,8 @@ The Revision Guide is the ONLY document that authorizes changes to the manuscrip
    - **BEFORE:** [quoted original text with line number]
    - **AFTER:** [the replacement text]
    - **RATIONALE:** [one sentence: why this fix works]
-3. **Only feed relevant context.** For a fix in Chapter 12, provide: Chapter 11-13 + Story Bible entries for relevant characters/locations. NOT the full manuscript.
+3. **Trace the Ripple Effect.** If a fact (name, backstory, item status) changes, immediately search for that fact across all subsequent and preceding chapters to ensure consistency.
+4. **Only feed relevant context.** For a fix in Chapter 12, provide: Chapter 11-13 + Story Bible entries for relevant characters/locations. NOT the full manuscript.
 4. **Check the "Protect" list** before making any change. If a fix would alter a protected element, STOP and flag for human review.
 5. **Update the Story Bible** after any change that affects established facts.
 
@@ -550,6 +555,17 @@ Assume NOTHING was done. Verify each item:
 Output a verification table. Quote evidence for every status.
 Do not take the executor's word for anything.
 ```
+
+---
+
+## The Post-Session Sync (Required Step)
+Every writing or revision block MUST end with a repository sync. Do not skip this step. 
+1. **Identify Deltas:** What facts, items, or timeline promises changed during this session?
+2. **Execute Updates:**
+   - Run `update_bible.sh` (if applicable) or manually append lore to `PROJECT_COMPENDIUM.md`.
+   - Add any new time-bound promises ("I'll see you in three days") to the Timeline Ledger.
+   - Update character relationship statuses in `context/FACTS_SHEET.md`.
+3. **Commit:** Ensure the meta-documents match the current state of the manuscript before stepping away from the desk.
 
 ---
 

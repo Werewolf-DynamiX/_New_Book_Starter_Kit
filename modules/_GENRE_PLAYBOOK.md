@@ -335,7 +335,26 @@ Comedy happens when something is:
 
 ---
 
-## 11. Memoir (Narrative Nonfiction)
+## 11. Cozy Fiction (Fantasy/Mystery)
+
+**Core Promise:** A sense of safety, community, and competence. The world is kind, even when it's complicated.
+
+### Essential Elements
+- **Small Stakes:** The fate of a business, a relationship, or a village rather than the world.
+- **Low Violence:** Physical danger is rare and secondary to emotional or social challenges.
+- **Community:** A focus on supporting characters and their relationships.
+- **Competence:** The protagonist is good at what they do (baking, magic, solving puzzles).
+- **Atmosphere:** Emphasis on sensory comfort (food, warmth, safety).
+
+### THREAT CALIBRATION [STRICT]
+The correct register for cozy danger is **UNEASE**, not **EMERGENCY**.
+- **The Bourne Test:** If a scene feels like it could belong in a high-octane thriller, it is over-calibrated for cozy.
+- **Choice over Chase:** The protagonist should make a conscious choice about how to handle danger rather than being forced into a frantic survival response.
+- **Keep it Grounded:** Maintain the narrative tone. Danger is a ripple on the surface of the pond, not a storm.
+
+---
+
+## 12. Memoir (Narrative Nonfiction)
 
 **Core Promise:** Transform lived experience into universal meaning. The "I" becomes an "us."
 

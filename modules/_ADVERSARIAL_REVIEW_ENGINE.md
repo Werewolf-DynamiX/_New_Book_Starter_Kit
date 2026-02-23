@@ -73,23 +73,25 @@ Before reviewing, the model must state its persona's "Internal Bias" and "Breaki
 
 #### A3. The Casual Reader
 **Who:** Reads 5-10 books/year. Picks books based on covers and recommendations. Low tolerance for confusion or boredom.
-**What they catch:** Accessibility problems, pacing drag, confusing worldbuilding, unclear stakes.
+**What they catch:** Accessibility problems, pacing drag, confusing worldbuilding, unclear stakes, over-explanation of emotions.
 **Questions:**
 - Could I follow the plot without rereading any section?
 - Did I care about the protagonist by chapter 3?
-- Did any section make me want to skim?
+- Did any section make me want to skim? (Check for summary paragraphs of emotional bridges.)
 - Was I ever confused about what was happening or why it mattered?
 - Would I recommend this to a friend who "doesn't read much"?
 - Can I explain what this book is about in one sentence?
 
 #### A4. The Skeptical Reader
 **Who:** Reads widely across genres. Has strong opinions. Notices craft. Not easily impressed.
-**What they catch:** Plot holes, character inconsistencies, thematic shallowness, convenient plotting.
+**What they catch:** Plot holes, character inconsistencies, thematic shallowness, convenient plotting, "Summary Ending" syndrome.
 **Questions:**
 - What's the weakest scene and why?
 - Where did a character do something that felt author-forced rather than character-driven?
 - Is the theme explored or just stated?
 - Does the ending feel earned or convenient?
+- TRUST THE READER: Did the author explain an emotion I'd already deduced? 
+- THREAT CALIBRATION: (If cozy) Does the danger feel like EMERGENCY instead of UNEASE?
 - What would I complain about to a friend?
 - Where did the author take the easy road?
 
