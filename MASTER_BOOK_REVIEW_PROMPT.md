@@ -413,28 +413,38 @@ List issues with Location, Problem, Evidence, Fix, Complexity (Low/Med/High)
 
 ## Example Workflow
 
+**Note on model selection:** Gemini CLI now auto-routes to the optimal model when you omit the `--model-id` flag (simple tasks → Flash, complex tasks → Pro). For the review pipeline below, explicit model selection is recommended to guarantee the right tier for each pass. Use `--model-id` (not the deprecated `--model` or `-m` flags).
+
 ```bash
 # Pass 0: Classification (fastest model)
-gemini -m [fastest_model] -f manuscript.md "$(cat pass0_prompt.md)" > pass0_output.md
+gemini --model-id [fastest_model] -f manuscript.md "$(cat pass0_prompt.md)" > pass0_output.md
 
 # Pass 1: Structure & Market (most capable model)
-claude -m [capable_model] -f manuscript.md -f pass0_output.md "$(cat pass1_prompt.md)" > pass1_output.md
+claude --model [capable_model] -f manuscript.md -f pass0_output.md "$(cat pass1_prompt.md)" > pass1_output.md
 
 # Pass 2: Accuracy (large context model)
-gemini -m [long_context_model] -f manuscript.md -f pass0_output.md "$(cat pass2_prompt.md)" > pass2_output.md
+gemini --model-id [long_context_model] -f manuscript.md -f pass0_output.md "$(cat pass2_prompt.md)" > pass2_output.md
 
 # Pass 3: Line-Level (balanced or capable model)
-claude -m [balanced_model] -f manuscript.md "$(cat pass3_prompt.md)" > pass3_output.md
+claude --model [balanced_model] -f manuscript.md "$(cat pass3_prompt.md)" > pass3_output.md
 
 # Pass 4A: Skeptical (most capable model)
-gemini -m [capable_model] -f manuscript.md "$(cat pass4a_prompt.md)" > pass4a_output.md
+gemini --model-id [capable_model] -f manuscript.md "$(cat pass4a_prompt.md)" > pass4a_output.md
 
 # Pass 4B: Voice & Authenticity (most capable model)
-claude -m [capable_model] -f manuscript.md "$(cat pass4b_prompt.md)" > pass4b_output.md
+claude --model [capable_model] -f manuscript.md "$(cat pass4b_prompt.md)" > pass4b_output.md
 
 # Pass 5: Synthesis (most capable model)
-claude -m [capable_model] -f pass1_output.md -f pass2_output.md -f pass3_output.md -f pass4a_output.md -f pass4b_output.md "$(cat pass5_prompt.md)" > FINAL_REVIEW.md
+claude --model [capable_model] -f pass1_output.md -f pass2_output.md -f pass3_output.md -f pass4a_output.md -f pass4b_output.md "$(cat pass5_prompt.md)" > FINAL_REVIEW.md
 ```
+
+### Deprecated Flags (Gemini CLI)
+| Deprecated | Use Instead |
+|------------|-------------|
+| `-m` / `--model` | `--model-id` |
+| `--max-output-tokens` | `--max-tokens` |
+| `--stop-sequences` | `--stop` |
+| `-t` (temperature) | `--temperature` |
 
 ## Model Selection Rationale
 

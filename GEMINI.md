@@ -102,6 +102,10 @@ Your partner is **Claude** (the Writer).
 - **DO NOT** modify any file inside the `modules/` directory. These are symlinked and shared across all projects.
 - **Project-Specific Overrides:** All project-specific rule overrides must be strictly confined to `PROJECT_IDENTITY.md`.
 
+### Policy Enforcement (v0.30+)
+- **GEMINI.md is highest-priority context.** The Gemini CLI policy engine injects this file as `<project_context>`, which overrides global and extension-level defaults. Your Architect role, module integrity rules, and continuity protocols are enforced automatically on every interaction within this directory.
+- **Plan Mode (v0.29+):** For structured research and planning, use `/plan` inside an interactive session. Plan Mode enforces read-only analysis → draft plan → approval, and leverages built-in subagents (`codebase_investigator` for deep cross-file analysis, `generalist` for batch operations). This is the preferred approach for generating Research Briefs and validating Claude's Scene Briefs.
+
 ### Collaboration & Review
 - **Direct Communication:** Use the CLI to guide Claude.
     ```bash

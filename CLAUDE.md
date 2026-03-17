@@ -105,15 +105,71 @@ gemini -i "your initial prompt"
 # Resume previous session
 gemini --resume latest
 gemini --list-sessions  # See available sessions
+
+# Undo/navigate within a session
+/rewind                 # Step back through session history
 ```
 
-**Note:** The `-p` flag is deprecated. Use positional prompts instead.
+### Plan Mode (v0.29+)
+For structured research and planning tasks, use Gemini's Plan Mode instead of freeform prompts. Plan Mode enforces a read-only analysis → draft plan → user approval workflow — which maps directly to our Research Brief → Scene Brief pipeline.
 
-**Use this for:**
+```bash
+# Inside an interactive Gemini session:
+/plan                   # Enter Plan Mode
+```
+
+**Plan Mode uses built-in subagents (v0.33+):**
+- **`codebase_investigator`** — deep analysis across manuscript/project files (good for continuity audits, dependency mapping)
+- **`generalist`** — batch processing and high-volume tasks (good for standardizing formatting across chapters)
+
+**When to use Plan Mode vs. one-shot queries:**
+- **Plan Mode:** Research Briefs, Scene Briefs, structural planning, multi-file analysis
+- **One-shot:** Quick fact-checks, single-chapter QA, targeted reviews
+
+### Custom Skills (v0.26+)
+Gemini supports activatable Skills — modular workflow overrides that make specific rules the primary operating directive. You can create Skills from your key modules so they're enforced as procedure, not just context.
+
+```bash
+# Inside an interactive Gemini session:
+/skills install          # Browse/install skills
+/skills reload           # Reload after changes
+```
+
+**Recommended Skills to create (via `skill-creator`):**
+- KDP Formatting (from `modules/KDP_BOOK_FORMATTING_SKILL.md`)
+- De-AI Audit (from the Anti-AI QC protocol)
+- Adversarial Review (from `modules/_ADVERSARIAL_REVIEW_ENGINE.md`)
+
+### Model Routing
+Gemini auto-routes prompts to the best model when you omit the `-m` flag:
+- Simple tasks (formatting, classification) → Flash (faster/cheaper)
+- Complex tasks (deep analysis, adversarial review) → Pro (stronger reasoning)
+
+For critical tasks where you need guaranteed maximum intelligence, use explicit model selection:
+```bash
+gemini --model-id gemini-3.1-pro "your prompt"
+```
+
+### Deprecated Flags
+| Deprecated | Use Instead |
+|------------|-------------|
+| `-p` | Positional prompt: `gemini "prompt"` |
+| `--model` | `--model-id` |
+| `--max-output-tokens` | `--max-tokens` |
+| `--stop-sequences` | `--stop` |
+| `-t` (temperature shorthand) | `--temperature` |
+
+### Session Management
+- Sessions persist for **30 days** by default (v0.33+)
+- `gemini --resume latest` to pick up where you left off
+- `gemini --list-sessions` to browse available sessions
+
+**Use Gemini for:**
 - Requesting research or fact-checking
 - Getting outline/structure review
 - QA review of completed prose
 - Clarifying project requirements
+- Structured planning via Plan Mode
 
 ---
 

@@ -78,6 +78,17 @@ gemini "Review the outline in manuscript/00_master_outline.md"
 gemini "Run a full review of Chapter 3 per _REVISION_WORKFLOW.md"
 ```
 
+**Plan Mode (for structured research/planning):**
+```bash
+# Start interactive session, then enter Plan Mode
+gemini -i "Let's plan the research brief for Chapter 5"
+/plan
+```
+Plan Mode uses built-in subagents for deep cross-file analysis (`codebase_investigator`) and batch operations (`generalist`). Preferred for Research Briefs, Scene Brief validation, and multi-chapter continuity checks.
+
+**Custom Skills (for repeatable workflows):**
+Gemini Skills turn module guides into activatable procedures. Use `skill-creator` to package workflows like KDP formatting or adversarial review into on-demand skills.
+
 ### Gemini → Claude
 Gemini can call Claude using:
 ```bash
@@ -93,4 +104,12 @@ claude "Write the opening scene for Chapter 2 based on research/chapter_2_brief.
 claude "Review these audit findings and create a Revision Guide per _REVISION_WORKFLOW.md"
 ```
 
-**Note:** Full paths may be required depending on system configuration.
+### CLI Flag Reference
+| Feature | Gemini | Claude |
+|---------|--------|--------|
+| Model selection | `--model-id [model]` | `--model [model]` |
+| File input | `-f file.md` | (use @ syntax or paste) |
+| Interactive mode | `-i "prompt"` | (interactive by default) |
+| Resume session | `--resume latest` | `--resume` |
+
+**Deprecated (Gemini):** `-p`, `-m`/`--model`, `--max-output-tokens`, `-t`. See CLAUDE.md for full deprecation table.
