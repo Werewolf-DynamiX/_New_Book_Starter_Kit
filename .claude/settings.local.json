@@ -13,7 +13,8 @@
       "mcp__text-editor__edit_text_file_contents",
       "WebFetch(domain:kdp.amazon.com)",
       "mcp__gemini-cli__ask-gemini",
-      "WebFetch(domain:geminicli.com)"
+      "WebFetch(domain:geminicli.com)",
+      "WebFetch(domain:docs.anthropic.com)"
     ],
     "deny": [
       "Bash(rm -rf /)*",

@@ -87,10 +87,23 @@ SYNC_ALWAYS=(
   "reference/MODEL_SELECTION_GUIDE.md"
   "reference/art_brief.md"
   "reference/KDP_BOOK_FORMATTING_SKILL.md"
+  ".claude/settings.json"
+  ".claude/hooks/banned-vocab.sh"
+  ".claude/hooks/deai-quick-scan.sh"
+  ".claude/hooks/prose-checklist-reminder.sh"
+  ".claude/hooks/save-critical-context.sh"
+  ".claude/rules/manuscript-prose.md"
+  ".claude/scripts/notebooklm-prep.sh"
+  ".claude/scripts/gemini-continuity-audit-spec.md"
 )
 
 SYNCED=0
 SKIPPED=0
+
+# Ensure Claude Code directories exist
+mkdir -p "$PROJECT_DIR/.claude/hooks" "$PROJECT_DIR/.claude/rules" "$PROJECT_DIR/.claude/scripts"
+mkdir -p "$PROJECT_DIR/.claude/skills"/{de-ai-audit,scene-brief,revision-guide,draft,chapter-done}
+
 for f in "${SYNC_ALWAYS[@]}"; do
   if [ ! -f "$KIT_DIR/$f" ]; then
     continue
@@ -112,7 +125,49 @@ for f in "${SYNC_ALWAYS[@]}"; do
     SYNCED=$((SYNCED + 1))
   fi
 done
+
+# Make hook and script files executable
+chmod +x "$PROJECT_DIR/.claude/hooks/"*.sh 2>/dev/null || true
+chmod +x "$PROJECT_DIR/.claude/scripts/"*.sh 2>/dev/null || true
+
 echo "  Infrastructure: $SYNCED updated, $SKIPPED already current"
+echo ""
+
+# --- Sync skill templates (diff-check, don't auto-overwrite) ---
+echo "--- Checking Claude skill templates ---"
+SKILL_TEMPLATES=(
+  ".claude/skills/de-ai-audit/SKILL.md"
+  ".claude/skills/scene-brief/SKILL.md"
+  ".claude/skills/revision-guide/SKILL.md"
+  ".claude/skills/draft/SKILL.md"
+  ".claude/skills/chapter-done/SKILL.md"
+)
+SKILL_SYNCED=0
+for f in "${SKILL_TEMPLATES[@]}"; do
+  if [ ! -f "$KIT_DIR/$f" ]; then
+    continue
+  fi
+  if [ ! -f "$PROJECT_DIR/$f" ]; then
+    mkdir -p "$(dirname "$PROJECT_DIR/$f")"
+    cp "$KIT_DIR/$f" "$PROJECT_DIR/$f"
+    echo "  + $f (new skill, copied)"
+    SKILL_SYNCED=$((SKILL_SYNCED + 1))
+  elif ! diff -q "$KIT_DIR/$f" "$PROJECT_DIR/$f" > /dev/null 2>&1; then
+    echo "  $f differs from kit."
+    read -p "    Overwrite with kit version? [y/N]: " yn
+    case $yn in
+      [Yy]*)
+        cp "$KIT_DIR/$f" "$PROJECT_DIR/$f"
+        echo "    Updated."
+        SKILL_SYNCED=$((SKILL_SYNCED + 1))
+        ;;
+      *) echo "    Kept your version.";;
+    esac
+  fi
+done
+if [ $SKILL_SYNCED -eq 0 ]; then
+  echo "  All skills current."
+fi
 echo ""
 
 # --- Check project-owned files for kit changes ---
@@ -130,6 +185,7 @@ PROJECT_OWNED_FROM_KIT=(
   ".gemini/settings.json"
   "context/FACTS_SHEET.md"
   "context/WRITER_VOICE.md"
+  "context/LESSONS_LEARNED.md"
 )
 
 DIFFS_FOUND=0
@@ -225,9 +281,9 @@ with open('$MANIFEST', 'w') as f:
     f.write('\n')
 "
 else
-  # Fallback: sed-based update
-  sed -i "s/\"kit_version\": \"[^\"]*\"/\"kit_version\": \"$KIT_VERSION\"/" "$MANIFEST"
-  sed -i "s/\"last_sync\": \"[^\"]*\"/\"last_sync\": \"$NOW\"/" "$MANIFEST"
+  # Fallback: sed-based update (portable across macOS and Linux)
+  sed -i.bak "s/\"kit_version\": \"[^\"]*\"/\"kit_version\": \"$KIT_VERSION\"/" "$MANIFEST" && rm -f "$MANIFEST.bak"
+  sed -i.bak "s/\"last_sync\": \"[^\"]*\"/\"last_sync\": \"$NOW\"/" "$MANIFEST" && rm -f "$MANIFEST.bak"
 fi
 
 echo "============================================"

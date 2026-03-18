@@ -1,5 +1,42 @@
 # Starter Kit Changelog
 
+## [1.4.1] - 2026-03-17
+### Added — Gemini Continuity Audit Skill
+- **Implemented Continuity Audit Skill:** Created `.gemini/skills/continuity-audit/SKILL.md` based on the installation spec. This provides systematic batch analysis across multiple chapters for consistency in characters, objects, locations, and timeline.
+
+## [1.4.0] - 2026-03-17
+### Added — Claude Code Automation
+- **5 Claude Skills (slash commands):**
+  - `/scene-brief`: Research Brief → Scene Brief pipeline with Gemini integration and user checkpoint
+  - `/draft`: Pre-flight validated prose drafting with inline QC (Self-Editing + De-AI)
+  - `/de-ai-audit`: Systematic AI-pattern scanner producing A-F graded reports
+  - `/revision-guide`: 3-audit Gemini pipeline (Continuity, Logic, Voice/AI) → triaged Revision Guide
+  - `/chapter-done`: Chapter Completion Checklist + Gemini Verification Certificate + user sign-off gate
+- **3 Automatic Hooks:**
+  - `deai-quick-scan.sh` (PostToolUse): Warns on AI vocabulary clusters in manuscript writes
+  - `prose-checklist-reminder.sh` (Stop): Reminds to run QC if manuscript files were modified
+  - `save-critical-context.sh` (PreCompact): Preserves banned vocab, burstiness rules, and persona across context compaction
+- **Contextual Rule:** `manuscript-prose.md` auto-loads anti-AI rules when editing manuscript files
+- **NotebookLM Integration:** `notebooklm-prep.sh` bundles manuscript + context for Google NotebookLM with 5 pre-written audit prompts (continuity, voice, timeline, character arc, plot thread)
+- **Gemini Skill Spec:** `gemini-continuity-audit-spec.md` documents manual installation of a Gemini continuity-audit skill
+
+### Changed — Infrastructure
+- **init_book.sh** (v1.4.0): Creates `.claude/hooks/`, `.claude/rules/`, `.claude/scripts/`, `.claude/skills/` directories; copies and chmod's new files
+- **update_book.sh**: Syncs hooks/rules/scripts as `sync_always`; syncs skills as `template_copy` with diff-check
+- **.sync/manifest.json**: Updated to v1.4.0 with all new file classifications
+- **CLAUDE.md**: Added "Automation & Skills" section documenting slash commands, hooks, and rules
+
+## [1.3.1] - 2026-03-17
+### Added — Custom Gemini Skills
+- **kdp-format**: Automated KDP formatting workflow using `docx` and `pandoc`.
+- **de-ai-audit**: Specialized audit skill for detecting AI patterns, vocabulary clusters, and structural tells.
+- **adversarial-review**: High-stakes persona-based review engine with Anti-Agreeability Protocol and iteration gating.
+
+### Changed — Module Consolidation
+- **_STYLE_AUTHORITY.md**: Consolidated `_ANTI_AI_CORE.md` and `_WORD_VARIATION.md` into a single source of truth for diction, syntax, and AI-pattern avoidance.
+- **_NARRATIVE_VOICE.md**: Renamed and expanded `_FICTION_POV.md` to cover all POV types (1st/3rd), tenses, and dialogue mechanics.
+- **README.md**: Updated module references to reflect the consolidated architecture.
+
 ## [1.3.0] - 2026-02-20
 ### Added — Manuscript Iteration Improvements
 - **Iteration Cap:** Maximum 3 rounds of adversarial review per chapter, then escalate to user. No more infinite loops.

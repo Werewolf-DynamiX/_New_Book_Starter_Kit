@@ -46,6 +46,7 @@
 - [x] `[GEMINI]` Create Planning Protocol (`_PLANNING_PROTOCOL.md`)
 - [x] `[GEMINI]` Create Prose Texture Module (`_PROSE_TEXTURE.md`)
 - [x] `[GEMINI]` Create Deep Continuity Audit (`CONTINUITY_AUDIT_PROMPT.md`)
+- [x] `[GEMINI]` Implement Continuity Audit Skill (`.gemini/skills/continuity-audit`)
 - [x] `[GEMINI]` Create Model Selection Guide (`MODEL_SELECTION_GUIDE.md`)
 - [x] `[GEMINI]` Sanitize modules for model/date neutrality.
 - [x] `[GEMINI]` Integrate Revision Workflow (`_REVISION_WORKFLOW.md`) and update project protocols.

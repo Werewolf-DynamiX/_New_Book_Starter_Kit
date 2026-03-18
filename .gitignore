@@ -17,3 +17,13 @@ nul
 # Archives
 *.tar
 *.zip
+
+# Generated files
+output/notebooklm-bundle/
+context/FACTS_SHEET_NEW.md
+
+# Python / Node artifacts
+__pycache__/
+node_modules/
+venv/
+.env
