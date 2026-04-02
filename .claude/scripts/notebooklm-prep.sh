@@ -4,8 +4,11 @@
 # =============================================================================
 # Usage: bash .claude/scripts/notebooklm-prep.sh
 #
-# Bundles manuscript chapters + context files into output/notebooklm-bundle/
-# with pre-written audit prompts for continuity, voice, and timeline analysis.
+# Auto-discovers manuscript chapters, context files, and project docs.
+# Bundles them into output/notebooklm-bundle/ with pre-written audit prompts.
+#
+# Structure-aware: works with chapters in manuscript/chapters/ or manuscript/
+# and picks up docs/, context/, and character files wherever they live.
 # =============================================================================
 
 set -e
@@ -28,25 +31,46 @@ echo "  NotebookLM Prep"
 echo "============================================"
 echo ""
 
-# --- Copy manuscript chapters ---
+# --- Discover and copy manuscript chapters ---
+# Priority: manuscript/chapters/*.md first, then manuscript/*.md as fallback
+# Exclude: FULL_MANUSCRIPT*, compiled files, outlines, PDFs
 CHAPTER_COUNT=0
-for f in manuscript/chapters/*.md manuscript/*.md; do
-  if [ -f "$f" ]; then
+
+echo "Manuscript files:"
+if [ -d "manuscript/chapters" ] && ls manuscript/chapters/*.md >/dev/null 2>&1; then
+  # Standard structure: chapters in subdirectory
+  for f in manuscript/chapters/*.md; do
+    [ -f "$f" ] || continue
+    cp "$f" "$BUNDLE_DIR/"
+    CHAPTER_COUNT=$((CHAPTER_COUNT + 1))
+    echo "  + chapters/$(basename "$f")"
+  done
+else
+  # Fallback: chapters directly in manuscript/
+  for f in manuscript/*.md; do
+    [ -f "$f" ] || continue
+    fname=$(basename "$f")
+    # Skip non-chapter files
+    case "$fname" in
+      FULL_MANUSCRIPT*|full_manuscript*|00_master_outline*) continue ;;
+    esac
     cp "$f" "$BUNDLE_DIR/"
     CHAPTER_COUNT=$((CHAPTER_COUNT + 1))
     echo "  + $(basename "$f")"
-  fi
-done
+  done
+fi
 
 # --- Copy context files ---
+echo ""
+echo "Context files:"
 CONTEXT_FILES=(
   "context/FACTS_SHEET.md"
   "context/WRITER_VOICE.md"
+  "context/LESSONS_LEARNED.md"
   "PROJECT_IDENTITY.md"
+  "PROJECT_COMPENDIUM.md"
 )
 
-echo ""
-echo "Context files:"
 for f in "${CONTEXT_FILES[@]}"; do
   if [ -f "$f" ]; then
     cp "$f" "$BUNDLE_DIR/"
@@ -54,14 +78,54 @@ for f in "${CONTEXT_FILES[@]}"; do
   fi
 done
 
-# --- Copy character sheets if they exist ---
-if [ -d "context/characters" ]; then
-  for f in context/characters/*.md; do
-    if [ -f "$f" ]; then
-      cp "$f" "$BUNDLE_DIR/"
-      echo "  + characters/$(basename "$f")"
-    fi
+# --- Discover and copy character/docs files ---
+echo ""
+echo "Project docs:"
+DOCS_FOUND=0
+
+# Check standard location: docs/
+if [ -d "docs" ]; then
+  for f in docs/*.md; do
+    [ -f "$f" ] || continue
+    fname=$(basename "$f")
+    # Skip holistic passes and revision internals — not useful for NotebookLM
+    case "$fname" in
+      HOLISTIC_PASSES*|REVISION_GUIDE*|revision_guide*|EDIT_PLAN*|BACKPORT*) continue ;;
+    esac
+    cp "$f" "$BUNDLE_DIR/docs_${fname}"
+    echo "  + docs/$fname"
+    DOCS_FOUND=$((DOCS_FOUND + 1))
   done
+fi
+
+# Check for character files in other common locations
+for f in \
+  "context/CHARACTER_VOICES.md" \
+  "context/characters.md" \
+  "series_bible.md" \
+  "docs/series_bible.md" \
+; do
+  if [ -f "$f" ] && [ ! -f "$BUNDLE_DIR/docs_$(basename "$f")" ] && [ ! -f "$BUNDLE_DIR/$(basename "$f")" ]; then
+    cp "$f" "$BUNDLE_DIR/$(basename "$f")"
+    echo "  + $f"
+    DOCS_FOUND=$((DOCS_FOUND + 1))
+  fi
+done
+
+# Check for character sheet directories
+for dir in "context/characters" "docs/characters"; do
+  if [ -d "$dir" ]; then
+    for f in "$dir"/*.md; do
+      [ -f "$f" ] || continue
+      cp "$f" "$BUNDLE_DIR/"
+      echo "  + $f"
+      DOCS_FOUND=$((DOCS_FOUND + 1))
+    done
+  fi
+done
+
+if [ $DOCS_FOUND -eq 0 ]; then
+  echo "  (none found)"
 fi
 
 # --- Generate audit prompts ---
@@ -116,6 +180,8 @@ Analyze the narrative voice across all chapters for consistency. Check:
    Flag any dialogue that could belong to any character interchangeably.
 
 Compare against WRITER_VOICE.md for the intended persona and voice targets.
+If character voice sheets are included, cross-reference dialogue against
+each character's documented speech patterns, forbidden words, and vocal tics.
 
 Output as: Chapter | Issue | Quote | Expected Voice | Severity
 ```
@@ -211,7 +277,7 @@ cat > "$BUNDLE_DIR/README.md" << 'README'
 - FACTS_SHEET.md (established facts — NotebookLM will cross-reference)
 - WRITER_VOICE.md (voice targets — NotebookLM will check consistency)
 - PROJECT_IDENTITY.md (project metadata)
-- Character sheets (if any exist)
+- Character sheets and project docs (if found)
 - NOTEBOOKLM_PROMPTS.md (5 pre-written audit prompts)
 
 ## Tips
@@ -226,6 +292,7 @@ echo ""
 echo "============================================"
 echo "  Bundle ready: $BUNDLE_DIR"
 echo "  $CHAPTER_COUNT manuscript file(s) bundled"
+echo "  $DOCS_FOUND project doc(s) included"
 echo "============================================"
 echo ""
 echo "Next: Upload all .md files to notebooklm.google.com"

@@ -94,7 +94,6 @@ SYNC_ALWAYS=(
   ".claude/hooks/save-critical-context.sh"
   ".claude/hooks/version-check.sh"
   ".claude/rules/manuscript-prose.md"
-  ".claude/scripts/notebooklm-prep.sh"
   ".claude/scripts/gemini-continuity-audit-spec.md"
 )
 
@@ -160,6 +159,8 @@ SKILL_TEMPLATES=(
   ".gemini/skills/de-ai-audit/references/_STYLE_AUTHORITY.md"
   ".gemini/skills/kdp-format/references/KDP_BOOK_FORMATTING_SKILL.md"
   "docs/HOLISTIC_PASSES.md"
+  "docs/characters.md"
+  ".claude/scripts/notebooklm-prep.sh"
 )
 SKILL_SYNCED=0
 for f in "${SKILL_TEMPLATES[@]}"; do

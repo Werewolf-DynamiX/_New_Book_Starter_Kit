@@ -24,7 +24,7 @@ if [ -f ".sync/manifest.json" ]; then
 fi
 
 echo "============================================"
-echo "  Book Project Initializer (Kit v1.5.0)"
+echo "  Book Project Initializer (Kit v1.5.1)"
 echo "============================================"
 echo ""
 echo "Kit location: $KIT_DIR"
@@ -99,6 +99,8 @@ TEMPLATE_COPIES=(
   ".gemini/skills/holistic-audit/SKILL.md"
   ".gemini/skills/holistic-pass/SKILL.md"
   "docs/HOLISTIC_PASSES.md"
+  "docs/characters.md"
+  ".claude/scripts/notebooklm-prep.sh"
   ".gemini/skills/adversarial-review/references/_ADVERSARIAL_REVIEW_ENGINE.md"
   ".gemini/skills/de-ai-audit/references/CLAUDE.md"
   ".gemini/skills/de-ai-audit/references/_HUMAN_PATTERNS.md"
@@ -130,7 +132,6 @@ SYNC_ALWAYS=(
   ".claude/hooks/save-critical-context.sh"
   ".claude/hooks/version-check.sh"
   ".claude/rules/manuscript-prose.md"
-  ".claude/scripts/notebooklm-prep.sh"
   ".claude/scripts/gemini-continuity-audit-spec.md"
 )
 for f in "${SYNC_ALWAYS[@]}"; do
@@ -163,7 +164,7 @@ fi
 NOW=$(date +%Y-%m-%d)
 cat > "$PROJECT_DIR/.sync/manifest.json" << MANIFEST
 {
-  "kit_version": "1.5.0",
+  "kit_version": "1.5.1",
   "kit_path": "$KIT_DIR",
   "project_id": "$PROJ_ID",
   "created": "$NOW",
@@ -199,7 +200,9 @@ cat > "$PROJECT_DIR/.sync/manifest.json" << MANIFEST
       ".gemini/skills/voice-lint/SKILL.md",
       ".gemini/skills/holistic-audit/SKILL.md",
       ".gemini/skills/holistic-pass/SKILL.md",
-      "docs/HOLISTIC_PASSES.md"
+      "docs/HOLISTIC_PASSES.md",
+      "docs/characters.md",
+      ".claude/scripts/notebooklm-prep.sh"
     ],
     "sync_always": [
       "PROJECT_COMPENDIUM.md",
@@ -217,7 +220,6 @@ cat > "$PROJECT_DIR/.sync/manifest.json" << MANIFEST
       ".claude/hooks/save-critical-context.sh",
       ".claude/hooks/version-check.sh",
       ".claude/rules/manuscript-prose.md",
-      ".claude/scripts/notebooklm-prep.sh",
       ".claude/scripts/gemini-continuity-audit-spec.md"
     ],
     "project_owned": [
@@ -246,7 +248,7 @@ cat > "$PROJECT_DIR/CHANGELOG.md" << CHANGELOG
 # $PROJ_ID Changelog
 
 ## [$NOW] - Project Created
-- Initialized from Starter Kit v1.5.0
+- Initialized from Starter Kit v1.5.1
 - Modules linked to: $KIT_DIR/modules
 CHANGELOG
 

@@ -1,5 +1,5 @@
 {
-  "kit_version": "1.5.0",
+  "kit_version": "1.5.1",
   "kit_path": "/mnt/c/Users/toast/Documents/Books/_New_Book_Starter_Kit",
   "project_id": "",
   "created": "",
@@ -42,7 +42,9 @@
       ".gemini/skills/voice-lint/SKILL.md",
       ".gemini/skills/holistic-audit/SKILL.md",
       ".gemini/skills/holistic-pass/SKILL.md",
-      "docs/HOLISTIC_PASSES.md"
+      "docs/HOLISTIC_PASSES.md",
+      "docs/characters.md",
+      ".claude/scripts/notebooklm-prep.sh"
     ],
     "sync_always": [
       "PROJECT_COMPENDIUM.md",
@@ -61,7 +63,6 @@
       ".claude/hooks/save-critical-context.sh",
       ".claude/hooks/version-check.sh",
       ".claude/rules/manuscript-prose.md",
-      ".claude/scripts/notebooklm-prep.sh",
       ".claude/scripts/gemini-continuity-audit-spec.md"
     ],
     "project_owned": [
