@@ -92,6 +92,7 @@ SYNC_ALWAYS=(
   ".claude/hooks/deai-quick-scan.sh"
   ".claude/hooks/prose-checklist-reminder.sh"
   ".claude/hooks/save-critical-context.sh"
+  ".claude/hooks/version-check.sh"
   ".claude/rules/manuscript-prose.md"
   ".claude/scripts/notebooklm-prep.sh"
   ".claude/scripts/gemini-continuity-audit-spec.md"
@@ -100,9 +101,11 @@ SYNC_ALWAYS=(
 SYNCED=0
 SKIPPED=0
 
-# Ensure Claude Code directories exist
+# Ensure Claude Code and Gemini directories exist
 mkdir -p "$PROJECT_DIR/.claude/hooks" "$PROJECT_DIR/.claude/rules" "$PROJECT_DIR/.claude/scripts"
-mkdir -p "$PROJECT_DIR/.claude/skills"/{de-ai-audit,scene-brief,revision-guide,draft,chapter-done}
+mkdir -p "$PROJECT_DIR/.claude/skills"/{de-ai-audit,scene-brief,revision-guide,draft,chapter-done,holistic-audit,holistic-pass}
+mkdir -p "$PROJECT_DIR/.gemini/skills"/{adversarial-review/references,continuity-audit,de-ai-audit/references,kdp-format/references,voice-lint,holistic-audit,holistic-pass}
+mkdir -p "$PROJECT_DIR/docs"
 
 for f in "${SYNC_ALWAYS[@]}"; do
   if [ ! -f "$KIT_DIR/$f" ]; then
@@ -141,6 +144,22 @@ SKILL_TEMPLATES=(
   ".claude/skills/revision-guide/SKILL.md"
   ".claude/skills/draft/SKILL.md"
   ".claude/skills/chapter-done/SKILL.md"
+  ".claude/skills/holistic-audit/SKILL.md"
+  ".claude/skills/holistic-pass/SKILL.md"
+  ".gemini/skills/adversarial-review/SKILL.md"
+  ".gemini/skills/continuity-audit/SKILL.md"
+  ".gemini/skills/de-ai-audit/SKILL.md"
+  ".gemini/skills/kdp-format/SKILL.md"
+  ".gemini/skills/voice-lint/SKILL.md"
+  ".gemini/skills/holistic-audit/SKILL.md"
+  ".gemini/skills/holistic-pass/SKILL.md"
+  ".gemini/skills/adversarial-review/references/_ADVERSARIAL_REVIEW_ENGINE.md"
+  ".gemini/skills/de-ai-audit/references/CLAUDE.md"
+  ".gemini/skills/de-ai-audit/references/_HUMAN_PATTERNS.md"
+  ".gemini/skills/de-ai-audit/references/MASTER_BOOK_REVIEW_PROMPT.md"
+  ".gemini/skills/de-ai-audit/references/_STYLE_AUTHORITY.md"
+  ".gemini/skills/kdp-format/references/KDP_BOOK_FORMATTING_SKILL.md"
+  "docs/HOLISTIC_PASSES.md"
 )
 SKILL_SYNCED=0
 for f in "${SKILL_TEMPLATES[@]}"; do

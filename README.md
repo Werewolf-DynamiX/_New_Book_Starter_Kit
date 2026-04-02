@@ -56,7 +56,7 @@ This kit uses two AI agents with distinct roles:
 2. `/draft` — Claude writes prose with automatic QC checks
 3. `/de-ai-audit` — Claude scans for AI patterns (also runs automatically via hook)
 4. `/revision-guide` — Claude requests 3 Gemini audits, builds a prioritized fix list, user approves
-5. `/chapter-done` — Claude runs completion checklist, Gemini issues verification, user signs off
+5. `/chapter-done` — Claude runs completion checklist, Gemini issues verification, user signs off, then runs `bash update_bible.sh`
 
 ### NotebookLM Integration
 Run `bash .claude/scripts/notebooklm-prep.sh` to bundle your manuscript for Google NotebookLM with pre-written audit prompts for continuity, voice consistency, timeline, character arcs, and plot threads.

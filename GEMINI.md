@@ -23,6 +23,7 @@ Your partner is **Claude** (the Writer).
     *   **Target Audience Exception:** You and Claude may agree to ignore a failing grade ONLY if you both identify the persona as being outside the project's **Target Audience** (see `_ADVERSARIAL_REVIEW_ENGINE.md`).
     *   **De-AI-ification:** Ruthlessly audit text for AI patterns (hedging, purple prose, uniform rhythm, "summary" endings).
 6.  **Adversarial Verification:** You are the Auditor. Never mark a task as DONE until you issue a **Verification Certificate** (see `modules/_ADVERSARIAL_REVIEW_ENGINE.md`).
+7.  **Holistic Manuscript Audit:** At act boundaries, after external reviews, or at manuscript completion, perform a full-manuscript structural analysis to identify cross-chapter patterns. This is your highest-value QA function — it catches problems invisible to chapter-level tools. Use the `holistic-audit` skill. Output goes to `docs/HOLISTIC_PASSES.md`.
 
 ### Verification Certificate Format
 When a chapter passes all checks, issue a certificate in this exact format:
@@ -102,6 +103,7 @@ Overall Findings: [any remaining issues or "No issues found"]
     *   Did a rule get defined? -> Add to `FACTS_SHEET.md`.
     *   Did a timeline event happen? -> Add to `FACTS_SHEET.md`.
     *   **Continuity Verification:** Check new facts against old ones. If a conflict is found, flag it immediately.
+    *   **Automation:** Run `bash update_bible.sh` to extract new facts.
 2.  **Update Lessons:** Identify any mistakes made or insights gained. Log them according to `modules/_LESSONS_PROTOCOL.md`.
 3.  **Update TODO:** Clear finished tasks, add next steps.
 4.  **Log Session:** Update the Session History below.
@@ -146,6 +148,17 @@ Overall Findings: [any remaining issues or "No issues found"]
       ```bash
       gemini "Run a continuity audit on chapters 1-5" --skill continuity-audit
       ```
+- **Holistic Manuscript Audit (End of Act / External Reviews / Manuscript Complete):**
+    - Use the `holistic-audit` skill to identify cross-chapter structural patterns:
+      ```bash
+      gemini "Run a holistic audit on the full manuscript" --skill holistic-audit
+      ```
+    - Output: `docs/HOLISTIC_PASSES.md` — prioritized revision passes spanning multiple chapters
+    - Use the `holistic-pass` skill to execute specific passes:
+      ```bash
+      gemini "Execute holistic pass 1" --skill holistic-pass
+      ```
+    - Holistic passes address: voice bleed between POVs, narrative device dependency, consequence propagation, character page time, act-level pacing, prose pattern accumulation, relationship texture, thematic coherence
 
 ### File System
 - **Reading Large Files:** When reading large files, use the `limit` and `offset` parameters of the `read_file` tool to read the file in chunks. This will prevent hitting token limits.

@@ -1,62 +1,21 @@
 ---
 name: continuity-audit
-description: Deep continuity analysis across manuscript chapters. Traces physical descriptions, object tracking, timeline math, and cross-chapter consistency against FACTS_SHEET.md.
+description: Audits a chapter for timeline contradictions, object/character state errors, and factual consistency against FACTS_SHEET. Use when reviewing chapters or when the user explicitly requests a continuity check.
 ---
 
-# Continuity Audit Skill
+# Continuity Audit
 
-You are performing a deep continuity audit of the manuscript. This is a systematic, exhaustive process — not a casual review.
+## Overview
+This skill performs a structured verification of a chapter against the project's established facts to ensure consistency.
 
-## Procedure
+## Execution Protocol
 
-### Phase 1: Inventory
-Read all files in `manuscript/chapters/` and `context/FACTS_SHEET.md`.
+You are performing a CONTINUITY AUDIT, not a prose review.
 
-Build internal tracking tables for:
-1. **Characters:** Every named character with all physical descriptions (hair, eyes, height, build, scars, clothing, age)
-2. **Objects:** Every significant object (weapons, letters, jewelry, keys, vehicles) — where introduced, where used
-3. **Locations:** Every named location with physical descriptions (layout, distances, environmental details)
-4. **Timeline:** Every temporal reference (dates, times, "three days later", ages, seasons)
+Read the provided chapter and the `context/FACTS_SHEET.md`. For every factual claim in the chapter:
+1. Is it consistent with the FACTS_SHEET?
+2. Is it consistent with the chapter timeline headers?
+3. If a character says "X happened Y days ago," verify the math.
+4. If a character claims knowledge of an event, verify they were present or informed.
 
-### Phase 2: Cross-Reference
-For each tracked item, compare:
-- Every mention against every other mention (internal consistency)
-- Every mention against FACTS_SHEET.md (canonical consistency)
-- Timeline math: Do elapsed times, ages, and travel distances add up?
-
-### Phase 3: Report
-Output findings as:
-
-```
-# Continuity Audit Report
-
-**Date:** [date]
-**Chapters Audited:** [list]
-**Auditor:** Gemini (continuity-audit skill)
-
-## CRITICAL (Contradictions)
-| Issue | Chapter A | Quote A | Chapter B | Quote B | Type |
-|-------|-----------|---------|-----------|---------|------|
-
-## HIGH (FACTS_SHEET Discrepancies)
-| Issue | Chapter | In Text | In FACTS_SHEET | Action |
-|-------|---------|---------|----------------|--------|
-
-## MEDIUM (Timeline Problems)
-| Issue | Chapters | Time Reference | Expected | Actual |
-|-------|----------|----------------|----------|--------|
-
-## LOW (Minor Inconsistencies)
-[list]
-
-## Tracking Tables
-[Full character/object/location/timeline tables for reference]
-```
-
-### Checklist
-- [ ] Every named character's physical description compared across all appearances
-- [ ] Every significant object tracked from introduction to last mention
-- [ ] Every location description compared across all scenes set there
-- [ ] Timeline math verified (elapsed time, ages, travel feasibility)
-- [ ] All findings compared against FACTS_SHEET.md
-- [ ] Report generated with severity ratings
+Report ONLY contradictions. Do not comment on prose quality.

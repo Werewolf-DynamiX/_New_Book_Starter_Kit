@@ -194,9 +194,16 @@ These skills automate the workflow gates defined in the Operational Protocol abo
 | `/draft` | Pre-flight checks (persona, brief, facts), drafts prose with anti-polish rules, runs Self-Editing Checklist + de-ai-audit inline | No — presents draft for review |
 | `/de-ai-audit` | Scans manuscript for AI vocabulary, structural tells, burstiness failures, filter words. Produces A-F graded report | No — read-only analysis |
 | `/revision-guide` | Requests 3 Gemini audits (Continuity, Logic, Voice/AI), triages findings by severity, builds Revision Guide | Yes — Work Order must be approved before execution |
-| `/chapter-done` | Runs Chapter Completion Checklist, requests Gemini Verification Certificate | Yes — user must explicitly sign off |
+| `/chapter-done` | Runs Chapter Completion Checklist, requests Gemini Verification Certificate, then runs `bash update_bible.sh` | Yes — user must explicitly sign off |
+| `/holistic-audit` | Full-manuscript structural analysis. Identifies cross-chapter patterns (voice bleed, device dependency, consequence gaps, pacing arcs) and generates `docs/HOLISTIC_PASSES.md` | Yes — passes must be approved before execution |
+| `/holistic-pass` | Executes a specific numbered pass from `docs/HOLISTIC_PASSES.md` across targeted chapters. Works 2-4 chapters per invocation, tracks progress | Yes — changes must be approved before applying |
 
-**Typical workflow:** `/scene-brief` → (approve) → `/draft` → `/de-ai-audit` → `/revision-guide` → (approve + execute fixes) → `/chapter-done` → (sign off)
+### Workflows
+
+**Chapter-level workflow:** `/scene-brief` → (approve) → `/draft` → `/de-ai-audit` → `/revision-guide` → (approve + execute fixes) → `/chapter-done` → (sign off + run `bash update_bible.sh`)
+
+**Manuscript-level workflow (holistic passes):** Run after external reviews, beta feedback, or at act/manuscript completion:
+`/holistic-audit` → (approve passes) → `/holistic-pass N` → (approve changes) → repeat until pass complete → `/holistic-pass M` → ...
 
 ### Automatic Hooks
 These fire automatically — no user action needed.

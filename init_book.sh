@@ -24,7 +24,7 @@ if [ -f ".sync/manifest.json" ]; then
 fi
 
 echo "============================================"
-echo "  Book Project Initializer (Kit v1.4.0)"
+echo "  Book Project Initializer (Kit v1.5.0)"
 echo "============================================"
 echo ""
 echo "Kit location: $KIT_DIR"
@@ -53,8 +53,9 @@ mkdir -p manuscript/chapters manuscript/front_matter manuscript/back_matter manu
 mkdir -p context reference output research/sources research/reviews
 mkdir -p visuals/diagrams visuals/figures visuals/generated
 mkdir -p .sync .claude/hooks .claude/rules .claude/scripts
-mkdir -p .claude/skills/{de-ai-audit,scene-brief,revision-guide,draft,chapter-done}
-mkdir -p .gemini
+mkdir -p .claude/skills/{de-ai-audit,scene-brief,revision-guide,draft,chapter-done,holistic-audit,holistic-pass}
+mkdir -p .gemini/skills/{adversarial-review/references,continuity-audit,de-ai-audit/references,kdp-format/references,voice-lint,holistic-audit,holistic-pass}
+mkdir -p docs
 
 # --- Symlink shared resources ---
 echo "Linking modules/ -> kit (shared, auto-updating)..."
@@ -88,6 +89,22 @@ TEMPLATE_COPIES=(
   ".claude/skills/revision-guide/SKILL.md"
   ".claude/skills/draft/SKILL.md"
   ".claude/skills/chapter-done/SKILL.md"
+  ".claude/skills/holistic-audit/SKILL.md"
+  ".claude/skills/holistic-pass/SKILL.md"
+  ".gemini/skills/adversarial-review/SKILL.md"
+  ".gemini/skills/continuity-audit/SKILL.md"
+  ".gemini/skills/de-ai-audit/SKILL.md"
+  ".gemini/skills/kdp-format/SKILL.md"
+  ".gemini/skills/voice-lint/SKILL.md"
+  ".gemini/skills/holistic-audit/SKILL.md"
+  ".gemini/skills/holistic-pass/SKILL.md"
+  "docs/HOLISTIC_PASSES.md"
+  ".gemini/skills/adversarial-review/references/_ADVERSARIAL_REVIEW_ENGINE.md"
+  ".gemini/skills/de-ai-audit/references/CLAUDE.md"
+  ".gemini/skills/de-ai-audit/references/_HUMAN_PATTERNS.md"
+  ".gemini/skills/de-ai-audit/references/MASTER_BOOK_REVIEW_PROMPT.md"
+  ".gemini/skills/de-ai-audit/references/_STYLE_AUTHORITY.md"
+  ".gemini/skills/kdp-format/references/KDP_BOOK_FORMATTING_SKILL.md"
 )
 for f in "${TEMPLATE_COPIES[@]}"; do
   if [ -f "$KIT_DIR/$f" ]; then
@@ -111,6 +128,7 @@ SYNC_ALWAYS=(
   ".claude/hooks/deai-quick-scan.sh"
   ".claude/hooks/prose-checklist-reminder.sh"
   ".claude/hooks/save-critical-context.sh"
+  ".claude/hooks/version-check.sh"
   ".claude/rules/manuscript-prose.md"
   ".claude/scripts/notebooklm-prep.sh"
   ".claude/scripts/gemini-continuity-audit-spec.md"
@@ -145,7 +163,7 @@ fi
 NOW=$(date +%Y-%m-%d)
 cat > "$PROJECT_DIR/.sync/manifest.json" << MANIFEST
 {
-  "kit_version": "1.4.0",
+  "kit_version": "1.5.0",
   "kit_path": "$KIT_DIR",
   "project_id": "$PROJ_ID",
   "created": "$NOW",
@@ -171,7 +189,17 @@ cat > "$PROJECT_DIR/.sync/manifest.json" << MANIFEST
       ".claude/skills/scene-brief/SKILL.md",
       ".claude/skills/revision-guide/SKILL.md",
       ".claude/skills/draft/SKILL.md",
-      ".claude/skills/chapter-done/SKILL.md"
+      ".claude/skills/chapter-done/SKILL.md",
+      ".claude/skills/holistic-audit/SKILL.md",
+      ".claude/skills/holistic-pass/SKILL.md",
+      ".gemini/skills/adversarial-review/SKILL.md",
+      ".gemini/skills/continuity-audit/SKILL.md",
+      ".gemini/skills/de-ai-audit/SKILL.md",
+      ".gemini/skills/kdp-format/SKILL.md",
+      ".gemini/skills/voice-lint/SKILL.md",
+      ".gemini/skills/holistic-audit/SKILL.md",
+      ".gemini/skills/holistic-pass/SKILL.md",
+      "docs/HOLISTIC_PASSES.md"
     ],
     "sync_always": [
       "PROJECT_COMPENDIUM.md",
@@ -187,6 +215,7 @@ cat > "$PROJECT_DIR/.sync/manifest.json" << MANIFEST
       ".claude/hooks/deai-quick-scan.sh",
       ".claude/hooks/prose-checklist-reminder.sh",
       ".claude/hooks/save-critical-context.sh",
+      ".claude/hooks/version-check.sh",
       ".claude/rules/manuscript-prose.md",
       ".claude/scripts/notebooklm-prep.sh",
       ".claude/scripts/gemini-continuity-audit-spec.md"
@@ -217,7 +246,7 @@ cat > "$PROJECT_DIR/CHANGELOG.md" << CHANGELOG
 # $PROJ_ID Changelog
 
 ## [$NOW] - Project Created
-- Initialized from Starter Kit v1.4.0
+- Initialized from Starter Kit v1.5.0
 - Modules linked to: $KIT_DIR/modules
 CHANGELOG
 
@@ -238,8 +267,10 @@ echo ""
 echo "  Claude Code automation:"
 echo "    .claude/hooks/     — 3 automatic hooks (de-ai scan, checklist, context)"
 echo "    .claude/rules/     — Auto-loaded prose rules for manuscript files"
-echo "    .claude/skills/    — 5 slash commands (/scene-brief, /draft, etc.)"
+echo "    .claude/skills/    — 7 slash commands (/scene-brief, /draft, /holistic-audit, etc.)"
 echo "    .claude/scripts/   — NotebookLM prep + Gemini audit spec"
+echo "    .gemini/skills/    — 7 Gemini skills (adversarial-review, holistic-audit, etc.)"
+echo "    docs/              — Holistic passes template"
 echo ""
 echo "  Next steps:"
 echo "    1. Fill out PROJECT_IDENTITY.md"

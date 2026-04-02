@@ -1,5 +1,5 @@
 {
-  "kit_version": "1.4.0",
+  "kit_version": "1.5.0",
   "kit_path": "/mnt/c/Users/toast/Documents/Books/_New_Book_Starter_Kit",
   "project_id": "",
   "created": "",
@@ -32,7 +32,17 @@
       ".claude/skills/scene-brief/SKILL.md",
       ".claude/skills/revision-guide/SKILL.md",
       ".claude/skills/draft/SKILL.md",
-      ".claude/skills/chapter-done/SKILL.md"
+      ".claude/skills/chapter-done/SKILL.md",
+      ".claude/skills/holistic-audit/SKILL.md",
+      ".claude/skills/holistic-pass/SKILL.md",
+      ".gemini/skills/adversarial-review/SKILL.md",
+      ".gemini/skills/continuity-audit/SKILL.md",
+      ".gemini/skills/de-ai-audit/SKILL.md",
+      ".gemini/skills/kdp-format/SKILL.md",
+      ".gemini/skills/voice-lint/SKILL.md",
+      ".gemini/skills/holistic-audit/SKILL.md",
+      ".gemini/skills/holistic-pass/SKILL.md",
+      "docs/HOLISTIC_PASSES.md"
     ],
     "sync_always": [
       "PROJECT_COMPENDIUM.md",
@@ -49,6 +59,7 @@
       ".claude/hooks/deai-quick-scan.sh",
       ".claude/hooks/prose-checklist-reminder.sh",
       ".claude/hooks/save-critical-context.sh",
+      ".claude/hooks/version-check.sh",
       ".claude/rules/manuscript-prose.md",
       ".claude/scripts/notebooklm-prep.sh",
       ".claude/scripts/gemini-continuity-audit-spec.md"
