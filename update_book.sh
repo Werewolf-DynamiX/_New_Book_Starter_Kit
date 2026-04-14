@@ -4,14 +4,45 @@ set -e
 # ============================================================
 # update_book.sh — Sync a book project to the latest Starter Kit
 # ============================================================
+#
+# WHAT THIS DOES:
+#   Brings your project's shared infrastructure up to date with
+#   the central Starter Kit, without touching your story content.
+#
+# THREE CATEGORIES OF FILES:
+#
+#   1. SHARED INFRASTRUCTURE (auto-synced, always safe)
+#      Hooks, rules, review prompts, reference docs.
+#      These have no project-specific content. The kit version
+#      is always correct. Overwritten automatically.
+#
+#   2. SKILL TEMPLATES (auto-synced if new, prompted if changed)
+#      Claude and Gemini skill definitions. New skills are copied
+#      automatically. If a skill you already have changed in the
+#      kit, you're asked before overwriting.
+#
+#   3. YOUR FILES (never overwritten)
+#      CLAUDE.md, GEMINI.md, PROJECT_IDENTITY.md, FACTS_SHEET,
+#      WRITER_VOICE, etc. These contain your story's characters,
+#      tone, session history, and other customizations. The script
+#      will TELL you if the kit template changed (so you can
+#      manually merge new framework features), but it will never
+#      touch them.
+#
+# STRUCTURAL CONSISTENCY:
+#   Ensures every project has the same directory layout —
+#   creates any missing folders and verifies symlinks to the
+#   shared modules/ and .vale/ directories.
+#
 # Usage: Run from inside your book project directory.
 #   bash update_book.sh
+#
 # ============================================================
 
 PROJECT_DIR="$(pwd)"
 MANIFEST="$PROJECT_DIR/.sync/manifest.json"
 
-# --- Check manifest exists ---
+# --- Preflight: check manifest ---
 if [ ! -f "$MANIFEST" ]; then
   echo "ERROR: No .sync/manifest.json found."
   echo "This project wasn't initialized with init_book.sh."
@@ -37,46 +68,88 @@ CURRENT_VERSION=$(python3 -c "import json; print(json.load(open('$MANIFEST'))['k
 KIT_VERSION=$(python3 -c "import json; print(json.load(open('$KIT_DIR/.sync/manifest.json'))['kit_version'])" 2>/dev/null || \
   grep -o '"kit_version"[[:space:]]*:[[:space:]]*"[^"]*"' "$KIT_DIR/.sync/manifest.json" | sed 's/.*: *"//;s/"$//')
 
+PROJECT_NAME=$(basename "$PROJECT_DIR")
+
 echo "============================================"
-echo "  Book Project Updater"
+echo "  Update: $PROJECT_NAME"
+echo "  $CURRENT_VERSION -> $KIT_VERSION"
 echo "============================================"
-echo ""
-echo "Kit location:    $KIT_DIR"
-echo "Project dir:     $PROJECT_DIR"
-echo "Project version: $CURRENT_VERSION"
-echo "Kit version:     $KIT_VERSION"
 echo ""
 
-# --- Check symlinks ---
-echo "--- Checking symlinks ---"
-LINKS_OK=true
+# ==========================================================
+# PHASE 1: STRUCTURE — Ensure consistent directory layout
+# ==========================================================
+echo "PHASE 1: Verify project structure"
+echo "----------------------------------"
+
+# Required directories
+REQUIRED_DIRS=(
+  "manuscript"
+  "context"
+  "reference"
+  "output"
+  "docs"
+  "archive"
+  ".claude/hooks"
+  ".claude/rules"
+  ".claude/scripts"
+  ".claude/skills/de-ai-audit"
+  ".claude/skills/scene-brief"
+  ".claude/skills/revision-guide"
+  ".claude/skills/draft"
+  ".claude/skills/chapter-done"
+  ".claude/skills/holistic-audit"
+  ".claude/skills/holistic-pass"
+  ".gemini/skills/adversarial-review"
+  ".gemini/skills/continuity-audit"
+  ".gemini/skills/de-ai-audit"
+  ".gemini/skills/kdp-format"
+  ".gemini/skills/voice-lint"
+  ".gemini/skills/holistic-audit"
+  ".gemini/skills/holistic-pass"
+)
+
+DIRS_CREATED=0
+for d in "${REQUIRED_DIRS[@]}"; do
+  if [ ! -d "$PROJECT_DIR/$d" ]; then
+    mkdir -p "$PROJECT_DIR/$d"
+    echo "  + Created $d/"
+    DIRS_CREATED=$((DIRS_CREATED + 1))
+  fi
+done
+if [ $DIRS_CREATED -eq 0 ]; then
+  echo "  All directories present."
+fi
+
+# Check symlinks (modules/ and .vale/ should point to the kit)
 for link in modules .vale; do
   if [ -L "$PROJECT_DIR/$link" ]; then
     TARGET=$(readlink -f "$PROJECT_DIR/$link" 2>/dev/null || readlink "$PROJECT_DIR/$link")
     EXPECTED=$(readlink -f "$KIT_DIR/$link" 2>/dev/null || echo "$KIT_DIR/$link")
     if [ "$TARGET" = "$EXPECTED" ]; then
-      echo "  $link/ -> OK (linked to kit)"
+      echo "  $link/ -> OK"
     else
       echo "  $link/ -> WARNING: points to $TARGET (expected $EXPECTED)"
-      LINKS_OK=false
     fi
   elif [ -d "$PROJECT_DIR/$link" ]; then
-    echo "  $link/ -> NOT LINKED (is a regular directory)"
-    echo "    Consider: rm -rf $link && ln -s $KIT_DIR/$link ./$link"
-    LINKS_OK=false
+    echo "  $link/ -> WARNING: regular directory, should be a symlink"
+    echo "    Fix: rm -rf $link && ln -s $KIT_DIR/$link ./$link"
   else
-    echo "  $link/ -> MISSING"
-    read -p "    Create symlink? [Y/n]: " yn
-    case ${yn:-Y} in
-      [Yy]*) ln -s "$KIT_DIR/$link" "$PROJECT_DIR/$link"; echo "    Created.";;
-      *) echo "    Skipped.";;
-    esac
+    echo "  $link/ -> MISSING — creating symlink"
+    ln -s "$KIT_DIR/$link" "$PROJECT_DIR/$link"
+    echo "  $link/ -> Created"
   fi
 done
 echo ""
 
-# --- Sync "sync_always" files ---
-echo "--- Syncing infrastructure files ---"
+# ==========================================================
+# PHASE 2: SHARED INFRASTRUCTURE — Auto-sync (always safe)
+# ==========================================================
+echo "PHASE 2: Sync shared infrastructure (auto-updated)"
+echo "---------------------------------------------------"
+echo "  These files have no project-specific content."
+echo ""
+
 SYNC_ALWAYS=(
   "PROJECT_COMPENDIUM.md"
   "MASTER_BOOK_REVIEW_PROMPT.md"
@@ -100,44 +173,39 @@ SYNC_ALWAYS=(
 SYNCED=0
 SKIPPED=0
 
-# Ensure Claude Code and Gemini directories exist
-mkdir -p "$PROJECT_DIR/.claude/hooks" "$PROJECT_DIR/.claude/rules" "$PROJECT_DIR/.claude/scripts"
-mkdir -p "$PROJECT_DIR/.claude/skills"/{de-ai-audit,scene-brief,revision-guide,draft,chapter-done,holistic-audit,holistic-pass}
-mkdir -p "$PROJECT_DIR/.gemini/skills"/{adversarial-review/references,continuity-audit,de-ai-audit/references,kdp-format/references,voice-lint,holistic-audit,holistic-pass}
-mkdir -p "$PROJECT_DIR/docs"
-
 for f in "${SYNC_ALWAYS[@]}"; do
   if [ ! -f "$KIT_DIR/$f" ]; then
     continue
   fi
-
   if [ ! -f "$PROJECT_DIR/$f" ]; then
-    # New file in kit, copy it
     mkdir -p "$(dirname "$PROJECT_DIR/$f")"
     cp "$KIT_DIR/$f" "$PROJECT_DIR/$f"
-    echo "  + $f (new file, copied)"
+    echo "  + $f (new)"
     SYNCED=$((SYNCED + 1))
   elif diff -q "$KIT_DIR/$f" "$PROJECT_DIR/$f" > /dev/null 2>&1; then
-    # Already identical
     SKIPPED=$((SKIPPED + 1))
   else
-    # Changed — auto-update (these are safe to overwrite)
     cp "$KIT_DIR/$f" "$PROJECT_DIR/$f"
     echo "  ~ $f (updated)"
     SYNCED=$((SYNCED + 1))
   fi
 done
 
-# Make hook and script files executable
 chmod +x "$PROJECT_DIR/.claude/hooks/"*.sh 2>/dev/null || true
 chmod +x "$PROJECT_DIR/.claude/scripts/"*.sh 2>/dev/null || true
 
-echo "  Infrastructure: $SYNCED updated, $SKIPPED already current"
+echo "  $SYNCED updated, $SKIPPED already current"
 echo ""
 
-# --- Sync skill templates (diff-check, don't auto-overwrite) ---
-echo "--- Checking Claude skill templates ---"
-SKILL_TEMPLATES=(
+# ==========================================================
+# PHASE 3: SKILL TEMPLATES — New skills auto-copy, existing
+#           skills prompt before overwriting
+# ==========================================================
+echo "PHASE 3: Sync skill templates"
+echo "------------------------------"
+
+SKILL_FILES=(
+  # Claude skills
   ".claude/skills/de-ai-audit/SKILL.md"
   ".claude/skills/scene-brief/SKILL.md"
   ".claude/skills/revision-guide/SKILL.md"
@@ -145,6 +213,7 @@ SKILL_TEMPLATES=(
   ".claude/skills/chapter-done/SKILL.md"
   ".claude/skills/holistic-audit/SKILL.md"
   ".claude/skills/holistic-pass/SKILL.md"
+  # Gemini skills
   ".gemini/skills/adversarial-review/SKILL.md"
   ".gemini/skills/continuity-audit/SKILL.md"
   ".gemini/skills/de-ai-audit/SKILL.md"
@@ -152,50 +221,58 @@ SKILL_TEMPLATES=(
   ".gemini/skills/voice-lint/SKILL.md"
   ".gemini/skills/holistic-audit/SKILL.md"
   ".gemini/skills/holistic-pass/SKILL.md"
+  # Gemini skill reference files
   ".gemini/skills/adversarial-review/references/_ADVERSARIAL_REVIEW_ENGINE.md"
   ".gemini/skills/de-ai-audit/references/CLAUDE.md"
   ".gemini/skills/de-ai-audit/references/_HUMAN_PATTERNS.md"
   ".gemini/skills/de-ai-audit/references/MASTER_BOOK_REVIEW_PROMPT.md"
   ".gemini/skills/de-ai-audit/references/_STYLE_AUTHORITY.md"
   ".gemini/skills/kdp-format/references/KDP_BOOK_FORMATTING_SKILL.md"
+  # Doc templates
   "docs/HOLISTIC_PASSES.md"
   "docs/characters.md"
   ".claude/scripts/notebooklm-prep.sh"
 )
-SKILL_SYNCED=0
-for f in "${SKILL_TEMPLATES[@]}"; do
+
+SKILL_NEW=0
+SKILL_UPDATED=0
+SKILL_CURRENT=0
+
+for f in "${SKILL_FILES[@]}"; do
   if [ ! -f "$KIT_DIR/$f" ]; then
     continue
   fi
   if [ ! -f "$PROJECT_DIR/$f" ]; then
     mkdir -p "$(dirname "$PROJECT_DIR/$f")"
     cp "$KIT_DIR/$f" "$PROJECT_DIR/$f"
-    echo "  + $f (new skill, copied)"
-    SKILL_SYNCED=$((SKILL_SYNCED + 1))
-  elif ! diff -q "$KIT_DIR/$f" "$PROJECT_DIR/$f" > /dev/null 2>&1; then
-    echo "  $f differs from kit."
+    echo "  + $f (new)"
+    SKILL_NEW=$((SKILL_NEW + 1))
+  elif diff -q "$KIT_DIR/$f" "$PROJECT_DIR/$f" > /dev/null 2>&1; then
+    SKILL_CURRENT=$((SKILL_CURRENT + 1))
+  else
+    echo "  ? $f differs from kit"
     read -p "    Overwrite with kit version? [y/N]: " yn
     case $yn in
       [Yy]*)
         cp "$KIT_DIR/$f" "$PROJECT_DIR/$f"
         echo "    Updated."
-        SKILL_SYNCED=$((SKILL_SYNCED + 1))
+        SKILL_UPDATED=$((SKILL_UPDATED + 1))
         ;;
-      *) echo "    Kept your version.";;
+      *) echo "    Kept yours.";;
     esac
   fi
 done
-if [ $SKILL_SYNCED -eq 0 ]; then
-  echo "  All skills current."
-fi
+
+echo "  $SKILL_NEW new, $SKILL_UPDATED updated, $SKILL_CURRENT already current"
 echo ""
 
-# --- Check project-owned files for kit changes ---
-echo "--- Checking project-owned files for kit updates ---"
-echo "(These files are yours. Showing diffs for review only.)"
-echo ""
+# ==========================================================
+# PHASE 4: YOUR FILES — Never overwritten, diff report only
+# ==========================================================
+echo "PHASE 4: Project-owned files (never overwritten)"
+echo "-------------------------------------------------"
 
-PROJECT_OWNED_FROM_KIT=(
+PROJECT_OWNED=(
   "CLAUDE.md"
   "GEMINI.md"
   "PROJECT_IDENTITY.md"
@@ -208,86 +285,105 @@ PROJECT_OWNED_FROM_KIT=(
   "context/LESSONS_LEARNED.md"
 )
 
+MIGRATION_FILE="$PROJECT_DIR/.sync/migration_guide.md"
 DIFFS_FOUND=0
-for f in "${PROJECT_OWNED_FROM_KIT[@]}"; do
+
+# Start building the migration guide
+cat > "$MIGRATION_FILE" <<'HEADER'
+# Migration Guide
+
+**Generated by `update_book.sh`** — delete this file after applying changes.
+
+This file contains diffs between the kit templates and your project files.
+Your project files have story-specific content (characters, tone, session
+history, etc.) that must be preserved. Only merge in **new framework
+features** — do not replace project-specific content with template
+placeholders.
+
+## Instructions
+
+For each file below, merge the additions from the kit template into the
+project file. Ignore any lines where the kit has a generic placeholder
+(like `[Define Tone Here]`) and your file has real content.
+
+---
+
+HEADER
+
+for f in "${PROJECT_OWNED[@]}"; do
   if [ ! -f "$KIT_DIR/$f" ] || [ ! -f "$PROJECT_DIR/$f" ]; then
     continue
   fi
   if ! diff -q "$KIT_DIR/$f" "$PROJECT_DIR/$f" > /dev/null 2>&1; then
     DIFFS_FOUND=$((DIFFS_FOUND + 1))
-    echo "  $f differs from kit template."
-    read -p "    View diff? [y/N]: " yn
-    case $yn in
-      [Yy]*)
-        echo "    --- Kit version vs. Your version ---"
-        diff --color=auto "$KIT_DIR/$f" "$PROJECT_DIR/$f" || true
-        echo ""
-        read -p "    Overwrite with kit version? (YOUR CHANGES WILL BE LOST) [y/N]: " ow
-        case $ow in
-          [Yy]*)
-            cp "$KIT_DIR/$f" "$PROJECT_DIR/$f"
-            echo "    Overwritten."
-            ;;
-          *) echo "    Kept your version.";;
-        esac
-        ;;
-      *) echo "    Skipped.";;
-    esac
+    {
+      echo "## \`$f\`"
+      echo ""
+      echo '```diff'
+      diff -u "$KIT_DIR/$f" "$PROJECT_DIR/$f" || true
+      echo '```'
+      echo ""
+      echo "---"
+      echo ""
+    } >> "$MIGRATION_FILE"
   fi
 done
 
-if [ $DIFFS_FOUND -eq 0 ]; then
-  echo "  No differences found in project-owned files."
+if [ $DIFFS_FOUND -gt 0 ]; then
+  echo "  $DIFFS_FOUND file(s) differ from kit templates."
+  echo "  Migration guide written to: .sync/migration_guide.md"
+  echo ""
+  echo "  To apply, tell Claude or Gemini:"
+  echo "    \"Read .sync/migration_guide.md and merge the framework changes.\""
+  echo ""
+  echo "  Delete .sync/migration_guide.md when done."
+else
+  echo "  All project files up to date."
+  rm -f "$MIGRATION_FILE"
 fi
 echo ""
 
-# --- Check for new files in kit that project doesn't have ---
-echo "--- Checking for new kit files ---"
-NEW_FILES=0
-# Check reference/ for new files
-for f in "$KIT_DIR"/reference/*.md; do
-  fname=$(basename "$f")
-  if [ ! -f "$PROJECT_DIR/reference/$fname" ]; then
-    echo "  New in kit: reference/$fname"
-    read -p "    Copy to project? [Y/n]: " yn
-    case ${yn:-Y} in
-      [Yy]*) cp "$f" "$PROJECT_DIR/reference/$fname"; echo "    Copied.";;
-      *) echo "    Skipped.";;
-    esac
-    NEW_FILES=$((NEW_FILES + 1))
-  fi
-done
+# ==========================================================
+# PHASE 5: NEW KIT FILES — Copy anything the kit added
+# ==========================================================
+echo "PHASE 5: Check for new files in kit"
+echo "------------------------------------"
 
-# Check context/ for new files
-for f in "$KIT_DIR"/context/*.md; do
-  fname=$(basename "$f")
-  if [ ! -f "$PROJECT_DIR/context/$fname" ]; then
-    echo "  New in kit: context/$fname"
-    read -p "    Copy to project? [Y/n]: " yn
-    case ${yn:-Y} in
-      [Yy]*) cp "$f" "$PROJECT_DIR/context/$fname"; echo "    Copied.";;
-      *) echo "    Skipped.";;
-    esac
-    NEW_FILES=$((NEW_FILES + 1))
-  fi
+NEW_FILES=0
+for dir in reference context docs; do
+  if [ ! -d "$KIT_DIR/$dir" ]; then continue; fi
+  for f in "$KIT_DIR/$dir"/*.md; do
+    [ -f "$f" ] || continue
+    fname=$(basename "$f")
+    if [ ! -f "$PROJECT_DIR/$dir/$fname" ]; then
+      mkdir -p "$PROJECT_DIR/$dir"
+      cp "$f" "$PROJECT_DIR/$dir/$fname"
+      echo "  + $dir/$fname"
+      NEW_FILES=$((NEW_FILES + 1))
+    fi
+  done
 done
 
 if [ $NEW_FILES -eq 0 ]; then
-  echo "  No new files found."
+  echo "  No new files."
 fi
 echo ""
 
-# --- Update the update script itself ---
+# ==========================================================
+# FINISH: Update manifest and self-update
+# ==========================================================
+
+# Self-update this script
 if [ -f "$KIT_DIR/update_book.sh" ]; then
   if ! diff -q "$KIT_DIR/update_book.sh" "$PROJECT_DIR/update_book.sh" > /dev/null 2>&1; then
     cp "$KIT_DIR/update_book.sh" "$PROJECT_DIR/update_book.sh"
     chmod +x "$PROJECT_DIR/update_book.sh"
-    echo "  update_book.sh itself was updated from kit."
+    echo "  Note: update_book.sh itself was updated from kit."
     echo ""
   fi
 fi
 
-# --- Update manifest ---
+# Update manifest version
 NOW=$(date +%Y-%m-%d)
 if command -v python3 > /dev/null 2>&1; then
   python3 -c "
@@ -301,12 +397,11 @@ with open('$MANIFEST', 'w') as f:
     f.write('\n')
 "
 else
-  # Fallback: sed-based update (portable across macOS and Linux)
   sed -i.bak "s/\"kit_version\": \"[^\"]*\"/\"kit_version\": \"$KIT_VERSION\"/" "$MANIFEST" && rm -f "$MANIFEST.bak"
   sed -i.bak "s/\"last_sync\": \"[^\"]*\"/\"last_sync\": \"$NOW\"/" "$MANIFEST" && rm -f "$MANIFEST.bak"
 fi
 
 echo "============================================"
-echo "  Sync complete! ($NOW)"
-echo "  Project now at kit version: $KIT_VERSION"
+echo "  Done! $PROJECT_NAME synced to v$KIT_VERSION"
+echo "  ($NOW)"
 echo "============================================"

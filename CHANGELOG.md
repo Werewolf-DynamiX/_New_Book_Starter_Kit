@@ -1,5 +1,38 @@
 # Starter Kit Changelog
 
+## [1.5.2] - 2026-04-14
+### Changed — `update_book.sh` Restructure
+- **Five named phases** (Structure, Infrastructure, Skills, Your Files, New Kit Files) with a clear header explaining the three file categories: auto-synced, prompted, and never-touched.
+- **Migration guide system:** project-owned files that diverge from kit templates now produce `.sync/migration_guide.md` (a unified-diff report) instead of a noisy interactive diff walkthrough. User hands it to Claude/Gemini for guided merging, then deletes it.
+- **Explicit directory seeding:** required dirs (including all Claude + Gemini skill dirs) are verified and created up front, so later sync steps never fail on a missing folder.
+- **Auto-creates missing `modules/` and `.vale/` symlinks** instead of prompting, and reports without asking when they're correct.
+- **Condensed output:** header shows `project: current -> kit`, per-phase summaries replace per-file chatter.
+
+## [1.5.1] - 2026-04-02
+### Changed — NotebookLM Prep Hardening
+- **`notebooklm-prep.sh` is now structure-aware:** auto-discovers chapters in `manuscript/chapters/` or `manuscript/`, skips `FULL_MANUSCRIPT*` files, and picks up `docs/`, character files, and series bibles wherever they live.
+- **Reclassified from `sync_always` to `template_copy`:** project-level customizations to the script now survive kit updates (fixes revert bug where local edits were overwritten).
+
+### Added
+- **`docs/characters.md` template:** standard location for character voice rules and physical descriptions.
+
+## [1.5.0] - 2026-04-02
+### Added — Holistic Manuscript-Level QA
+- **`/holistic-audit` (Claude + Gemini):** Full-manuscript structural analysis identifying cross-chapter patterns (voice bleed, narrative device dependency, consequence gaps, pacing arcs). Generates `docs/HOLISTIC_PASSES.md` with prioritized revision passes.
+- **`/holistic-pass N` (Claude + Gemini):** Executes a specific numbered pass across targeted chapters. Works 2–4 chapters per invocation and tracks progress. User checkpoint required before changes apply.
+- **`docs/HOLISTIC_PASSES.md`:** Template/output file for holistic pass planning.
+- **`.claude/hooks/version-check.sh`:** Notifies when a project has fallen behind the kit version.
+- **Gemini skills:** `holistic-audit`, `holistic-pass`, `voice-lint` installed under `.gemini/skills/`.
+
+### Fixed
+- **Gemini skills deployment:** `.gemini/skills/` was never being copied to new projects via `init_book.sh`. Now deployed correctly.
+- **`continuity-audit` skill:** trimmed the bundled `CONTINUITY_AUDIT_PROMPT.md` reference; skill now self-contained.
+
+### Changed
+- **CLAUDE.md:** Added manuscript-level workflow documentation (`/holistic-audit` → `/holistic-pass`) alongside the existing chapter-level workflow.
+- **`init_book.sh` / `update_book.sh`:** Deploy new skills, hooks, and Gemini skills directory.
+- **`.sync/manifest.json`:** Bumped to 1.5.0 with new file classifications.
+
 ## [1.4.1] - 2026-03-17
 ### Added — Gemini Continuity Audit Skill
 - **Implemented Continuity Audit Skill:** Created `.gemini/skills/continuity-audit/SKILL.md` based on the installation spec. This provides systematic batch analysis across multiple chapters for consistency in characters, objects, locations, and timeline.
