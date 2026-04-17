@@ -1,5 +1,35 @@
 # Starter Kit Changelog
 
+## [1.6.0] - 2026-04-16
+### Added — Build Pipeline & Publication Scaffold
+Addresses the consistent gap both `TatsuroYamashita` and `sleaze/BurnAGodI` had to fill in themselves: a working compile pipeline and KDP submission scaffolding. New projects now get `markdown → EPUB/PDF/DOCX` out of the box, with front/back matter templates and a KDP specs guide.
+
+- **Pandoc-based build pipeline:**
+  - `scripts/compile.sh` (bash) and `scripts/compile.ps1` (PowerShell) — cross-platform build drivers with targets `md`, `epub`, `print`, `docx`, `all`.
+  - `Makefile` with `make epub`, `make print`, `make docx`, `make all`, `make clean`, `make release`.
+  - `build/print.latex` — LuaLaTeX typography preamble (6x9 trade paperback, microtype, proper paragraph typography). CJK block included but commented out.
+  - `build/epub.css` — genre-neutral EPUB styling.
+  - `build/metadata.yaml` — pandoc metadata template.
+  - `build/canonical_chapters.txt.example` — optional chapter-order override pattern.
+- **Publication metadata:**
+  - `book.yaml` — single source of truth for title, author, rights, slug, KDP abstract.
+  - `progress.json` — chapter-completion tracker template (populated by `/chapter-done`).
+- **Front/back matter templates** (split into discrete files so authors delete what they don't need):
+  - `manuscript/front_matter/`: `01_title.md`, `02_copyright.md`, `03_dedication.md`, `04_epigraph.md`, `05_content_notes.md`.
+  - `manuscript/back_matter/`: `01_author_note.md`, `02_also_by.md`, `03_about_author.md`, `04_coming_soon.md`, `05_review_request.md`.
+- **KDP submission scaffold:**
+  - `kdp/README.md` — trim sizes, cover specs, bleed, spine width, metadata requirements, pre-submission checklist.
+  - `kdp/` and `release/` directories seeded with `.gitkeep`.
+
+### Changed
+- **`.gitignore`:** added LaTeX build artifacts (`*.aux`, `*.log`, `*.toc`, `*.out`, `texput.log`, `*.synctex.gz`) and scratch-file patterns (`temp_*.txt`, `*_scratch.md`, `gemini_output.txt`) to match the debris that accumulated in real projects.
+- **`README.md`:** new "Build Pipeline" section documenting targets, chapter naming convention, and prerequisites. Directory Structure section expanded.
+- **`init_book.sh`:** bumped to kit v1.6.0, creates `build/`, `scripts/`, `kdp/`, `release/`, copies all new templates.
+- **`.sync/manifest.json`:** bumped to 1.6.0, build tooling classified as `sync_always` (auto-upgrades with kit), book metadata + front/back matter classified as `template_copy` (project customizes).
+
+### Migration notes for existing projects
+Run `bash update_book.sh` to pull the new build infrastructure. Existing custom build setups (e.g. `TatsuroYamashita/scripts/build-pdf.sh`, `BurnAGodI/build/build.ps1`) will **not** be overwritten — the new kit files use different paths (`scripts/compile.sh`, `build/*`) and appear alongside. Delete your custom scripts if you want to migrate to the kit-standard pipeline.
+
 ## [1.5.2] - 2026-04-14
 ### Changed — `update_book.sh` Restructure
 - **Five named phases** (Structure, Infrastructure, Skills, Your Files, New Kit Files) with a clear header explaining the three file categories: auto-synced, prompted, and never-touched.

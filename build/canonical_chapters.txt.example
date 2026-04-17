@@ -1,0 +1,17 @@
+# canonical_chapters.txt — OPTIONAL chapter-order override
+#
+# By default, scripts/compile.sh concatenates chapters by filename sort.
+# That works if your files follow the 01_xxx.md, 02_xxx.md, 10_xxx.md convention.
+#
+# Rename this file to canonical_chapters.txt (remove .example) ONLY if:
+#   - You want to omit certain chapters from a build (e.g. unfinished drafts)
+#   - Your filenames don't sort cleanly
+#   - You want to build an Act 1 or sample compile with a subset
+#
+# One chapter filename per line, relative to manuscript/chapters/.
+# Lines starting with # are ignored. Blank lines are ignored.
+#
+# Example:
+# 01_the_oracle.md
+# 02_the_inquisitor.md
+# 03_first_meeting.md

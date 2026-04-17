@@ -1,0 +1,86 @@
+% ==============================================================================
+% PRINT TYPOGRAPHY PREAMBLE
+% For use with LuaLaTeX via pandoc (--include-in-header)
+% NOTE: microtype, geometry, xcolor loaded by pandoc template via -V flags
+% ==============================================================================
+
+% ------------------------------------------------------------------------------
+% CJK FALLBACK (uncomment if your book contains Japanese/Chinese/Korean text)
+% Requires IPAexMincho and IPAexGothic fonts installed on the system.
+% ------------------------------------------------------------------------------
+% \usepackage{luatexja}
+% \usepackage[match]{luatexja-fontspec}
+% \setmainjfont[BoldFont=IPAexGothic]{IPAexMincho}
+%
+% % Fix: luatexja treats curly quotes/dashes as Japanese punctuation and
+% % inserts spacing around them. Reclassify as Latin (ALchar).
+% \ltjdefcharrange{100}{"2018, "2019, "201C, "201D, "2013, "2014, "2026}
+% \ltjsetparameter{jacharrange={-100}}
+
+% --- PARAGRAPH TYPOGRAPHY ---
+\usepackage{indentfirst}
+\setlength{\parindent}{1.5em}
+\setlength{\parskip}{0pt}
+
+% Prevent rivers in justified text
+\tolerance=1500
+\emergencystretch=1.5em
+\hyphenpenalty=300
+\exhyphenpenalty=100
+\widowpenalty=10000
+\clubpenalty=10000
+\brokenpenalty=4991
+
+% --- HEADERS AND FOOTERS ---
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+\fancypagestyle{plain}{
+  \fancyhf{}
+  \fancyfoot[C]{\thepage}
+  \renewcommand{\headrulewidth}{0pt}
+}
+
+% --- CHAPTER AND SECTION STYLING ---
+\usepackage{titlesec}
+\titleformat{\chapter}[display]
+  {\normalfont\Large\bfseries\centering}
+  {}
+  {0pt}
+  {\LARGE}
+\titlespacing*{\chapter}{0pt}{50pt}{30pt}
+
+\titleformat{\section}
+  {\normalfont\large\bfseries}
+  {}
+  {0pt}
+  {}
+\titlespacing*{\section}{0pt}{24pt}{8pt}
+
+\titleformat{\subsection}
+  {\normalfont\normalsize\bfseries}
+  {}
+  {0pt}
+  {}
+\titlespacing*{\subsection}{0pt}{18pt}{6pt}
+
+% --- BLOCKQUOTE STYLING ---
+\usepackage{quoting}
+\quotingsetup{leftmargin=2em, rightmargin=2em, vskip=6pt}
+\renewenvironment{quote}{\begin{quoting}\itshape}{\end{quoting}}
+
+% --- LINK COLORS ---
+\definecolor{linkgray}{gray}{0.25}
+
+% --- TABLE OF CONTENTS ---
+\usepackage{tocloft}
+\renewcommand{\cftchapfont}{\normalfont}
+\renewcommand{\cftchappagefont}{\normalfont}
+\renewcommand{\cftchapleader}{\cftdotfill{\cftdotsep}}
+\setlength{\cftbeforechapskip}{4pt}
+
+% --- PROPER QUOTES ---
+\usepackage{csquotes}

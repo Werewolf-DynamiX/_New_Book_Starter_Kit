@@ -1,0 +1,8 @@
+---
+title: "{{TITLE}}"
+subtitle: "{{SUBTITLE}}"
+author: "{{AUTHOR}}"
+date: "{{YEAR}}"
+rights: "© {{YEAR}} {{AUTHOR}}. All rights reserved."
+lang: "en-US"
+---

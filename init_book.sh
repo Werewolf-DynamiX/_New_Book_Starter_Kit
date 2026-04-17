@@ -24,7 +24,7 @@ if [ -f ".sync/manifest.json" ]; then
 fi
 
 echo "============================================"
-echo "  Book Project Initializer (Kit v1.5.1)"
+echo "  Book Project Initializer (Kit v1.6.0)"
 echo "============================================"
 echo ""
 echo "Kit location: $KIT_DIR"
@@ -52,6 +52,7 @@ echo "Creating directory structure..."
 mkdir -p manuscript/chapters manuscript/front_matter manuscript/back_matter manuscript/drafts
 mkdir -p context reference output research/sources research/reviews
 mkdir -p visuals/diagrams visuals/figures visuals/generated
+mkdir -p build scripts kdp release
 mkdir -p .sync .claude/hooks .claude/rules .claude/scripts
 mkdir -p .claude/skills/{de-ai-audit,scene-brief,revision-guide,draft,chapter-done,holistic-audit,holistic-pass}
 mkdir -p .gemini/skills/{adversarial-review/references,continuity-audit,de-ai-audit/references,kdp-format/references,voice-lint,holistic-audit,holistic-pass}
@@ -79,6 +80,21 @@ TEMPLATE_COPIES=(
   "TODO.md"
   "README.md"
   ".gitignore"
+  "book.yaml"
+  "progress.json"
+  "build/metadata.yaml"
+  "build/canonical_chapters.txt.example"
+  "manuscript/front_matter/01_title.md"
+  "manuscript/front_matter/02_copyright.md"
+  "manuscript/front_matter/03_dedication.md"
+  "manuscript/front_matter/04_epigraph.md"
+  "manuscript/front_matter/05_content_notes.md"
+  "manuscript/back_matter/01_author_note.md"
+  "manuscript/back_matter/02_also_by.md"
+  "manuscript/back_matter/03_about_author.md"
+  "manuscript/back_matter/04_coming_soon.md"
+  "manuscript/back_matter/05_review_request.md"
+  "kdp/README.md"
   ".claude/settings.local.json"
   ".gemini/settings.json"
   "context/FACTS_SHEET.md"
@@ -121,6 +137,11 @@ SYNC_ALWAYS=(
   "MASTER_BOOK_REVIEW_PROMPT.md"
   "CONTINUITY_AUDIT_PROMPT.md"
   "GEMINI_REVIEW.md"
+  "Makefile"
+  "scripts/compile.sh"
+  "scripts/compile.ps1"
+  "build/print.latex"
+  "build/epub.css"
   "reference/collaboration_workflow.md"
   "reference/CENTRAL_FRAMEWORK_SETUP.md"
   "reference/MODEL_SELECTION_GUIDE.md"
@@ -143,6 +164,7 @@ done
 # --- Make hook and script files executable ---
 chmod +x "$PROJECT_DIR/.claude/hooks/"*.sh 2>/dev/null || true
 chmod +x "$PROJECT_DIR/.claude/scripts/"*.sh 2>/dev/null || true
+chmod +x "$PROJECT_DIR/scripts/"*.sh 2>/dev/null || true
 
 # --- Copy the update script ---
 if [ -f "$KIT_DIR/update_book.sh" ]; then
@@ -164,7 +186,7 @@ fi
 NOW=$(date +%Y-%m-%d)
 cat > "$PROJECT_DIR/.sync/manifest.json" << MANIFEST
 {
-  "kit_version": "1.5.1",
+  "kit_version": "1.6.0",
   "kit_path": "$KIT_DIR",
   "project_id": "$PROJ_ID",
   "created": "$NOW",
@@ -181,6 +203,21 @@ cat > "$PROJECT_DIR/.sync/manifest.json" << MANIFEST
       "TODO.md",
       "README.md",
       ".gitignore",
+      "book.yaml",
+      "progress.json",
+      "build/metadata.yaml",
+      "build/canonical_chapters.txt.example",
+      "manuscript/front_matter/01_title.md",
+      "manuscript/front_matter/02_copyright.md",
+      "manuscript/front_matter/03_dedication.md",
+      "manuscript/front_matter/04_epigraph.md",
+      "manuscript/front_matter/05_content_notes.md",
+      "manuscript/back_matter/01_author_note.md",
+      "manuscript/back_matter/02_also_by.md",
+      "manuscript/back_matter/03_about_author.md",
+      "manuscript/back_matter/04_coming_soon.md",
+      "manuscript/back_matter/05_review_request.md",
+      "kdp/README.md",
       ".claude/settings.local.json",
       ".gemini/settings.json",
       "context/FACTS_SHEET.md",
@@ -209,6 +246,11 @@ cat > "$PROJECT_DIR/.sync/manifest.json" << MANIFEST
       "MASTER_BOOK_REVIEW_PROMPT.md",
       "CONTINUITY_AUDIT_PROMPT.md",
       "GEMINI_REVIEW.md",
+      "Makefile",
+      "scripts/compile.sh",
+      "scripts/compile.ps1",
+      "build/print.latex",
+      "build/epub.css",
       "reference/collaboration_workflow.md",
       "reference/CENTRAL_FRAMEWORK_SETUP.md",
       "reference/MODEL_SELECTION_GUIDE.md",
@@ -230,12 +272,16 @@ cat > "$PROJECT_DIR/.sync/manifest.json" << MANIFEST
       "README.md",
       "CHANGELOG.md",
       ".gitignore",
+      "book.yaml",
+      "progress.json",
       ".claude/settings.local.json",
       ".gemini/settings.json",
       "context/FACTS_SHEET.md",
       "context/WRITER_VOICE.md",
       "manuscript/",
       "output/",
+      "release/",
+      "kdp/",
       "research/",
       "visuals/"
     ]
@@ -248,7 +294,7 @@ cat > "$PROJECT_DIR/CHANGELOG.md" << CHANGELOG
 # $PROJ_ID Changelog
 
 ## [$NOW] - Project Created
-- Initialized from Starter Kit v1.5.1
+- Initialized from Starter Kit v1.6.0
 - Modules linked to: $KIT_DIR/modules
 CHANGELOG
 
@@ -274,11 +320,26 @@ echo "    .claude/scripts/   — NotebookLM prep + Gemini audit spec"
 echo "    .gemini/skills/    — 7 Gemini skills (adversarial-review, holistic-audit, etc.)"
 echo "    docs/              — Holistic passes template"
 echo ""
+echo "  Build pipeline:"
+echo "    scripts/compile.sh | compile.ps1 — Pandoc build drivers"
+echo "    build/             — Typography (print.latex, epub.css, metadata.yaml)"
+echo "    Makefile           — make epub | make print | make docx | make all"
+echo "    release/           — Compiled output (EPUB, PDF, DOCX) lands here"
+echo "    kdp/               — KDP submission assets (covers, mockups). See kdp/README.md"
+echo ""
+echo "  Manuscript scaffold:"
+echo "    manuscript/front_matter/ — 5 templates (title, copyright, dedication, epigraph, content notes)"
+echo "    manuscript/back_matter/  — 5 templates (author note, also-by, about, coming soon, review)"
+echo "    book.yaml          — title, author, rights, slug, KDP abstract (fill in placeholders)"
+echo ""
 echo "  Next steps:"
 echo "    1. Fill out PROJECT_IDENTITY.md"
 echo "    2. Customize CLAUDE.md (tone, POV, tense, active modules)"
 echo "    3. Customize GEMINI.md (thesis, audience, strategic pillars)"
-echo "    4. git init && git add -A && git commit -m 'Initial project setup'"
+echo "    4. Fill out book.yaml (title, author, slug, KDP abstract)"
+echo "    5. Customize or delete front/back matter templates in manuscript/"
+echo "    6. git init && git add -A && git commit -m 'Initial project setup'"
 echo ""
+echo "  To build: make epub | make print | make all   (requires pandoc)"
 echo "  To update from kit later: bash update_book.sh"
 echo "============================================"

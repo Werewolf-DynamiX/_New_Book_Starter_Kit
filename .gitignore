@@ -27,3 +27,20 @@ __pycache__/
 node_modules/
 venv/
 .env
+
+# LaTeX build artifacts (from pandoc PDF builds)
+*.aux
+*.log
+*.toc
+*.out
+*.synctex.gz
+texput.log
+
+# Scratch / debug files
+temp_*.txt
+temp_*.md
+*_scratch.md
+gemini_output.txt
+
+# Optional: uncomment to keep drafts out of version control
+# manuscript/drafts/

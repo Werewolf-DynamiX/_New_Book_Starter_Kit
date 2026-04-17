@@ -1,0 +1,7 @@
+## Epigraph
+
+> "{{QUOTATION TEXT}}"
+>
+> — {{ATTRIBUTION}}
+
+---

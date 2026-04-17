@@ -1,0 +1,44 @@
+/* Body Text: Sets the baseline for the whole book */
+body {
+    font-family: serif; /* Lets the e-reader use its default serif font */
+    line-height: 1.5;
+    margin: 0;
+    text-align: justify; /* Justified text looks more professional in ebooks */
+}
+
+/* Headings: The most important part for navigation */
+h1 {
+    font-family: sans-serif;
+    text-align: center;
+    font-weight: bold;
+    margin-top: 2em;
+    margin-bottom: 1em;
+    page-break-before: always; /* CRITICAL: Forces a new page for every chapter */
+}
+
+h2 {
+    font-family: sans-serif;
+    margin-top: 1.5em;
+    margin-bottom: 0.5em;
+    page-break-after: avoid; /* Keeps the sub-header attached to the text below it */
+}
+
+/* Paragraphs: Standard fiction formatting */
+p {
+    margin-top: 0;
+    margin-bottom: 0;
+    text-indent: 1.5em; /* Indents the first line of every paragraph */
+}
+
+/* Fix for the first paragraph after a chapter title (no indent) */
+h1 + p, h2 + p {
+    text-indent: 0;
+}
+
+/* Images: Prevents images from breaking the layout */
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 1em auto;
+}

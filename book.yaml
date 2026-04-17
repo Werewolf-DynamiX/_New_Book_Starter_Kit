@@ -1,0 +1,14 @@
+---
+title: "{{BOOK TITLE}}"
+subtitle: "{{SUBTITLE (optional — delete this line if none)}}"
+author: "{{AUTHOR NAME}}"
+rights: "© {{YEAR}} {{AUTHOR NAME}}. All rights reserved."
+lang: "en-US"
+papersize: "6in,9in"
+slug: "{{slug_for_output_files}}"
+# The abstract is used as the KDP blurb when converting to EPUB later.
+abstract: |
+  {{ONE- OR TWO-PARAGRAPH BOOK DESCRIPTION. This becomes the Amazon product
+  description / back-cover copy. Write it to sell. Avoid AI patterns —
+  this is the first thing a reader sees.}}
+---

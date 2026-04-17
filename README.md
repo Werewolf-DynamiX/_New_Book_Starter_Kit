@@ -61,11 +61,55 @@ This kit uses two AI agents with distinct roles:
 ### NotebookLM Integration
 Run `bash .claude/scripts/notebooklm-prep.sh` to bundle your manuscript for Google NotebookLM with pre-written audit prompts for continuity, voice consistency, timeline, character arcs, and plot threads.
 
+## Build Pipeline
+
+The kit ships a Pandoc-based build that takes your chapters to KDP-ready artifacts in one command.
+
+### Prerequisites
+- **Pandoc** ([install](https://pandoc.org/installing.html)) — required for all targets
+- **LuaLaTeX** (part of [TeX Live](https://tug.org/texlive/) or [MiKTeX](https://miktex.org/)) — only needed for `print` (PDF)
+
+### Chapter naming convention
+Chapters must be zero-padded for sort order: `01_xxx.md`, `02_xxx.md`, ..., `10_xxx.md`. Without zero-padding, `chapter_10.md` sorts before `chapter_2.md` and your book compiles out of order.
+
+### Targets
+From the project root:
+
+```bash
+make all      # MD + EPUB + PDF + DOCX
+make epub     # EPUB only
+make print    # PDF only (6x9 trade paperback)
+make docx     # DOCX only
+make md       # Merged manuscript markdown only
+make clean    # Remove artifacts in release/
+```
+
+On Windows without `make`, invoke directly: `bash scripts/compile.sh epub` or `powershell -File scripts/compile.ps1 epub`.
+
+### What gets built
+The compile step concatenates `manuscript/front_matter/*.md` → `manuscript/chapters/*.md` → `manuscript/back_matter/*.md` (all in sorted order) into `release/<slug>.md`, where `<slug>` comes from `book.yaml`. Output formats are built from that merged file.
+
+To override chapter order (e.g. to build only Act 1, or to skip unfinished drafts), copy `build/canonical_chapters.txt.example` to `build/canonical_chapters.txt` and list the chapter filenames explicitly.
+
+### Build configuration
+- `book.yaml` — title, author, rights, slug, KDP abstract. Fill in placeholders before building.
+- `build/metadata.yaml` — pandoc metadata used at build time (title/author/rights).
+- `build/print.latex` — LuaLaTeX preamble for PDF typography. CJK block is present but commented out; uncomment if your book contains Japanese/Chinese/Korean text.
+- `build/epub.css` — EPUB styling.
+
 ## Directory Structure
 
 - `manuscript/`: Your actual book content.
+  - `chapters/`: The numbered chapters (`01_xxx.md`, `02_xxx.md`, ...).
+  - `front_matter/`: Title, copyright, dedication, epigraph, content notes.
+  - `back_matter/`: Author's note, about, also-by, coming-soon, review request.
+  - `drafts/`: Scratch / earlier versions (optional).
 - `research/`: Structured research notes (facts, not prose).
 - `context/`: Project bible details (characters, timeline, voice).
-- `modules/`: The brain of the writing system.
-- `output/`: Compiled files (PDF, EPUB, DOCX).
+- `modules/`: The brain of the writing system (symlinked to the kit).
+- `build/`: Typography, CSS, metadata for the compile pipeline.
+- `scripts/`: Compile scripts (`compile.sh`, `compile.ps1`).
+- `release/`: Output artifacts (`.md`, `.epub`, `.pdf`, `.docx`).
+- `kdp/`: Covers, mockups, submitted files. See `kdp/README.md` for specs.
+- `output/`: Legacy output location (deprecated — use `release/` instead).
 - `.claude/`: Claude Code automation (hooks, rules, skills, scripts).
