@@ -57,6 +57,8 @@
       ".gemini/skills/voice-lint/SKILL.md",
       ".gemini/skills/holistic-audit/SKILL.md",
       ".gemini/skills/holistic-pass/SKILL.md",
+      ".gemini/skills/logic-check/SKILL.md",
+      ".gemini/skills/research-brief/SKILL.md",
       "docs/HOLISTIC_PASSES.md",
       "docs/characters.md",
       ".claude/scripts/notebooklm-prep.sh"

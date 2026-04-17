@@ -55,7 +55,7 @@ mkdir -p visuals/diagrams visuals/figures visuals/generated
 mkdir -p build scripts kdp release
 mkdir -p .sync .claude/hooks .claude/rules .claude/scripts
 mkdir -p .claude/skills/{de-ai-audit,scene-brief,revision-guide,draft,chapter-done,holistic-audit,holistic-pass}
-mkdir -p .gemini/skills/{adversarial-review/references,continuity-audit,de-ai-audit/references,kdp-format/references,voice-lint,holistic-audit,holistic-pass}
+mkdir -p .gemini/skills/{adversarial-review/references,continuity-audit,de-ai-audit/references,kdp-format/references,voice-lint,holistic-audit,holistic-pass,logic-check/references,research-brief/references}
 mkdir -p docs
 
 # --- Symlink shared resources ---
@@ -114,15 +114,18 @@ TEMPLATE_COPIES=(
   ".gemini/skills/voice-lint/SKILL.md"
   ".gemini/skills/holistic-audit/SKILL.md"
   ".gemini/skills/holistic-pass/SKILL.md"
+  ".gemini/skills/logic-check/SKILL.md"
+  ".gemini/skills/research-brief/SKILL.md"
   "docs/HOLISTIC_PASSES.md"
   "docs/characters.md"
   ".claude/scripts/notebooklm-prep.sh"
   ".gemini/skills/adversarial-review/references/_ADVERSARIAL_REVIEW_ENGINE.md"
-  ".gemini/skills/de-ai-audit/references/CLAUDE.md"
   ".gemini/skills/de-ai-audit/references/_HUMAN_PATTERNS.md"
   ".gemini/skills/de-ai-audit/references/MASTER_BOOK_REVIEW_PROMPT.md"
   ".gemini/skills/de-ai-audit/references/_STYLE_AUTHORITY.md"
   ".gemini/skills/kdp-format/references/KDP_BOOK_FORMATTING_SKILL.md"
+  ".gemini/skills/logic-check/references/_LOGIC_CHECK.md"
+  ".gemini/skills/research-brief/references/_PLANNING_PROTOCOL.md"
 )
 for f in "${TEMPLATE_COPIES[@]}"; do
   if [ -f "$KIT_DIR/$f" ]; then
@@ -237,6 +240,8 @@ cat > "$PROJECT_DIR/.sync/manifest.json" << MANIFEST
       ".gemini/skills/voice-lint/SKILL.md",
       ".gemini/skills/holistic-audit/SKILL.md",
       ".gemini/skills/holistic-pass/SKILL.md",
+      ".gemini/skills/logic-check/SKILL.md",
+      ".gemini/skills/research-brief/SKILL.md",
       "docs/HOLISTIC_PASSES.md",
       "docs/characters.md",
       ".claude/scripts/notebooklm-prep.sh"
@@ -317,7 +322,7 @@ echo "    .claude/hooks/     — 3 automatic hooks (de-ai scan, checklist, conte
 echo "    .claude/rules/     — Auto-loaded prose rules for manuscript files"
 echo "    .claude/skills/    — 7 slash commands (/scene-brief, /draft, /holistic-audit, etc.)"
 echo "    .claude/scripts/   — NotebookLM prep + Gemini audit spec"
-echo "    .gemini/skills/    — 7 Gemini skills (adversarial-review, holistic-audit, etc.)"
+echo "    .gemini/skills/    — 9 Gemini skills (adversarial-review, holistic-audit, logic-check, research-brief, etc.)"
 echo "    docs/              — Holistic passes template"
 echo ""
 echo "  Build pipeline:"
