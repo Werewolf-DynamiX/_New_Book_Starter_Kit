@@ -15,7 +15,6 @@
       "GEMINI_REVIEW.md",
       "PROJECT_IDENTITY.md",
       "PROJECT_COMPENDIUM.md",
-      "MASTER_BOOK_REVIEW_PROMPT.md",
       "CONTINUITY_AUDIT_PROMPT.md",
       "TODO.md",
       "README.md",
@@ -61,7 +60,6 @@
     ],
     "sync_always": [
       "PROJECT_COMPENDIUM.md",
-      "MASTER_BOOK_REVIEW_PROMPT.md",
       "CONTINUITY_AUDIT_PROMPT.md",
       "GEMINI_REVIEW.md",
       "Makefile",

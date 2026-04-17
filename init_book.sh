@@ -130,7 +130,6 @@ done
 echo "Copying infrastructure files..."
 SYNC_ALWAYS=(
   "PROJECT_COMPENDIUM.md"
-  "MASTER_BOOK_REVIEW_PROMPT.md"
   "CONTINUITY_AUDIT_PROMPT.md"
   "GEMINI_REVIEW.md"
   "Makefile"
