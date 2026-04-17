@@ -107,6 +107,8 @@ REQUIRED_DIRS=(
   ".gemini/skills/voice-lint"
   ".gemini/skills/holistic-audit"
   ".gemini/skills/holistic-pass"
+  ".gemini/skills/research-brief"
+  ".gemini/skills/logic-check"
 )
 
 DIRS_CREATED=0
@@ -221,13 +223,16 @@ SKILL_FILES=(
   ".gemini/skills/voice-lint/SKILL.md"
   ".gemini/skills/holistic-audit/SKILL.md"
   ".gemini/skills/holistic-pass/SKILL.md"
+  ".gemini/skills/research-brief/SKILL.md"
+  ".gemini/skills/logic-check/SKILL.md"
   # Gemini skill reference files
   ".gemini/skills/adversarial-review/references/_ADVERSARIAL_REVIEW_ENGINE.md"
-  ".gemini/skills/de-ai-audit/references/CLAUDE.md"
   ".gemini/skills/de-ai-audit/references/_HUMAN_PATTERNS.md"
   ".gemini/skills/de-ai-audit/references/MASTER_BOOK_REVIEW_PROMPT.md"
   ".gemini/skills/de-ai-audit/references/_STYLE_AUTHORITY.md"
   ".gemini/skills/kdp-format/references/KDP_BOOK_FORMATTING_SKILL.md"
+  ".gemini/skills/research-brief/references/_PLANNING_PROTOCOL.md"
+  ".gemini/skills/logic-check/references/_LOGIC_CHECK.md"
   # Doc templates
   "docs/HOLISTIC_PASSES.md"
   "docs/characters.md"

@@ -14,7 +14,7 @@ This skill scans text for AI writing patterns, vocabulary, and structural tells 
 ## Audit Checklist
 1. **Vocabulary Scan:** Check for clusters of AI vocabulary patterns. Reference `references/_STYLE_AUTHORITY.md`.
    - Examples: *delve, tapestry, testament, realm, nuanced, multifaceted*.
-2. **Structural Tells:** Identify common AI formatting patterns. Reference `references/MASTER_BOOK_REVIEW_PROMPT.md` and `references/CLAUDE.md`.
+2. **Structural Tells:** Identify common AI formatting patterns. Reference `references/MASTER_BOOK_REVIEW_PROMPT.md` and `references/_STYLE_AUTHORITY.md`.
    - The "AI Sandwich" (Topic → 3 points → Summary).
    - Sermonizing dialogue.
    - Summary/moralizing endings (e.g., "In conclusion," "Ultimately").
