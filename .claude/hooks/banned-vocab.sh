@@ -4,19 +4,19 @@
 # Sourced by deai-quick-scan.sh and save-critical-context.sh
 # =============================================================================
 
-# AI-associated words that cluster
+# Structural AI tells — phrases that signal AI authorship regardless of vocabulary
 BANNED_WORDS=(
-  "delve" "tapestry" "testament" "myriad" "plethora"
-  "multifaceted" "crucial" "nuanced" "realm" "paradigm"
-  "notably" "furthermore" "moreover" "additionally" "seamlessly"
-  "leverage" "harness" "foster" "cultivate" "invaluable"
-  "indispensable" "paramount" "intricate" "game-changer"
-  "cutting-edge" "revolutionary" "rich tapestry" "vibrant landscape"
-  "dynamic" "optimize" "utilize" "facilitate" "deep dive"
+  "testament to"
+  "reminder that"
+  "dive in"
+  "let's explore"
+  "in today's digital age"
+  "let that sink in"
+  "only time will tell"
 )
 
 # Comma-separated for display
-BANNED_WORDS_CSV="delve, tapestry, testament, myriad, plethora, multifaceted, crucial, nuanced, realm, paradigm, notably, furthermore, moreover, additionally, seamlessly, leverage, harness, foster, cultivate, invaluable, indispensable, paramount, intricate, game-changer, cutting-edge, revolutionary, rich tapestry, vibrant landscape, dynamic, optimize, utilize, facilitate, deep dive"
+BANNED_WORDS_CSV="testament to, reminder that, dive in, let's explore, in today's digital age, let that sink in, only time will tell"
 
 # Zero-tolerance phrases
 ZERO_TOLERANCE_PHRASES=(

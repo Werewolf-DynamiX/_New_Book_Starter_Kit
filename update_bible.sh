@@ -1,53 +1,36 @@
 #!/bin/bash
 set -e
 
-# ============================================================
-# update_bible.sh — Automated Continuity Extraction
-# ============================================================
-# This script uses Gemini to extract characters, locations, 
-# and timeline events from your manuscript and updates 
-# your context/FACTS_SHEET.md.
-# ============================================================
-
 echo "============================================"
-echo "  Continuity Extraction (The Entity Extractor)"
+echo "  Targeted Continuity Audit"
 echo "============================================"
 
-# Check for gemini CLI
 if ! command -v gemini &> /dev/null; then
-    echo "ERROR: 'gemini' CLI not found. Please install it first."
+    echo "ERROR: 'gemini' CLI not found."
     exit 1
 fi
 
-# Check for chapters
 CHAPTERS=(manuscript/chapters/*.md)
 if [ ! -e "${CHAPTERS[0]}" ]; then
-    echo "ERROR: No chapters found in manuscript/chapters/"
+    echo "ERROR: No chapters found."
     exit 1
 fi
 
-echo "Reading manuscript/chapters/..."
+gemini "Perform six targeted continuity checks on the manuscript files in manuscript/chapters/. Reference context/FACTS_SHEET.md as canonical truth.
 
-# Read Strategy 1 from CONTINUITY_AUDIT_PROMPT.md
-STRATEGY_FILE="CONTINUITY_AUDIT_PROMPT.md"
-if [ ! -f "$STRATEGY_FILE" ]; then
-    echo "ERROR: $STRATEGY_FILE not found."
-    exit 1
-fi
+CHECK 1 — NAME INTRODUCTIONS: For every named character, identify the first scene they appear in. Flag any case where a POV character addresses or refers to someone by name before that name has been stated in their presence.
 
-# Extract the Strategy 1 prompt (lines after Strategy 1 until next strategy)
-# This is a bit brittle but better than hardcoding.
-# For simplicity in this script, we'll just refer to the strategy file in the prompt.
+CHECK 2 — KNOWLEDGE GRAPH: Track who knows what. Flag any dialogue or internal thought where a character references information they shouldn't have at that point in the story.
 
-echo "Running forensic extraction with Gemini..."
+CHECK 3 — NAME SIMILARITY: Identify any pair of named characters whose names differ by fewer than three letters (e.g., Moren/Meren). Flag as potential reader confusion.
 
-# We pass all chapter files to Gemini.
-# Note: On some systems with huge manuscripts, this might hit shell argument limits.
-# But for typical book sizes, it should be fine.
+CHECK 4 — CONTIGUOUS CONTRADICTIONS: For each 20-page span, flag statements that directly contradict other statements within the same span (e.g., 'she can't sleep' followed shortly by 'sleep comes eventually').
 
-gemini "Read Strategy 1 in $STRATEGY_FILE and perform the forensic extraction on the following chapter files. Compare the findings with context/FACTS_SHEET.md and provide an updated, unified facts table. Flag any contradictions. $(ls manuscript/chapters/*.md)" > context/FACTS_SHEET_NEW.md
+CHECK 5 — BACKSTORY CONSISTENCY: Track every character's stated backstory. Flag any dialogue or internal thought that contradicts their established history.
 
-echo "Extraction complete."
-echo "New facts written to context/FACTS_SHEET_NEW.md"
-echo "Please review context/FACTS_SHEET_NEW.md and merge into context/FACTS_SHEET.md if satisfied."
-echo "============================================"
+CHECK 6 — LOCATION CONTINUITY: Track physical locations scene by scene. Flag any scene where a character is in a location that contradicts where the previous scene ended.
+
+Output findings in a table: Check | Chapter | Quote | What it contradicts | Severity." $(ls manuscript/chapters/*.md) > context/CONTINUITY_REPORT.md
+
+echo "Report written to context/CONTINUITY_REPORT.md"
+echo "Review manually and update FACTS_SHEET.md / manuscript as needed."

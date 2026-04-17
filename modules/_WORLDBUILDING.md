@@ -304,3 +304,135 @@ For contemporary settings you don't personally know:
 | **Delivery** | Through action, not exposition |
 | **Consistency** | Track details, check for contradictions |
 | **Contemporary** | Specific details over generic research |
+
+---
+
+# Part II: Atmosphere & World-as-Character
+
+The setting is not a backdrop; it is a character that acts upon the protagonists. A strong atmosphere creates a mood that lingers after the reader closes the book.
+
+## 11. THE ATMOSPHERE ENGINE
+
+Every project should have a 3-word "Aesthetic Core."
+
+- **Noir:** Dirty, cynical, high-contrast.
+- **Cozy:** Warm, safe, tactile.
+- **Eldritch:** Vast, indifferent, decaying.
+- **High Fantasy:** Vibrant, noble, ancient.
+
+### The "City as Character" Protocol
+(Applicable to any primary setting.)
+
+1. **The Mood:** How does the setting "feel" today? (The city is hungry. The house is grieving.)
+2. **The Smell:** What is the underlying scent of this place?
+3. **The Sound:** What is the constant background noise?
+4. **The Resistance:** How does the setting hinder the characters?
+
+### Aesthetic Palettes
+
+**Noir (Chiaroscuro & Grit)**
+- Visuals: Shadows that swallow feet, flickering light, rain-slicked stone, silhouettes.
+- Sensory: Ozone, copper, cold iron, tobacco, wet wool.
+- Themes: Corruption baked into the architecture; the system is the antagonist.
+
+**Cozy (The Hearth)**
+- Visuals: Soft edges, amber light, clutter that feels like history, steam rising from mugs.
+- Sensory: Baking bread, old books, cedar, rain against a windowpane (safe inside).
+- Themes: Belonging, slow time, the value of small things.
+
+**Gothic (Decay & Grandeur)**
+- Visuals: Overgrown gardens, crumbling stone, portraits with eyes that follow, moonlight.
+- Sensory: Dust, lilies, cold marble, damp earth.
+- Themes: The past is not dead; it haunts the present.
+
+### Weather as Emotional Mirror (or Subversion)
+
+**Mirroring** amplifies mood: grief + rain, fury + storm, peace + stillness.
+**Subverting** creates irony: a murder on a bright sunny day, a declaration of love in a freezing blizzard.
+
+### Prose Techniques for Atmosphere
+
+**Personification of setting:**
+- "The gas lamps wheezed in the fog."
+- "The forest held its breath."
+- "The mountains glared down at the travelers."
+
+**The "Rule of Three" Details:** When introducing a new location, give three atmospheric details:
+1. One **Visual** (the crumbling gargoyle)
+2. One **Sensory** (the smell of stagnant water)
+3. One **Internal** (the feeling of being watched)
+
+### Atmosphere Checklist
+- [ ] Does the setting have a mood/personality in this scene?
+- [ ] Are there at least two sensory details that reinforce the specific aesthetic?
+- [ ] Is the setting active (hiding things, hindering characters) rather than passive?
+- [ ] Does the prose use personification?
+- [ ] Is weather/lighting used to enhance the emotional beat?
+
+---
+
+## 12. SENSORY POV & IMMERSION
+
+Fiction is experienced through the senses. To create a deep, immersive POV, ground every scene in the specific sensory filter of the protagonist.
+
+### Sensory Dominance & Restriction
+
+**The Single Sense Exercise:** To deepen a scene, try writing it using only one sense (sound or smell) before layering in the others.
+
+**Writing Sensory Impairment (Non-Visual POV)**
+
+When writing a character who is blind or in complete darkness:
+
+*What to perceive:*
+- **Sound:** Heartbeats, breathing patterns, footsteps (gait, weight), fabric rustling, echo/acoustics, voice tone/micro-tremors.
+- **Scent:** Individual markers (soap, sweat, fear), environment (ozone, damp, old paper), weather.
+- **Touch:** Air movement (drafts), temperature shifts, vibrations through floors, texture, proximity of bodies (heat).
+- **Spatial Memory:** Mapping a room by counting steps or feeling for landmarks.
+
+*What to avoid:* Colors, light levels, shadows. Facial expressions (read voice/body instead). Visual metaphors ("I see what you mean"). Descriptions of visual beauty.
+
+**Writing Sensory Overload**
+
+When a character is overwhelmed (magic, trauma, sensory processing issues):
+- Use fragments and staccato sentences.
+- Focus on intrusive, unwanted stimuli.
+- Use *italics* for intrusive sensory memories or "flashes."
+- Blur boundaries: "I can't tell where the floor ends and my feet begin."
+
+### The Sensory Palette
+
+For every project, define a **Primary Palette** of 3-5 recurring sensory markers that define the vibe.
+
+**Example (Gaslamp Noir):**
+1. **Ozone:** Sharp, metallic tang of magic and lightning.
+2. **Coal Smoke:** Heavy, gritty taste of industry.
+3. **Chiaroscuro:** Deep shadows and harsh, flickering gaslight.
+4. **Copper:** Smell of blood and old pennies.
+
+**Example (Cozy Fantasy):**
+1. **Cedar & Parchment:** Dry, warm scent of an old library.
+2. **Honey & Steam:** Comforting humidity of a kitchen.
+3. **Wool:** Scratchy, heavy warmth of a sweater.
+4. **Golden Hour:** Soft, amber quality of late afternoon light.
+
+### Filter Word Sweep
+
+(See `_PROSE.md` Section 5 for the canonical filter-word rule. The POV-specific reminder:)
+
+**The Camera Rule:** If a camera can see it, show it. If a character is *feeling* it, describe the physical sensation, not the emotion.
+
+### Bonding Mechanisms (Sensory Links)
+
+If your story involves a magical or psychological bond between characters:
+
+1. **Emotional Bleed:** One character feels a shadow of the other's strong emotions.
+2. **Sensory Echo:** One character hears or smells what the other does.
+3. **Physical Sympathy:** A wound on one causes a phantom ache on the other.
+4. **The Anchor Effect:** One character can ground the other with a strong sensory stimulus.
+
+### Sensory Sweep Checklist
+- [ ] Is there at least one non-visual sensory detail in the first paragraph?
+- [ ] Are colors/visuals removed if the POV is non-visual?
+- [ ] Are filter words ("I saw," "I heard") removed?
+- [ ] Does the vibe match the project's sensory palette?
+- [ ] Is sensory intensity proportional to the character's stress level?

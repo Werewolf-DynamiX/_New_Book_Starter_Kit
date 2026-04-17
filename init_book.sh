@@ -54,8 +54,8 @@ mkdir -p context reference output research/sources research/reviews
 mkdir -p visuals/diagrams visuals/figures visuals/generated
 mkdir -p build scripts kdp release
 mkdir -p .sync .claude/hooks .claude/rules .claude/scripts
-mkdir -p .claude/skills/{de-ai-audit,scene-brief,revision-guide,draft,chapter-done,holistic-audit,holistic-pass}
-mkdir -p .gemini/skills/{adversarial-review/references,continuity-audit,de-ai-audit/references,kdp-format/references,voice-lint,holistic-audit,holistic-pass,logic-check/references,research-brief/references}
+mkdir -p .claude/skills/{de-ai-audit,draft,holistic-audit,holistic-pass}
+mkdir -p .gemini/skills/{continuity-audit,de-ai-audit,kdp-format/references,voice-lint,holistic-audit,holistic-pass,logic-check/references,research-brief/references}
 mkdir -p docs
 
 # --- Symlink shared resources ---
@@ -101,13 +101,9 @@ TEMPLATE_COPIES=(
   "context/WRITER_VOICE.md"
   "context/LESSONS_LEARNED.md"
   ".claude/skills/de-ai-audit/SKILL.md"
-  ".claude/skills/scene-brief/SKILL.md"
-  ".claude/skills/revision-guide/SKILL.md"
   ".claude/skills/draft/SKILL.md"
-  ".claude/skills/chapter-done/SKILL.md"
   ".claude/skills/holistic-audit/SKILL.md"
   ".claude/skills/holistic-pass/SKILL.md"
-  ".gemini/skills/adversarial-review/SKILL.md"
   ".gemini/skills/continuity-audit/SKILL.md"
   ".gemini/skills/de-ai-audit/SKILL.md"
   ".gemini/skills/kdp-format/SKILL.md"
@@ -119,10 +115,7 @@ TEMPLATE_COPIES=(
   "docs/HOLISTIC_PASSES.md"
   "docs/characters.md"
   ".claude/scripts/notebooklm-prep.sh"
-  ".gemini/skills/adversarial-review/references/_ADVERSARIAL_REVIEW_ENGINE.md"
-  ".gemini/skills/de-ai-audit/references/_HUMAN_PATTERNS.md"
-  ".gemini/skills/de-ai-audit/references/MASTER_BOOK_REVIEW_PROMPT.md"
-  ".gemini/skills/de-ai-audit/references/_STYLE_AUTHORITY.md"
+  "reviewer_complaints.md"
   ".gemini/skills/kdp-format/references/KDP_BOOK_FORMATTING_SKILL.md"
   ".gemini/skills/logic-check/references/_LOGIC_CHECK.md"
   ".gemini/skills/research-brief/references/_PLANNING_PROTOCOL.md"
@@ -221,19 +214,16 @@ cat > "$PROJECT_DIR/.sync/manifest.json" << MANIFEST
       "manuscript/back_matter/04_coming_soon.md",
       "manuscript/back_matter/05_review_request.md",
       "kdp/README.md",
+      "reviewer_complaints.md",
       ".claude/settings.local.json",
       ".gemini/settings.json",
       "context/FACTS_SHEET.md",
       "context/WRITER_VOICE.md",
       "context/LESSONS_LEARNED.md",
       ".claude/skills/de-ai-audit/SKILL.md",
-      ".claude/skills/scene-brief/SKILL.md",
-      ".claude/skills/revision-guide/SKILL.md",
       ".claude/skills/draft/SKILL.md",
-      ".claude/skills/chapter-done/SKILL.md",
       ".claude/skills/holistic-audit/SKILL.md",
       ".claude/skills/holistic-pass/SKILL.md",
-      ".gemini/skills/adversarial-review/SKILL.md",
       ".gemini/skills/continuity-audit/SKILL.md",
       ".gemini/skills/de-ai-audit/SKILL.md",
       ".gemini/skills/kdp-format/SKILL.md",
@@ -318,11 +308,11 @@ echo "    CLAUDE.md, GEMINI.md, PROJECT_IDENTITY.md"
 echo "    context/, reference/, .gitignore"
 echo ""
 echo "  Claude Code automation:"
-echo "    .claude/hooks/     — 3 automatic hooks (de-ai scan, checklist, context)"
+echo "    .claude/hooks/     — 2 automatic hooks (checklist reminder, context preservation)"
 echo "    .claude/rules/     — Auto-loaded prose rules for manuscript files"
-echo "    .claude/skills/    — 7 slash commands (/scene-brief, /draft, /holistic-audit, etc.)"
+echo "    .claude/skills/    — 4 slash commands (/draft, /de-ai-audit, /holistic-audit, /holistic-pass)"
 echo "    .claude/scripts/   — NotebookLM prep + Gemini audit spec"
-echo "    .gemini/skills/    — 9 Gemini skills (adversarial-review, holistic-audit, logic-check, research-brief, etc.)"
+echo "    .gemini/skills/    — 8 Gemini skills (continuity-audit, holistic-audit, logic-check, research-brief, etc.)"
 echo "    docs/              — Holistic passes template"
 echo ""
 echo "  Build pipeline:"
