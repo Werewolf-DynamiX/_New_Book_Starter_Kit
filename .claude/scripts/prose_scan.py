@@ -73,6 +73,7 @@ LOW_EFFORT_PHRASES = [
 ]
 
 STOPWORDS = {
+    # articles, pronouns, aux verbs, prepositions — classic stopwords
     "a","an","and","the","of","in","on","at","to","for","with","from","by",
     "is","was","were","are","be","been","being","am","i","me","my","you","your",
     "he","she","it","we","they","his","her","its","our","their","them","him",
@@ -83,7 +84,31 @@ STOPWORDS = {
     "up","down","out","over","under","off","into","onto","through","across",
     "very","just","too","also","about","than","then","some","any","all",
     "one","two","three","four","five","six","seven","eight","nine","ten",
-    "said", "say", "says",
+    # dialogue-adjacent (they'll echo in any dialogue-heavy scene)
+    "said", "say", "says", "ask", "asks", "asked", "reply", "replied",
+    # high-frequency content words that repeat naturally in any English prose
+    "like","still","back","small","first","second","third","last",
+    "same","different","more","less","most","least","other","another",
+    "thing","things","something","nothing","anything","everything",
+    "good","bad","old","new","big","little","long","short","high","low",
+    "since","because","while","until","though","although","before","after",
+    "inside","outside","across","around","among","between","against",
+    "almost","nearly","quite","rather","fairly","enough","always","never",
+    "own","every","each","few","many","several","both","either","neither",
+    "even","ever","once","twice","again","still","already","yet","soon",
+    "way","ways","part","parts","side","sides","place","places","time","times",
+    "day","days","night","nights","year","years","moment","moments",
+    "hand","hands","eye","eyes","face","head","body","mind",  # anatomy — over-used in prose
+    "find","finds","found","come","comes","came","go","goes","gone","went",
+    "look","looks","looked","see","sees","seen","saw","know","knows","knew",
+    "get","gets","got","take","takes","took","give","gives","gave",
+    "make","makes","made","think","thinks","thought","want","wants","wanted",
+    "tell","tells","told","feel","feels","felt","seem","seems","seemed",
+    "turn","turns","turned","move","moves","moved","keep","keeps","kept",
+    "hold","holds","held","let","lets","leave","leaves","left",
+    "work","works","worked","need","needs","needed","try","tries","tried",
+    # common adverbs/fillers
+    "only","really","actually","maybe","perhaps","probably","certainly",
 }
 
 # Sentence opener classification
@@ -155,6 +180,23 @@ def word_count(s):
 
 def tokens(s):
     return re.findall(r"\b[\w'-]+\b", s.lower())
+
+
+def detect_proper_nouns(prose_lines):
+    """A word is a proper noun if it appears capitalized mid-sentence.
+    Returns a set of lowercase forms to skip in echo detection."""
+    proper = set()
+    for _, text in prose_lines:
+        # Skip first word of each sentence (capitalized by convention)
+        parts = re.split(r'(?<=[.!?])\s+', text)
+        for part in parts:
+            words = re.findall(r"[A-Za-z][A-Za-z'-]*", part)
+            for i, w in enumerate(words):
+                if i == 0:
+                    continue  # first word, skip
+                if w[0].isupper() and len(w) >= 3:
+                    proper.add(w.lower())
+    return proper
 
 
 # ------------------------------------------------------------------------
@@ -278,38 +320,39 @@ def check_burstiness(sentences):
     return findings
 
 
-def check_echo(prose_lines, sentences):
-    """Flag content words appearing 3+ times in 200 words or 2+ in 40 words."""
+def check_echo(prose_lines, sentences, proper_nouns):
+    """Flag content words appearing 3+ times in 40 words or 4+ in 200 words.
+    Excludes stopwords, proper nouns, short words, digits."""
     findings = []
-    # Build word-position index (position = cumulative word index)
-    word_positions = []  # list of (pos, lineno, word)
+    word_positions = []
     pos = 0
     for lineno, text in prose_lines:
         for w in tokens(text):
-            if w in STOPWORDS or len(w) < 4 or w.isdigit():
+            if (
+                w in STOPWORDS
+                or w in proper_nouns
+                or len(w) < 4
+                or w.isdigit()
+            ):
                 pos += 1
                 continue
             word_positions.append((pos, lineno, w))
             pos += 1
 
-    # Group positions by word
     by_word = defaultdict(list)
     for p, ln, w in word_positions:
         by_word[w].append((p, ln))
 
     reported = set()
     for w, entries in by_word.items():
-        if len(entries) < 2:
+        if len(entries) < 3:
             continue
         for i, (p1, ln1) in enumerate(entries):
-            # 40-word window, 2+ occurrences
             near40 = [e for e in entries[i:] if e[0] - p1 <= 40]
-            # 200-word window, 3+ occurrences
             near200 = [e for e in entries[i:] if e[0] - p1 <= 200]
-            key = (w, ln1)
-            if key in reported:
-                continue
-            if len(near40) >= 2 and w not in reported:
+            if w in reported:
+                break
+            if len(near40) >= 3:
                 findings.append({
                     "severity": "LOW",
                     "check": "echo-tight",
@@ -320,7 +363,7 @@ def check_echo(prose_lines, sentences):
                 })
                 reported.add(w)
                 break
-            elif len(near200) >= 3 and w not in reported:
+            elif len(near200) >= 4:
                 findings.append({
                     "severity": "LOW",
                     "check": "echo-loose",
@@ -332,7 +375,6 @@ def check_echo(prose_lines, sentences):
                 reported.add(w)
                 break
 
-    # Upgrade severity if many echoes in one chapter
     if len([f for f in findings if f["check"].startswith("echo")]) >= 5:
         for f in findings:
             if f["check"].startswith("echo") and f["severity"] == "LOW":
@@ -475,15 +517,23 @@ def fmt(findings, severity):
 
 
 def main():
+    # Force UTF-8 output so em-dashes and smart quotes render on any terminal
+    # (fixes legacy Windows cmd.exe which defaults to cp1252)
+    try:
+        sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+    except AttributeError:
+        pass  # Python < 3.7; rarely encountered, degrades gracefully
+
     path = Path(sys.argv[1])
     prose_lines = read_prose(path)
     sentences = split_sentences(prose_lines)
+    proper_nouns = detect_proper_nouns(prose_lines)
 
     all_findings = []
     all_findings += check_placeholder(prose_lines)
     all_findings += check_sentence_opener_variance(sentences)
     all_findings += check_burstiness(sentences)
-    all_findings += check_echo(prose_lines, sentences)
+    all_findings += check_echo(prose_lines, sentences, proper_nouns)
     all_findings += check_sensory_ratio(prose_lines)
     all_findings += check_transition_velocity(prose_lines, sentences)
     all_findings += check_dialogue_beat_ratio(prose_lines)
