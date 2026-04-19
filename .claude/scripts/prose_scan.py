@@ -72,6 +72,43 @@ LOW_EFFORT_PHRASES = [
     "a little while later", "after a moment", "a short time later",
 ]
 
+# Structural phrases that reliably signal AI authorship
+ZERO_TOLERANCE_PHRASES = [
+    "testament to", "reminder that", "dive in", "let's explore",
+    "let's dive", "in today's digital age", "let that sink in",
+    "only time will tell", "in conclusion", "at the end of the day",
+    "it is important to note", "it's important to note",
+    "it's not just about", "it is not just about",
+    "to understand x, you", "think of x as", "think of it as",
+    "whether it's", "whether it is",
+]
+
+# AI-associated vocabulary — flag when clusters appear
+AI_VOCAB = {
+    "delve", "tapestry", "testament", "myriad", "plethora",
+    "multifaceted", "crucial", "nuanced", "paradigm",
+    "notably", "furthermore", "moreover", "seamlessly",
+    "leverage", "harness", "foster", "cultivate", "invaluable",
+    "indispensable", "paramount", "intricate",
+    "cutting-edge", "revolutionary", "optimize", "facilitate",
+}
+
+WAN_INTENSIFIERS = {
+    "very", "really", "quite", "rather", "somewhat", "just",
+    "actually", "basically", "literally",
+}
+
+LITERAL_AI_PATTERNS = [
+    r"\bas an ai\b",
+    r"\blanguage model\b",
+    r"\bi cannot (?:help|assist|provide|generate|produce|comply|discuss|create|write)\b",
+    r"\bi'?m unable to (?:help|assist|provide|generate|produce|comply|discuss|create|write)\b",
+    r"\bi apologize.{0,30}\b(?:cannot|unable|can't)\b",
+    r"^here'?s (?:a|an|the|your).{0,60}:",
+    r"^here are (?:a|some|the|your).{0,60}:",
+    r"\bas (?:a|an) (?:large )?language model\b",
+]
+
 STOPWORDS = {
     # articles, pronouns, aux verbs, prepositions — classic stopwords
     "a","an","and","the","of","in","on","at","to","for","with","from","by",
@@ -450,6 +487,119 @@ def check_transition_velocity(prose_lines, sentences):
     return findings
 
 
+def check_zero_tolerance(prose_lines):
+    """HIGH — structural AI phrases. Fire on any hit."""
+    findings = []
+    for lineno, text in prose_lines:
+        low = text.lower()
+        for phrase in ZERO_TOLERANCE_PHRASES:
+            if phrase in low:
+                # Skip generic placeholders in the phrase list
+                if "x, you" in phrase or "think of x" in phrase:
+                    continue
+                findings.append({
+                    "severity": "HIGH",
+                    "check": "zero-tolerance-phrase",
+                    "line": lineno,
+                    "quote": f'"{phrase}" found',
+                    "note": "Structural AI tell. Remove.",
+                })
+    return findings
+
+
+def check_ai_vocab_cluster(prose_lines, sentences):
+    """MEDIUM — flag when 3+ AI-associated words cluster in a chapter."""
+    findings = []
+    total_words = sum(word_count(s) for _, s in sentences)
+    hits = []
+    for lineno, text in prose_lines:
+        for w in tokens(text):
+            if w in AI_VOCAB:
+                hits.append((lineno, w))
+    if len(hits) >= 3:
+        sev = "HIGH" if len(hits) >= 6 else "MEDIUM"
+        seen = {}
+        for ln, w in hits:
+            seen.setdefault(w, []).append(ln)
+        summary = ", ".join(f"{w} ×{len(lines)}" for w, lines in seen.items())
+        findings.append({
+            "severity": sev,
+            "check": "ai-vocab-cluster",
+            "line": hits[0][0],
+            "quote": f"{len(hits)} AI-associated words in {total_words} words ({summary})",
+            "note": "Cluster of AI vocabulary — replace with specific alternatives.",
+        })
+    return findings
+
+
+def check_filter_word_density(prose_lines, sentences):
+    """LOW/MEDIUM — distancing filter verbs."""
+    findings = []
+    total_words = sum(word_count(s) for _, s in sentences)
+    if total_words == 0:
+        return findings
+    hits = []
+    for lineno, text in prose_lines:
+        for w in tokens(text):
+            if w in FILTER_VERBS:
+                hits.append((lineno, w))
+    density_per_1000 = len(hits) / (total_words / 1000.0)
+    if density_per_1000 > 4:
+        sev = "MEDIUM" if density_per_1000 > 8 else "LOW"
+        findings.append({
+            "severity": sev,
+            "check": "filter-word-density",
+            "line": hits[0][0] if hits else 1,
+            "quote": f"{len(hits)} filter verbs in {total_words} words ({density_per_1000:.1f} per 1000)",
+            "note": "High filter-word density — cut 'saw/heard/felt/noticed' to bring the reader closer.",
+        })
+    return findings
+
+
+def check_wan_intensifiers(prose_lines, sentences):
+    """LOW — empty intensifiers."""
+    findings = []
+    total_words = sum(word_count(s) for _, s in sentences)
+    if total_words == 0:
+        return findings
+    hits = []
+    for lineno, text in prose_lines:
+        for w in tokens(text):
+            if w in WAN_INTENSIFIERS:
+                hits.append((lineno, w))
+    density_per_1000 = len(hits) / (total_words / 1000.0)
+    if density_per_1000 > 3:
+        findings.append({
+            "severity": "LOW",
+            "check": "wan-intensifiers",
+            "line": hits[0][0] if hits else 1,
+            "quote": f"{len(hits)} wan intensifiers in {total_words} words (very, really, quite, just...)",
+            "note": "Intensifiers weaken the verb they modify. Replace with a stronger verb.",
+        })
+    return findings
+
+
+def check_literal_ai_remnants(prose_lines):
+    """CRITICAL — literal traces of AI generation."""
+    findings = []
+    compiled = [re.compile(p, re.IGNORECASE) for p in LITERAL_AI_PATTERNS]
+    for lineno, text in prose_lines:
+        # Skip lines that look like markdown headings or code fences
+        if text.strip().startswith(("#", "```")):
+            continue
+        for pat in compiled:
+            m = pat.search(text)
+            if m:
+                findings.append({
+                    "severity": "CRITICAL",
+                    "check": "literal-ai-remnant",
+                    "line": lineno,
+                    "quote": m.group(0),
+                    "note": "Literal AI artifact left in prose.",
+                })
+    return findings
+
+
 def check_dialogue_beat_ratio(prose_lines):
     """Flag dialogue-heavy stretches that are mostly tags, no beats."""
     findings = []
@@ -531,11 +681,16 @@ def main():
 
     all_findings = []
     all_findings += check_placeholder(prose_lines)
+    all_findings += check_literal_ai_remnants(prose_lines)
+    all_findings += check_zero_tolerance(prose_lines)
+    all_findings += check_ai_vocab_cluster(prose_lines, sentences)
     all_findings += check_sentence_opener_variance(sentences)
     all_findings += check_burstiness(sentences)
     all_findings += check_echo(prose_lines, sentences, proper_nouns)
     all_findings += check_sensory_ratio(prose_lines)
     all_findings += check_transition_velocity(prose_lines, sentences)
+    all_findings += check_filter_word_density(prose_lines, sentences)
+    all_findings += check_wan_intensifiers(prose_lines, sentences)
     all_findings += check_dialogue_beat_ratio(prose_lines)
 
     total_words = sum(word_count(s) for _, s in sentences)

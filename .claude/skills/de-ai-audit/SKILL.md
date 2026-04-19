@@ -1,114 +1,98 @@
 ---
 name: de-ai-audit
-description: Scan manuscript prose for AI-generated patterns, vocabulary clusters, structural tells, and burstiness failures. Produces a scored report (A-F).
+description: Interpretive scan for AI-pattern structures that require reading — AI Sandwich, Ending Trap, telling-after-showing, subtext overexplanation. Mechanical checks (vocabulary, burstiness, filter words, placeholders) live in /prose-scan — run that first.
 allowed-tools: Read, Grep, Glob
 user-invocable: true
 ---
 
 # /de-ai-audit
 
-You are running a De-AI Audit — a systematic scan for AI-generated writing patterns.
+You are running the **interpretive** pass of AI-pattern detection. The mechanical checks — vocabulary clusters, zero-tolerance phrases, burstiness collapse, filter-word density, dialogue placeholders — are all handled by `/prose-scan`. Your job here is the patterns that require reading and judgment.
+
+## Preflight
+
+If the user hasn't already run `/prose-scan` on this file, tell them to run it first and come back. The mechanical checks produce the numbers; this skill produces the interpretation.
+
+**Recommended model:** Opus (interpretive judgment). Can run on Sonnet if speed matters more than depth.
 
 ## Input
-- `$ARGUMENTS`: File path or directory to audit. Defaults to `manuscript/` if empty.
-- If a directory, audit all `.md` files within it.
+- `$ARGUMENTS`: File path. If empty, ask which chapter.
 
 ## Procedure
 
-### 0. Persona Context
-Read `context/WRITER_VOICE.md` if it exists. Note the target voice and tone — this informs whether vocabulary and structural patterns are intentional or AI artifacts.
+### Step 1: Read the chapter
+Load the full chapter. Also load `context/WRITER_VOICE_CORE.md` and `context/WRITER_VOICE.md` for voice context — some patterns are intentional for this voice.
 
-### 1. Vocabulary Scan
-Search for AI-associated vocabulary. Flag when 3+ cluster in a single file.
+### Step 2: Scan for the five interpretive AI tells
 
-**Zero-tolerance phrases (instant flag):**
-- "A testament to..." / "A reminder that..."
-- "In conclusion," / "Ultimately," / "At the end of the day"
-- "Let's dive in" / "Let's explore" / "In this chapter, we will..."
-- "It's not just about X, it's about Y"
-- "To understand X, you have to understand Y"
-- "Let that sink in" / "It is important to note that"
-- "In today's digital age" / "Whether it's X or Y..."
-- "Only time will tell..." / "Think of X as a Y..."
+#### 1. AI Sandwich Structure
+A passage (scene, paragraph, or section) that follows the pattern: **topic statement → three supporting examples/observations → restated summary.** Feels like an essay rather than a scene. Common in AI-drafted prose because it's the default LLM response shape.
 
-**AI-associated words (flag clusters of 3+):**
-delve, tapestry, testament, myriad, plethora, multifaceted, crucial, nuanced, realm, paradigm, notably, furthermore, moreover, additionally, seamlessly, leverage, harness, foster, cultivate, invaluable, indispensable, paramount, intricate, game-changer, cutting-edge, revolutionary, rich tapestry, vibrant landscape, dynamic, optimize, utilize, facilitate, deep dive
+Quote the passage. Mark whether it's a scene, paragraph, or whole section.
 
-**Exception:** Words used literally are fine (e.g., "a faded tapestry on the wall"). Note the context.
+#### 2. The Ending Trap
+Scene or chapter endings that do one of:
+- Name the theme ("And that, she realized, was what friendship really meant.")
+- Wrap up with moralizing summary ("A testament to the power of…")
+- Punch an uplifting or redemptive note the rest of the scene hasn't earned
+- Tell the reader how to feel about what just happened
 
-### 2. Structural Tells
-Scan for these AI writing patterns:
-- **AI Sandwich:** Topic → 3 examples → Summary pattern
-- **Uniform paragraphs:** All paragraphs ~3 sentences long
-- **Parallel sentence starts:** 3+ consecutive sentences starting the same way
-- **The Ending Trap:** Scene ending with moralizing summary, "testament to...", or uplifting wrap-up
-- **Telling after showing:** Action/emotion shown, then named anyway
-- **Overexplaining:** Subtext or jokes explained
+Quote the last 2–3 sentences of each scene/chapter and evaluate.
 
-### 3. Burstiness Check
-For each file, sample 3 passages of 10 consecutive sentences each:
-- Count word length of each sentence
-- Flag "AI Flatline" if all 10 fall within 12-18 words
-- Flag if 3+ consecutive sentences have similar length (within 3 words)
-- Flag if 3+ consecutive paragraphs are uniform length
-- Check for varied paragraph lengths (should include 1-sentence and 4-5 sentence paragraphs)
+#### 3. Telling-After-Showing
+Emotion or action has been rendered through concrete detail, and then the narrator names the emotion anyway. Example: *"Her hands wouldn't stop shaking. She was afraid."* The second sentence is the tell.
 
-### 4. Filter Word Scan
-Count occurrences of distancing filter words:
-saw, heard, felt, noticed, realized, watched, observed, thought, wondered, seemed
+Find instances where showing is complete and then undermined by a follow-up name.
 
-Flag each with line number and context. Note exceptions where perception is the point.
+#### 4. Overexplanation of Subtext
+Subtext, jokes, or metaphors explained to the reader. Examples:
+- Character says something pointed; narrator explains what they meant.
+- Joke lands; narrator explains why it's funny.
+- Metaphor used; narrator paraphrases the metaphor.
 
-### 5. Wan Intensifier Scan
-Count: very, really, quite, rather, somewhat, just, actually, basically, literally (non-literal)
+The rule: if the reader can get it without the explanation, the explanation is AI footprint.
 
-### 6. Literal AI Remnants
-Search for:
-- "As an AI" / "language model" / "I cannot" / "I'm unable to"
-- Markdown artifacts in prose (##, **, ```)
-- "Here's" / "Here are" introducing lists in narrative prose
-- Any meta-commentary about the writing process
+#### 5. Uniform Emotional Register
+Scene-level check: does the emotional temperature stay flat for long stretches? Human prose modulates — a moment of tension, a dry observation, a small laugh. AI prose tends to sustain one register. Flag stretches where the register doesn't shift.
 
-## Output Format
+### Step 3: Output Format
 
 ```markdown
-# De-AI Audit Report
+# De-AI Audit (Interpretive)
 
-**File(s):** [files audited]
-**Date:** [date]
-**Overall Grade:** [A-F]
+**File:** [path]
+**Date:** [today]
+**Overall:** [verdict: clean / minor / patterned / pervasive]
 
-## Summary
-[1-2 sentence overall assessment]
+## AI Sandwich
+[quoted passages or "none found"]
 
-## Vocabulary ([X] issues)
-| Word/Phrase | File | Line | Context | Literal Use? |
-|-------------|------|------|---------|--------------|
+## Ending Trap
+[quoted scene/chapter endings, evaluation]
 
-## Structural Tells ([X] issues)
-| Pattern | File | Line | Description |
-|---------|------|------|-------------|
+## Telling After Showing
+[quoted instances]
 
-## Burstiness ([PASS/FAIL])
-| File | Passage | Sentence Lengths | Verdict |
-|------|---------|-------------------|---------|
+## Overexplained Subtext
+[quoted instances]
 
-## Filter Words ([X] found)
-| Word | File | Line | Context | Keep? |
-|------|------|------|---------|-------|
+## Uniform Register Stretches
+[passage ranges, summary of register]
 
-## Wan Intensifiers ([X] found)
-| Word | File | Line | Context |
-|------|------|------|---------|
-
-## AI Remnants ([X] found)
-| Issue | File | Line | Context |
-|-------|------|------|---------|
-
-## Grading Rubric
-- **A:** 0 zero-tolerance phrases, <3 AI vocab, burstiness passes, <5 filter words
-- **B:** 0 zero-tolerance, 3-5 AI vocab, burstiness mostly passes, 5-10 filters
-- **C:** 1 zero-tolerance OR 6-10 AI vocab OR burstiness fails in 1 passage
-- **D:** 2+ zero-tolerance OR 10+ AI vocab OR burstiness fails in 2+ passages
-- **F:** Literal AI remnants found OR structural tells dominant
+## Recommendation
+[1–3 sentence summary of what to fix vs. what to leave]
 ```
+
+### Step 4: Grade
+
+Use this rubric for the **Overall** verdict:
+
+- **clean** — zero interpretive AI tells. Reading this chapter you would not suspect AI involvement.
+- **minor** — 1–2 instances of any single tell. Easy to fix in a single revision pass.
+- **patterned** — 3+ instances of one tell or 2+ instances of multiple. Chapter needs focused revision.
+- **pervasive** — telling-after-showing or ending trap shows up more than once per scene, or AI Sandwich structures dominate. Chapter needs rewriting, not revising.
+
+## Rules
+- Always quote the offending text. Line numbers are a bonus, but the quote is the minimum.
+- If a pattern fires but is clearly intentional for the voice (e.g., the narrator is deliberately essayistic), note it as "intentional — not a flag." Don't mechanically flag what the voice earns.
+- Do not attempt fixes inside this skill. This is diagnosis, not treatment. Send the report to the user; fixing happens in `/draft` or `/holistic-pass`.

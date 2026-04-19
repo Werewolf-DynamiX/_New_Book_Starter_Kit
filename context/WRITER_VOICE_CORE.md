@@ -181,6 +181,39 @@ These come from the combined Gibson / Morgenstern / Taylor / Miller stack, disti
 
 ---
 
+## 4b. Voice Dimensions (per-project sliders)
+
+Each project tunes these five dimensions. Set them in `context/WRITER_VOICE.md` for the book. The core file assumes mid-range defaults; the project file overrides.
+
+| Dimension | Low Setting | High Setting |
+|-----------|-------------|--------------|
+| **Formality** | Slang, contractions, fragments | Academic, full sentences, no contractions |
+| **Intimacy** | Detached observer | Deep interiority, direct address |
+| **Cynicism** | Earnest, hopeful | Jaded, sarcastic, distrustful |
+| **Ornateness** | Hemingway minimalist | Morgenstern-lyrical |
+| **Humor** | Deadly serious | Constant wit |
+
+## 4c. Reader Relationship
+
+How does the narrator treat the reader? One of:
+- **Guide** — "Come with me, I'll show you." Reassuring. (cozy, warm)
+- **Conspirator** — "They don't want you to know this." Secretive. (dark, noir)
+- **Challenger** — "Keep up if you can." Demanding. (literary, ambitious)
+- **Confessor** — "I shouldn't be telling you this." Vulnerable. (memoir, intimate)
+
+Declare in `WRITER_VOICE.md` per project.
+
+## 4d. High-Concept Hook
+
+Every book must answer, in one sentence: *what is the emotional promise to the reader?* If you can't say it clearly, the book doesn't have a hook — go back to the outline, not the prose.
+
+Examples of good one-sentence promises:
+- *"A library at the end of the world where each book is someone's dream."* (Morgenstern vibe)
+- *"What if Patroclus told the story, and told it as a love story?"* (Miller — Song of Achilles)
+- *"A girl falls from the sky into an impossible city, and the dreamer who has been dreaming of her her whole life is the only one who can help."* (Taylor — Strange the Dreamer)
+
+Declare in `PROJECT_IDENTITY.md` or `book.yaml`.
+
 ## 5. Voice Negatives (what this voice is NOT)
 
 - Not Sanderson's expository narrator (over-defines mechanics).

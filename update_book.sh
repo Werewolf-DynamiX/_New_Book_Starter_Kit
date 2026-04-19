@@ -99,6 +99,8 @@ REQUIRED_DIRS=(
   ".claude/skills/holistic-pass"
   ".claude/skills/prose-scan"
   ".claude/skills/pre-publish"
+  ".claude/skills/review-chapter"
+  ".claude/skills/feedback-digest"
   ".gemini/skills/continuity-audit"
   ".gemini/skills/de-ai-audit"
   ".gemini/skills/kdp-format"
@@ -208,6 +210,8 @@ SKILL_FILES=(
   ".claude/skills/holistic-pass/SKILL.md"
   ".claude/skills/prose-scan/SKILL.md"
   ".claude/skills/pre-publish/SKILL.md"
+  ".claude/skills/review-chapter/SKILL.md"
+  ".claude/skills/feedback-digest/SKILL.md"
   # Gemini skills
   ".gemini/skills/continuity-audit/SKILL.md"
   ".gemini/skills/de-ai-audit/SKILL.md"

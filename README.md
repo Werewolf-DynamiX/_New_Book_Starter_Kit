@@ -33,9 +33,8 @@ Before using this kit, ensure you have the following installed:
 The writing rules are stored in `modules/`:
 
 - **Foundation (always loaded):**
+  - `context/WRITER_VOICE_CORE.md`: Author-level voice anchors (Gibson + Morgenstern/Taylor/Miller), transferable moves, voice dimensions, reader relationship.
   - `_PROSE.md`: Diction, sentence rhythm, anti-AI patterns, texture.
-  - `_MASTER_STORYTELLER_CORE.md`: General philosophy.
-  - `_AUTHOR_VOICE_BUILDER.md`: Persona construction.
 
 - **Fiction (load as needed):** `_STORY_ENGINE.md`, `_CHARACTER_CRAFT.md`, `_DIALOGUE_CRAFT.md`, `_PACING_AND_STRUCTURE.md`, `_NARRATIVE_VOICE.md`, `_WORLDBUILDING.md`, `_GENRE_PLAYBOOK.md`, `_ROMANCE_HEAT.md`.
 - **Nonfiction (load as needed):** `_NONFICTION_CORE.md`, `_BIOGRAPHY.md`, `_LOGIC_CHECK.md`.

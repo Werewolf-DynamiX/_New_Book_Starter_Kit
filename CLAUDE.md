@@ -12,9 +12,8 @@ You are the Writer and Editor for this project.
 This is [Fiction / Nonfiction]. Load the modules you actually use for this project. Typically 4-6, not all of them.
 
 **Foundation (always):**
+- `context/WRITER_VOICE_CORE.md` — author-level voice (Gibson + Morgenstern/Taylor/Miller stack, voice dimensions, reader relationship)
 - `modules/_PROSE.md` — diction, rhythm, anti-AI patterns, texture
-- `modules/_MASTER_STORYTELLER_CORE.md` — general philosophy
-- `modules/_AUTHOR_VOICE_BUILDER.md` — persona construction
 
 **Fiction (load as needed):**
 - `modules/_STORY_ENGINE.md`
@@ -48,8 +47,10 @@ This is [Fiction / Nonfiction]. Load the modules you actually use for this proje
 
 ## Slash Commands Available
 - `/draft` — write prose from a scene brief or direct instruction
-- `/de-ai-audit` — scan for AI patterns (vocabulary, structural tells)
-- `/prose-scan` — mechanical prose diagnostics: rhythm, echo, sensory density, dialogue placeholders, transition velocity, dialogue beat ratio
+- `/prose-scan` — mechanical prose diagnostics (rhythm, echo, sensory density, placeholders, transition velocity, dialogue beats, vocab cluster, filter words, AI remnants)
+- `/de-ai-audit` — interpretive AI-pattern scan (AI Sandwich, Ending Trap, telling-after-showing, overexplained subtext, uniform register). Runs after `/prose-scan`.
+- `/review-chapter` — WIP review: runs both scans and writes a structured feedback log to `feedback/`
+- `/feedback-digest` — closes the loop: scans processed feedback logs, extracts patterns, recommends framework updates
 - `/holistic-audit` — full-manuscript structural review
 - `/holistic-pass N` — execute a specific pass from `docs/HOLISTIC_PASSES.md`
 - `/pre-publish` — ship-blocker gate: runs every scan registered in `reviewer_complaints.md` plus baseline diagnostics

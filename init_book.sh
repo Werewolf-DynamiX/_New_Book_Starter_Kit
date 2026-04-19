@@ -107,6 +107,8 @@ TEMPLATE_COPIES=(
   ".claude/skills/holistic-pass/SKILL.md"
   ".claude/skills/prose-scan/SKILL.md"
   ".claude/skills/pre-publish/SKILL.md"
+  ".claude/skills/review-chapter/SKILL.md"
+  ".claude/skills/feedback-digest/SKILL.md"
   ".gemini/skills/continuity-audit/SKILL.md"
   ".gemini/skills/de-ai-audit/SKILL.md"
   ".gemini/skills/kdp-format/SKILL.md"
@@ -227,6 +229,8 @@ cat > "$PROJECT_DIR/.sync/manifest.json" << MANIFEST
       ".claude/skills/holistic-pass/SKILL.md",
       ".claude/skills/prose-scan/SKILL.md",
       ".claude/skills/pre-publish/SKILL.md",
+      ".claude/skills/review-chapter/SKILL.md",
+      ".claude/skills/feedback-digest/SKILL.md",
       ".gemini/skills/continuity-audit/SKILL.md",
       ".gemini/skills/de-ai-audit/SKILL.md",
       ".gemini/skills/kdp-format/SKILL.md",
