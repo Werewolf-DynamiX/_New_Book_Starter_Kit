@@ -94,7 +94,7 @@ Output findings as:
    ```bash
    /skills list
    ```
-   You should see `continuity-audit` in the list alongside `de-ai-audit`, `adversarial-review`, and `kdp-format`.
+   You should see `continuity-audit` in the list alongside `de-ai-audit`, `voice-lint`, `logic-check`, and `kdp-format`.
 
 ## Usage
 

@@ -56,4 +56,4 @@ Report:
 - Changes made per chapter (count + brief description)
 - Any borderline decisions flagged for user review
 - Remaining chapters for this pass
-- Whether any chapter-level issues were noticed (route to `/revision-guide`)
+- Whether any chapter-level issues were noticed (handle with chapter-level audits)

@@ -12,13 +12,15 @@ This skill scans text for AI writing patterns, vocabulary, and structural tells 
 - **Output Report:** The audit must produce a scored report detailing vocabulary hits, structural hits, and burstiness score.
 
 ## Audit Checklist
-1. **Vocabulary Scan:** Check for clusters of AI vocabulary patterns. Reference `references/_STYLE_AUTHORITY.md`.
-   - Examples: *delve, tapestry, testament, realm, nuanced, multifaceted*.
-2. **Structural Tells:** Identify common AI formatting patterns. Reference `references/MASTER_BOOK_REVIEW_PROMPT.md` and `references/_STYLE_AUTHORITY.md`.
+Reference the kit's `modules/_PROSE.md` for the full rule set. At minimum, scan for:
+
+1. **Structural phrases** that reliably signal AI authorship:
+   - *testament to, reminder that, dive in, let's explore, in today's digital age, let that sink in, only time will tell*
+2. **Structural tells:**
    - The "AI Sandwich" (Topic → 3 points → Summary).
    - Sermonizing dialogue.
    - Summary/moralizing endings (e.g., "In conclusion," "Ultimately").
-3. **Literal AI Remnants:** Flag literal traces of AI generation instantly.
-   - Refusal language, "As an AI", "Here's/Here are" list intros in prose.
-4. **Burstiness and Perplexity:** Check sentence length variance. Reference `references/_HUMAN_PATTERNS.md`.
-   - Flag "AI Flatline" — uniform sentence length throughout the section.
+3. **Literal AI remnants** — flag instantly:
+   - Refusal language, "As an AI", "Here's/Here are" list intros in prose, bracketed placeholders in dialogue.
+4. **Burstiness** — sentence length variance:
+   - Flag "AI Flatline" — uniform sentence length (all 12–18 words) for 10+ consecutive sentences.

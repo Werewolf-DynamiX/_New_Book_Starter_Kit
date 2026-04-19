@@ -12,7 +12,7 @@
 ## 2. THE STRENGTHS OF "CAPABLE" MODELS (Opus/Ultra/Pro Class)
 *   **Nuance:** They can handle conflicting character motivations and subtext.
 *   **Rhythm:** They produce "burstier," more human-sounding prose.
-*   **Adversarial Rigor:** They are better at executing the `_CRITIC_PROTOCOL`.
+*   **Critical Rigor:** They are better at catching subtle prose failures during review passes.
 
 ---
 

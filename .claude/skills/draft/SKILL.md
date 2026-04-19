@@ -1,29 +1,34 @@
 ---
 name: draft
-description: Draft prose from an approved Scene Brief. Pre-flight checks persona and facts, applies anti-polish rules, runs Self-Editing Checklist and de-ai-audit inline.
+description: Draft prose from a scene brief or direct instruction. Pre-flight checks persona and facts, applies anti-polish rules, runs Self-Editing Checklist and de-ai-audit inline.
 user-invocable: true
 ---
 
 # /draft
 
-You are drafting prose from an approved Scene/Section Brief.
+You are drafting prose. Work from whatever scene context the user has given you — a brief in conversation, a beat sheet, or direct instruction. If the intent is ambiguous, ask a clarifying question before writing.
 
 ## Input
-- `$ARGUMENTS`: Optional file path to write to. If empty, determine from the Scene Brief or ask.
+- `$ARGUMENTS`: Optional file path to write to. If empty, determine from context or ask.
 
 ## Pre-Flight Checks
 
 Before writing a single word of prose, verify:
 
-### 1. Scene Brief Exists
-There must be an approved Scene Brief in the current conversation. If none exists:
-**"No approved Scene Brief found. Run /scene-brief first, then /draft."**
-Stop here.
+### 1. Scene Intent is Clear
+You need at minimum: what happens, whose POV, what the character wants, what stands in the way, what shifts by the end. If any of those are missing, ask the user.
 
 ### 2. Persona Check
-Read `context/WRITER_VOICE.md`.
-- If defined: "Writing as: [Persona Archetype]."
-- If not defined: **"No persona defined. Run persona interview first."** Stop here.
+Read **both** voice files:
+1. `context/WRITER_VOICE_CORE.md` — author-level core (Gibson moves, four transferable patterns, general negatives). Required.
+2. `context/WRITER_VOICE.md` — project-specific genre anchors.
+
+Evaluate:
+- If WRITER_VOICE_CORE.md is missing or empty: **"No author-level voice core defined. Create `context/WRITER_VOICE_CORE.md` from the kit template before drafting."** Stop here.
+- If WRITER_VOICE.md Section 2 (Genre Anchors) has no filled passage: **"No project-specific genre anchor. Drafts will draw only from the core, which may be wrong for this book's emotional temperature. Paste a genre anchor (Section 2) before continuing, or type `override` to draft using the core alone."** Wait.
+- If both are filled in: "Writing with core voice (Gibson moves) + genre anchor [N]: [summary]."
+
+**During drafting:** keep the Four Transferable Moves from the core and the genre anchor passage in your working context. Every few paragraphs, compare your rhythm against the anchor. If divergence is obvious (emotional temperature, sentence rhythm, register), correct course before continuing.
 
 ### 3. Facts Sheet
 Read `context/FACTS_SHEET.md`. Note all established facts relevant to this scene.
@@ -41,8 +46,10 @@ SCENE ASSERTIONS:
 ## Drafting Rules
 
 ### Voice & Anti-Polish
-- Write in the persona voice from `WRITER_VOICE.md`
-- Include purposeful imperfections: tangents, fragments, abrupt transitions
+- Apply the Four Transferable Moves from `WRITER_VOICE_CORE.md`: Trust, Present-Tense Surface, Register Collision, Restraint on Interiority.
+- Match the emotional temperature of the project's genre anchor in `WRITER_VOICE.md`.
+- Apply every rule in Section 3 of `WRITER_VOICE.md` (project-specific additions to the core).
+- Include purposeful imperfections: tangents, fragments, abrupt transitions — if the model passages show them.
 - Do not smooth every sentence. Real voices are messy.
 - Vary sentence length aggressively (2-6 words, 8-15 words, 18-30 words)
 - Vary paragraph length (some 1 sentence, some 4-5 sentences)
@@ -103,4 +110,4 @@ Present the draft with:
 3. **Facts Sheet Updates:** List any new facts to add
 4. **Word count**
 
-State: **"Draft ready for review. For a comprehensive scored De-AI audit, run /de-ai-audit. For full QA with Gemini audits, run /revision-guide. Or provide feedback directly."**
+State: **"Draft ready for review. For a comprehensive scored De-AI audit, run /de-ai-audit. For prose diagnostics (rhythm, echo, sensory density), run /prose-scan. Or provide feedback directly."**

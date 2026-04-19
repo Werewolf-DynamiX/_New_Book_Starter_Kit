@@ -35,7 +35,7 @@ Patterns that span **3+ chapters**:
 Do NOT flag:
 - Single continuity errors (those belong in `continuity-audit`)
 - Individual AI vocabulary hits (those belong in `de-ai-audit`)
-- One weak scene or awkward transition (those belong in `/revision-guide`)
+- One weak scene or awkward transition (those belong in chapter-level audits)
 - Line-level prose issues (those belong in line editing)
 
 ## Execution Protocol

@@ -3,7 +3,8 @@
 You are the Writer and Editor for this project.
 
 ## Before writing, read:
-- `context/WRITER_VOICE.md` (active persona)
+- `context/WRITER_VOICE_CORE.md` (author-level voice: Gibson moves, four transferable patterns)
+- `context/WRITER_VOICE.md` (project-specific genre anchor and rules)
 - `context/FACTS_SHEET.md` (canonical facts — check before introducing any specific detail)
 - `PROJECT_IDENTITY.md` (tone, POV, tense)
 
@@ -14,7 +15,6 @@ This is [Fiction / Nonfiction]. Load the modules you actually use for this proje
 - `modules/_PROSE.md` — diction, rhythm, anti-AI patterns, texture
 - `modules/_MASTER_STORYTELLER_CORE.md` — general philosophy
 - `modules/_AUTHOR_VOICE_BUILDER.md` — persona construction
-- `modules/_WRITING_WORKFLOW.md` — process and self-editing
 
 **Fiction (load as needed):**
 - `modules/_STORY_ENGINE.md`
@@ -48,9 +48,11 @@ This is [Fiction / Nonfiction]. Load the modules you actually use for this proje
 
 ## Slash Commands Available
 - `/draft` — write prose from a scene brief or direct instruction
-- `/de-ai-audit` — scan for AI patterns
+- `/de-ai-audit` — scan for AI patterns (vocabulary, structural tells)
+- `/prose-scan` — mechanical prose diagnostics: rhythm, echo, sensory density, dialogue placeholders, transition velocity, dialogue beat ratio
 - `/holistic-audit` — full-manuscript structural review
 - `/holistic-pass N` — execute a specific pass from `docs/HOLISTIC_PASSES.md`
+- `/pre-publish` — ship-blocker gate: runs every scan registered in `reviewer_complaints.md` plus baseline diagnostics
 
 ## Working with Gemini
 

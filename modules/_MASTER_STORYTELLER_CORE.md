@@ -46,7 +46,7 @@ Characters are psychological entities.
 *   **The Ticking Clock:** Establish deadlines (literal or psychological).
 
 ## 7. PROSE HYGIENE
-*   **Anti-AI:** No "delve," "tapestry," "testament." (See `_STYLE_AUTHORITY.md`)
+*   **Anti-AI:** Avoid structural AI tells like "testament to," "reminder that," "dive in." (See `_PROSE.md`.)
 *   **Strong Verbs:** No "was running" (sprinted).
 *   **Variable Rhythm:** Short sentences for action; long for atmosphere.
 

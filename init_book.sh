@@ -99,11 +99,14 @@ TEMPLATE_COPIES=(
   ".gemini/settings.json"
   "context/FACTS_SHEET.md"
   "context/WRITER_VOICE.md"
+  "context/WRITER_VOICE_CORE.md"
   "context/LESSONS_LEARNED.md"
   ".claude/skills/de-ai-audit/SKILL.md"
   ".claude/skills/draft/SKILL.md"
   ".claude/skills/holistic-audit/SKILL.md"
   ".claude/skills/holistic-pass/SKILL.md"
+  ".claude/skills/prose-scan/SKILL.md"
+  ".claude/skills/pre-publish/SKILL.md"
   ".gemini/skills/continuity-audit/SKILL.md"
   ".gemini/skills/de-ai-audit/SKILL.md"
   ".gemini/skills/kdp-format/SKILL.md"
@@ -129,9 +132,6 @@ done
 # --- Copy sync-always files (infrastructure, safe to overwrite on update) ---
 echo "Copying infrastructure files..."
 SYNC_ALWAYS=(
-  "PROJECT_COMPENDIUM.md"
-  "CONTINUITY_AUDIT_PROMPT.md"
-  "GEMINI_REVIEW.md"
   "Makefile"
   "scripts/compile.sh"
   "scripts/compile.ps1"
@@ -143,12 +143,13 @@ SYNC_ALWAYS=(
   "reference/art_brief.md"
   "reference/KDP_BOOK_FORMATTING_SKILL.md"
   ".claude/settings.json"
-  ".claude/hooks/deai-quick-scan.sh"
   ".claude/hooks/prose-checklist-reminder.sh"
   ".claude/hooks/save-critical-context.sh"
   ".claude/hooks/version-check.sh"
   ".claude/rules/manuscript-prose.md"
   ".claude/scripts/gemini-continuity-audit-spec.md"
+  ".claude/scripts/prose-scan.sh"
+  ".claude/scripts/prose_scan.py"
 )
 for f in "${SYNC_ALWAYS[@]}"; do
   if [ -f "$KIT_DIR/$f" ]; then
@@ -218,11 +219,14 @@ cat > "$PROJECT_DIR/.sync/manifest.json" << MANIFEST
       ".gemini/settings.json",
       "context/FACTS_SHEET.md",
       "context/WRITER_VOICE.md",
+      "context/WRITER_VOICE_CORE.md",
       "context/LESSONS_LEARNED.md",
       ".claude/skills/de-ai-audit/SKILL.md",
       ".claude/skills/draft/SKILL.md",
       ".claude/skills/holistic-audit/SKILL.md",
       ".claude/skills/holistic-pass/SKILL.md",
+      ".claude/skills/prose-scan/SKILL.md",
+      ".claude/skills/pre-publish/SKILL.md",
       ".gemini/skills/continuity-audit/SKILL.md",
       ".gemini/skills/de-ai-audit/SKILL.md",
       ".gemini/skills/kdp-format/SKILL.md",
@@ -236,10 +240,6 @@ cat > "$PROJECT_DIR/.sync/manifest.json" << MANIFEST
       ".claude/scripts/notebooklm-prep.sh"
     ],
     "sync_always": [
-      "PROJECT_COMPENDIUM.md",
-      "MASTER_BOOK_REVIEW_PROMPT.md",
-      "CONTINUITY_AUDIT_PROMPT.md",
-      "GEMINI_REVIEW.md",
       "Makefile",
       "scripts/compile.sh",
       "scripts/compile.ps1",
@@ -251,12 +251,13 @@ cat > "$PROJECT_DIR/.sync/manifest.json" << MANIFEST
       "reference/art_brief.md",
       "reference/KDP_BOOK_FORMATTING_SKILL.md",
       ".claude/settings.json",
-      ".claude/hooks/deai-quick-scan.sh",
       ".claude/hooks/prose-checklist-reminder.sh",
       ".claude/hooks/save-critical-context.sh",
       ".claude/hooks/version-check.sh",
       ".claude/rules/manuscript-prose.md",
-      ".claude/scripts/gemini-continuity-audit-spec.md"
+      ".claude/scripts/gemini-continuity-audit-spec.md",
+      ".claude/scripts/prose-scan.sh",
+      ".claude/scripts/prose_scan.py"
     ],
     "project_owned": [
       "CLAUDE.md",
@@ -272,6 +273,7 @@ cat > "$PROJECT_DIR/.sync/manifest.json" << MANIFEST
       ".gemini/settings.json",
       "context/FACTS_SHEET.md",
       "context/WRITER_VOICE.md",
+      "context/WRITER_VOICE_CORE.md",
       "manuscript/",
       "output/",
       "release/",

@@ -12,25 +12,14 @@ echo ""
 echo "=== CRITICAL CONTEXT (preserved across compaction) ==="
 echo ""
 
-# --- Source shared vocabulary lists ---
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-source "$SCRIPT_DIR/banned-vocab.sh"
-
-# --- Banned AI Vocabulary ---
-echo "## BANNED AI VOCABULARY (flag when 3+ cluster in a chapter)"
-echo "$BANNED_WORDS_CSV"
-echo ""
-
-# --- Zero-Tolerance Phrases ---
-echo "## ZERO-TOLERANCE PHRASES (never use)"
-for phrase in "${ZERO_TOLERANCE_PHRASES[@]}"; do
-  echo "- '$phrase'"
-done
+# --- Structural AI tells (rarer but reliable) ---
+echo "## STRUCTURAL AI TELLS (avoid)"
+echo "testament to, reminder that, dive in, let's explore, in today's digital age, let that sink in, only time will tell"
 echo ""
 
 # --- Filter Words ---
 echo "## FILTER WORDS (remove distancing phrases)"
-echo "Cut: $FILTER_WORDS"
+echo "Cut: felt, saw, heard, noticed, realized, watched, thought, seemed, looked, began to, started to"
 echo ""
 
 # --- Burstiness Rules ---

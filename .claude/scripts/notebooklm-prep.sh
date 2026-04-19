@@ -68,7 +68,6 @@ CONTEXT_FILES=(
   "context/WRITER_VOICE.md"
   "context/LESSONS_LEARNED.md"
   "PROJECT_IDENTITY.md"
-  "PROJECT_COMPENDIUM.md"
 )
 
 for f in "${CONTEXT_FILES[@]}"; do

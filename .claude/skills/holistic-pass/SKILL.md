@@ -50,7 +50,7 @@ For each chapter in the chunk, follow the pass's Method step by step. For every 
 3. **State the rationale** (how this change serves the pass's Goal)
 
 **Rules:**
-- Only make changes relevant to THIS pass. Do not fix unrelated issues you notice — those belong in other passes or `/revision-guide`.
+- Only make changes relevant to THIS pass. Do not fix unrelated issues you notice — those belong in other passes or a dedicated chapter-level audit.
 - Preserve the author's voice. You are adjusting a specific pattern, not rewriting prose.
 - If a passage is borderline (could go either way), flag it for the user rather than changing it.
 - If applying the method reveals the pass definition needs refinement, note that for the user.
@@ -115,4 +115,4 @@ After user approval:
 ### Step 10: Suggest Next Steps
 - If more chapters remain for this pass: "Run `/holistic-pass [N]` to continue."
 - If this pass is complete: "Pass [N] complete. Next priority pass is [M]: [Title]."
-- If changes were substantial: "Consider running `/revision-guide` on the modified chapters to verify no chapter-level issues were introduced."
+- If changes were substantial: "Consider running `/de-ai-audit` and `/prose-scan` on the modified chapters to verify no chapter-level issues were introduced."

@@ -1,14 +1,14 @@
 ---
 name: research-brief
-description: Produce a Research Brief that feeds into Claude's Scene/Section Brief. Trigger when the user asks for a "Research Brief" or when invoked upstream of /scene-brief. Supports both Fiction and Nonfiction tracks.
+description: Produce a Research Brief that Claude consumes before drafting a scene or section. Trigger when the user asks for a "Research Brief" or when research gaps block a /draft. Supports both Fiction and Nonfiction tracks.
 ---
 
 # Research Brief
 
 ## Overview
-You are the research specialist in the planning pipeline. Your output is consumed by Claude to produce the Scene/Section Brief. **You do not draft prose. You do not plan conflict architecture. You gather and verify.**
+You are the research specialist. Your output is consumed by Claude before drafting prose. **You do not draft prose. You do not plan conflict architecture. You gather and verify.**
 
-Claude cannot plan without your Brief. If your Brief is thin, the Scene Brief will be thin, and the prose will drift.
+If your Brief is thin, the draft will drift. Cite chapters, source names, and FACTS_SHEET entries; flag gaps explicitly.
 
 ## Operating Directives
 - **Track first.** Confirm Fiction or Nonfiction before researching. The sections differ.

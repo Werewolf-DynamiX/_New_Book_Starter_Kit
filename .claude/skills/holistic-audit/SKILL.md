@@ -70,13 +70,13 @@ For each problem found, provide:
 - **Impact:** How much it hurts the manuscript (Critical/High/Medium)
 - **Suggested approach:** How to fix it
 
-Do NOT flag chapter-level issues (single continuity errors, individual AI tells, one weak scene). Those belong in /revision-guide, not here.
+Do NOT flag chapter-level issues (single continuity errors, individual AI tells, one weak scene). Those belong in chapter-level audits (`/de-ai-audit`, `/prose-scan`), not here.
 ```
 
 ### Step 3: Incorporate External Feedback
 If the user provided external review notes:
 - Map each reviewer complaint to the categories above
-- Identify which complaints are chapter-level (route to `/revision-guide`) vs. manuscript-level (include here)
+- Identify which complaints are chapter-level (handle per-chapter) vs. manuscript-level (include here)
 - Note when multiple reviewers independently flag the same pattern — that's high-signal
 
 ### Step 4: Synthesize into Passes

@@ -24,7 +24,7 @@ bash update_book.sh
 
 The update script:
 1. Verifies symlinks are intact
-2. Auto-updates infrastructure files (PROJECT_COMPENDIUM.md, review prompts, reference docs)
+2. Auto-updates infrastructure files (settings, hooks, reference docs, compile pipeline)
 3. Shows diffs for project-owned files so you can merge changes manually
 4. Detects new files added to the kit
 5. Updates the manifest with the new kit version
@@ -42,15 +42,13 @@ These are symlinks pointing to the kit. Changes to the kit are instantly visible
 
 ### Sync-Always (infrastructure)
 These are copies that `update_book.sh` overwrites automatically. They contain no project-specific content.
-- `PROJECT_COMPENDIUM.md`
-- `MASTER_BOOK_REVIEW_PROMPT.md`
-- `CONTINUITY_AUDIT_PROMPT.md`
-- `GEMINI_REVIEW.md`
+- `Makefile`, `scripts/compile.sh`, `scripts/compile.ps1`, `build/print.latex`, `build/epub.css`
 - `reference/collaboration_workflow.md`
 - `reference/CENTRAL_FRAMEWORK_SETUP.md`
 - `reference/MODEL_SELECTION_GUIDE.md`
 - `reference/art_brief.md`
 - `reference/KDP_BOOK_FORMATTING_SKILL.md`
+- `.claude/settings.json`, `.claude/hooks/*.sh`, `.claude/rules/manuscript-prose.md`, `.claude/scripts/gemini-continuity-audit-spec.md`
 
 ### Project-Owned (yours to customize)
 These start as copies of kit templates but become project-specific. `update_book.sh` will **never overwrite** them automatically — it shows diffs and asks.

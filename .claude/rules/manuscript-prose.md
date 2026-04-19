@@ -59,6 +59,6 @@ These place a character between reader and action. Remove unless the act of perc
 - Cut tautologies
 
 ## Before Submitting Any Prose
-1. Run the Self-Editing Checklist (`modules/_WRITING_WORKFLOW.md`)
-2. Run /de-ai-audit on the file
+1. Run `/de-ai-audit` on the file
+2. Run `/prose-scan` for rhythm, echo, and sensory-density diagnostics
 3. Update `context/FACTS_SHEET.md` if you introduced new names/dates/places

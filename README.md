@@ -32,14 +32,13 @@ Before using this kit, ensure you have the following installed:
 
 The writing rules are stored in `modules/`:
 
-- **Universal:**
-  - `_STYLE_AUTHORITY.md`: Banned words, forbidden transitions, structural rules, crutch word limits.
-  - `_HUMAN_PATTERNS.md`: Sentence rhythm (burstiness), paragraph variation.
+- **Foundation (always loaded):**
+  - `_PROSE.md`: Diction, sentence rhythm, anti-AI patterns, texture.
+  - `_MASTER_STORYTELLER_CORE.md`: General philosophy.
+  - `_AUTHOR_VOICE_BUILDER.md`: Persona construction.
 
-- **Genre-Specific:**
-  - `_NARRATIVE_VOICE.md`: POV rules (1st/3rd), all tenses, dialogue mechanics.
-  - `_ROMANCE_HEAT.md`: Heat levels, fantasy integration.
-  - `_BIOGRAPHY.md`: New Journalism style, factual rigor, avoiding hagiography.
+- **Fiction (load as needed):** `_STORY_ENGINE.md`, `_CHARACTER_CRAFT.md`, `_DIALOGUE_CRAFT.md`, `_PACING_AND_STRUCTURE.md`, `_NARRATIVE_VOICE.md`, `_WORLDBUILDING.md`, `_GENRE_PLAYBOOK.md`, `_ROMANCE_HEAT.md`.
+- **Nonfiction (load as needed):** `_NONFICTION_CORE.md`, `_BIOGRAPHY.md`, `_LOGIC_CHECK.md`.
 
 ## Dual-AI Automation
 
@@ -48,15 +47,27 @@ This kit uses two AI agents with distinct roles:
 | | **Claude** (Writer/Editor) | **Gemini** (Architect/QA) |
 |---|---|---|
 | **Role** | Writes and revises prose | Reviews, researches, verifies |
-| **Skills** | `/scene-brief`, `/draft`, `/de-ai-audit`, `/revision-guide`, `/chapter-done` | `de-ai-audit`, `adversarial-review`, `kdp-format`, `continuity-audit` |
-| **Automation** | 3 hooks (vocabulary scan, checklist reminder, context preservation) + 1 auto-loading rule | Plan Mode subagents, model routing |
+| **Skills** | `/draft`, `/de-ai-audit`, `/prose-scan`, `/holistic-audit`, `/holistic-pass` | `continuity-audit`, `voice-lint`, `logic-check`, `research-brief`, `kdp-format`, `de-ai-audit`, `holistic-audit`, `holistic-pass` |
+| **Automation** | Stop-hook prose checklist reminder, PreCompact context preservation, kit version check | Plan Mode subagents, model routing |
 
 ### Typical Workflow
-1. `/scene-brief` — Claude gets a Research Brief from Gemini, generates a Scene Brief, user approves
-2. `/draft` — Claude writes prose with automatic QC checks
-3. `/de-ai-audit` — Claude scans for AI patterns (also runs automatically via hook)
-4. `/revision-guide` — Claude requests 3 Gemini audits, builds a prioritized fix list, user approves
-5. `/chapter-done` — Claude runs completion checklist, Gemini issues verification, user signs off, then runs `bash update_bible.sh`
+
+**Per scene:**
+1. `/draft` — write the scene (optionally preceded by a Gemini `research-brief` if facts are thin)
+2. `/de-ai-audit` — scan for AI vocabulary and structural tells
+3. `/prose-scan` — diagnostics: rhythm, echo, sensory density, dialogue placeholders
+
+**Per chapter:**
+- Gemini `continuity-audit` against `FACTS_SHEET.md`
+- Gemini `voice-lint` against `docs/characters.md`
+- Update `FACTS_SHEET.md` with any new facts
+
+**Per book, before publishing:**
+1. `/holistic-audit` to generate cross-chapter revision passes
+2. `/holistic-pass N` to execute each
+3. Run every logged complaint in `reviewer_complaints.md` as a scan
+4. NotebookLM full-manuscript pass with beta-reader prompts
+5. One cover-to-cover human read
 
 ### NotebookLM Integration
 Run `bash .claude/scripts/notebooklm-prep.sh` to bundle your manuscript for Google NotebookLM with pre-written audit prompts for continuity, voice consistency, timeline, character arcs, and plot threads.
