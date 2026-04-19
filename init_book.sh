@@ -134,6 +134,7 @@ done
 # --- Copy sync-always files (infrastructure, safe to overwrite on update) ---
 echo "Copying infrastructure files..."
 SYNC_ALWAYS=(
+  "context/WRITER_VOICE_CORE.md"
   "Makefile"
   "scripts/compile.sh"
   "scripts/compile.ps1"

@@ -77,6 +77,54 @@ echo "============================================"
 echo ""
 
 # ==========================================================
+# PHASE 0: DEPRECATION CLEANUP — Remove files retired in
+#   previous kit versions. Only targets empty skill dirs
+#   and orphan files known to be removed upstream; never
+#   touches manuscripts, FACTS_SHEET, or user-owned files.
+# ==========================================================
+echo "PHASE 0: Clean up deprecated files"
+echo "-----------------------------------"
+
+DEPRECATED_PATHS=(
+  # Retired skills (adversarial review pipeline)
+  ".claude/skills/scene-brief"
+  ".claude/skills/revision-guide"
+  ".claude/skills/chapter-done"
+  ".gemini/skills/adversarial-review"
+  # Retired hooks (PostToolUse vocab scanner was noisy)
+  ".claude/hooks/banned-vocab.sh"
+  ".claude/hooks/deai-quick-scan.sh"
+  # Retired root docs (redundant with CLAUDE.md/GEMINI.md/README)
+  "PROJECT_COMPENDIUM.md"
+  "CONTINUITY_AUDIT_PROMPT.md"
+  "GEMINI_REVIEW.md"
+  "MASTER_BOOK_REVIEW_PROMPT.md"
+  # Retired modules (consolidated into WRITER_VOICE_CORE + _PROSE)
+  "modules/_WRITING_WORKFLOW.md"
+  "modules/_MASTER_STORYTELLER_CORE.md"
+  "modules/_AUTHOR_VOICE_BUILDER.md"
+  "modules/KDP_BOOK_FORMATTING_SKILL.md"
+  # Retired gemini skill references (files were integrated into _PROSE)
+  ".gemini/skills/de-ai-audit/references/_HUMAN_PATTERNS.md"
+  ".gemini/skills/de-ai-audit/references/MASTER_BOOK_REVIEW_PROMPT.md"
+  ".gemini/skills/de-ai-audit/references/_STYLE_AUTHORITY.md"
+  ".gemini/skills/adversarial-review/references/_ADVERSARIAL_REVIEW_ENGINE.md"
+)
+
+REMOVED=0
+for p in "${DEPRECATED_PATHS[@]}"; do
+  if [ -e "$PROJECT_DIR/$p" ] || [ -L "$PROJECT_DIR/$p" ]; then
+    rm -rf "$PROJECT_DIR/$p"
+    echo "  - Removed deprecated: $p"
+    REMOVED=$((REMOVED + 1))
+  fi
+done
+if [ $REMOVED -eq 0 ]; then
+  echo "  No deprecated files to remove."
+fi
+echo ""
+
+# ==========================================================
 # PHASE 1: STRUCTURE — Ensure consistent directory layout
 # ==========================================================
 echo "PHASE 1: Verify project structure"
@@ -153,6 +201,7 @@ echo "  These files have no project-specific content."
 echo ""
 
 SYNC_ALWAYS=(
+  "context/WRITER_VOICE_CORE.md"
   "reference/collaboration_workflow.md"
   "reference/CENTRAL_FRAMEWORK_SETUP.md"
   "reference/MODEL_SELECTION_GUIDE.md"

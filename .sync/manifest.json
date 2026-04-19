@@ -36,7 +36,6 @@
       ".gemini/settings.json",
       "context/FACTS_SHEET.md",
       "context/WRITER_VOICE.md",
-      "context/WRITER_VOICE_CORE.md",
       "reference/art_brief.md",
       "reference/collaboration_workflow.md",
       "reference/KDP_BOOK_FORMATTING_SKILL.md",
@@ -62,6 +61,7 @@
       ".claude/scripts/notebooklm-prep.sh"
     ],
     "sync_always": [
+      "context/WRITER_VOICE_CORE.md",
       "Makefile",
       "scripts/compile.sh",
       "scripts/compile.ps1",
